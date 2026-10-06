@@ -1,0 +1,373 @@
+@use "./_variables.scss" as vars;
+
+@mixin page {
+	align-items: center;
+	background: var(--background-color);
+	box-shadow: var(--box-shadow);
+	color: var(--text-color);
+	display: flex;
+	flex-direction: column;
+	margin-inline: auto;
+	max-width: vars.$ultra-wide;
+	min-width: 100%;
+	min-height: calc(100vh - 10rem + 1px);
+	padding-top: 0;
+	width: 100%;
+
+	@media (min-width: vars.$tablet) {
+		margin-top: 0;
+	}
+}
+
+@mixin inner {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	margin-inline: auto;
+	min-height: calc(100vh - vars.$nav-height + 1px);
+	padding-block: 4rem;
+	padding-top: 0;
+	width: 100%;
+
+	@media (min-width: vars.$tablet) {
+		padding-top: 2rem;
+		margin-top: 0;
+	}
+}
+
+@mixin button {
+	align-items: center;
+	background: var(--button-background);
+	border: none;
+	border-radius: var(--border-radius);
+	color: var(--button-color);
+	cursor: pointer;
+	display: inline-flex;
+	font-size: 1rem;
+	font-weight: 500;
+	justify-content: center;
+	padding: 0.5rem 1rem;
+	transition: background-color 0.3s ease;
+
+	&:hover {
+		background: var(--button-color);
+		color: var(--button-background);
+		outline: 2px solid var(--button-background);
+	}
+
+	&:active {
+		transform: scale(0.98);
+	}
+}
+
+@mixin buttonRounded {
+	@include button;
+	& {
+		border-radius: 3rem;
+	}
+}
+
+@mixin input {
+	background: var(--background-color);
+	border: 1px solid var(--text-color);
+	border-radius: var(--border-radius);
+	color: var(--text-color);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.125rem;
+	padding-block: 0.5rem;
+	padding-inline: 0.5rem;
+	position: relative;
+	width: 100%;
+
+	&::placeholder {
+		color: var(--text-color);
+		opacity: 0.5;
+	}
+
+	&:-webkit-autofill {
+		-webkit-box-shadow: none !important;
+		background-color: transparent !important;
+		box-shadow: none !important;
+		color: inherit;
+		transition: background-color 5000s ease-in-out 0s;
+	}
+
+	&:-webkit-autofill::first-line {
+		color: var(--text-color) !important;
+	}
+
+	&:active,
+	&:focus {
+		border: 1px solid var(--text-color);
+		color: inherit;
+		outline: 1px solid var(--text-color);
+	}
+}
+
+@mixin error {
+	color: var(--error-color);
+	bottom: 0.25rem;
+	display: block;
+	font-size: 0.8rem;
+	margin-inline-start: 0.5rem;
+	position: absolute;
+}
+
+@mixin shootImg {
+	aspect-ratio: 1 / 1;
+	max-width: 100%;
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+}
+
+@mixin shootDetailsImg {
+	@include shootImg;
+	aspect-ratio: 4 / 5;
+}
+
+@mixin selectChooser {
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+
+		@media (min-width: vars.$tablet) {
+			flex-direction: row;
+		}
+	}
+
+	&__select {
+		background: var(--background-color);
+		border: 1px solid var(--text-color);
+		border-radius: var(--border-radius);
+		color: var(--text-color);
+		height: 3rem;
+		font-size: 1rem;
+		padding: 0.25rem;
+		text-align: center;
+		width: 100%;
+
+		&.userDisabled {
+			pointer-events: none;
+		}
+
+		&:focus,
+		&:active {
+			outline: none;
+		}
+	}
+
+	&__button-container {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+
+		@media (min-width: vars.$tablet) {
+			gap: 0.5rem;
+		}
+	}
+
+	&__button {
+		align-items: center;
+		border: 1px solid var(--text-color);
+		border-radius: 50%;
+		display: flex;
+		height: 2.25rem;
+		justify-content: center;
+		padding: 0.25rem;
+		width: 2.25rem;
+
+		&--add {
+			height: 35px;
+			width: 35px;
+		}
+
+		&--add-stroke {
+			stroke: var(--text-color);
+		}
+	}
+
+	&--remove-icon {
+		stroke: var(--text-color);
+	}
+}
+
+@mixin navLink {
+	color: var(--text-color);
+	cursor: pointer;
+	display: flex;
+	font-size: 1rem;
+	font-weight: 600;
+	justify-content: center;
+	letter-spacing: 3px;
+
+	@media (min-width: vars.$small-phone) {
+		font-size: 1.25rem;
+	}
+}
+
+@mixin cardBoxShadow {
+	box-shadow:
+		0 4px 12px rgba(0, 0, 0, 0.25),
+		0 8px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+@mixin disabledButton {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+// ***
+@mixin sideNav {
+	background: var(--nav-footer-bg);
+	bottom: 0;
+	box-shadow: var(--nav-footer-box-shadow);
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	transition: transform 0.33s ease-in-out;
+	width: 80vw;
+	will-change: transform;
+	z-index: 3;
+
+	@media (min-width: vars.$side-nav-50vw-breakpoint) {
+		width: 50vw;
+	}
+
+	&.show {
+		transform: translateX(0); /* slide in */
+		transition: transform 0.33s ease-out;
+	}
+}
+
+@mixin sideNavRightToLeft {
+	@include sideNav;
+	& {
+		right: 0;
+		transform: translateX(100%); /* start offscreen right */
+	}
+}
+
+@mixin sideNavLeftToRight {
+	@include sideNav;
+	left: 0;
+	transform: translateX(-100%); /* start offscreen right */
+}
+
+@mixin clickOffDiv {
+	height: 100%;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 3;
+}
+
+@mixin sideNavCloseButton {
+	cursor: pointer;
+	height: vars.$side-nav-close-button-height;
+	position: fixed;
+	top: calc((vars.$nav-height - vars.$side-nav-close-button-height) / 2);
+	width: vars.$side-nav-close-button-height;
+}
+
+@mixin sideNavInner {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding-bottom: 8rem;
+	position: relative;
+}
+
+@mixin sideNavLinks {
+	color: var(--nav-link-color);
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+	margin-top: 8rem;
+}
+
+@mixin navBarToggle {
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	gap: 0.45rem;
+	height: vars.$nav-toggle-height;
+	justify-content: center;
+	position: absolute;
+	top: calc((vars.$nav-height - vars.$nav-toggle-height) / 2);
+	width: 2.25rem;
+
+	@media (min-width: vars.$large-tablet) {
+		display: none;
+	}
+
+	&.open {
+		.navBarToggle__icon:nth-child(1) {
+			transform: translateY(0.55rem) rotate(225deg);
+		}
+
+		.navBarToggle__icon:nth-child(2) {
+			opacity: 0;
+		}
+
+		.navBarToggle__icon:nth-child(3) {
+			transform: translateY(-0.55rem) rotate(-225deg);
+		}
+	}
+}
+
+@mixin navBarToggleRight {
+	@include navBarToggle;
+	right: 2rem;
+}
+
+@mixin navContent {
+	align-items: center;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	margin-inline: auto;
+	max-width: vars.$ultra-wide;
+	padding-inline: 4rem;
+	width: 100%;
+
+	@media (min-width: vars.$desktop) {
+		padding-inline: 8rem;
+	}
+}
+
+@mixin cardTitleHeading {
+	border-bottom: 2px solid var(--accent-color);
+	color: var(--text-color);
+	display: inline-block;
+	font-size: var(--font-size-base);
+	font-weight: 500;
+	letter-spacing: var(--letter-spacing-lg);
+	line-height: var(--line-height-xl);
+
+	@media (min-width: vars.$tablet) {
+		font-size: var(--font-size-lg);
+	}
+
+	@media (min-width: vars.$desktop) {
+		font-size: var(--font-size-xl);
+	}
+}
+
+@mixin buttonContainer {
+	align-items: center;
+	display: flex;
+	gap: 2rem;
+	justify-content: center;
+}
+
+// ----
+@mixin imageBox {
+	display: block;
+	inset: 0;
+	overflow: hidden;
+	position: relative;
+	z-index: 0;
+}
