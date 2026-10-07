@@ -9,14 +9,9 @@
 	flex-direction: column;
 	margin-inline: auto;
 	max-width: vars.$ultra-wide;
-	min-width: 100%;
-	min-height: calc(100vh - 10rem + 1px);
+	min-height: calc(100vh - vars.$footer-height + 1px);
 	padding-top: 0;
 	width: 100%;
-
-	@media (min-width: vars.$tablet) {
-		margin-top: 0;
-	}
 }
 
 @mixin inner {

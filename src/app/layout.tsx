@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Open_Sans, Poppins } from "next/font/google";
 import "./globals.scss";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const openSans = Open_Sans({
   subsets: ["latin"],
+  variable: "--body-font",
+  fallback: ["Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
+  display: "swap"
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--heading-font",
+  fallback: ["Trebuchet MS", "Helvetica", "Arial", "sans-serif"],
+  display: "swap",
 });
-
 
 const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
@@ -20,10 +24,12 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       lang="en"
       suppressHydrationWarning 
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${openSans.variable} ${poppins.variable}`}
     >
       <body>
-        {children}
+        <main className="app">
+          {children}
+        </main>
       </body>
     </html>
   );
