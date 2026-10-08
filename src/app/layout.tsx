@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 import { Open_Sans, Poppins } from "next/font/google";
+import { AppContextProvider } from "@/contexts/AppContext";
+import Footer from "@/components/Footer/Footer";
 import "./globals.scss";
+import Navbar from "@/components/Navbar/Navbar";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -27,9 +30,13 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       className={`${openSans.variable} ${poppins.variable}`}
     >
       <body>
-        <main className="app">
-          {children}
-        </main>
+        <AppContextProvider>
+          <Navbar />
+          <main className="app">
+            {children}
+          </main>
+          <Footer />
+        </AppContextProvider>
       </body>
     </html>
   );

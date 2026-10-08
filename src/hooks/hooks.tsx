@@ -1,9 +1,23 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { UseOutsideClickProps } from "@/typing/interfaces"
+import { useContext, useEffect, useRef } from "react";
+import { AppContextValue, UseOutsideClickProps } from "@/typing/interfaces"
+import { AppContext } from "@/contexts/AppContext";
 
-const useOutsideClick = ({ targetRef, onOutsideClick, componentIsActive = true }: UseOutsideClickProps) => {
+const useAppContext = (): AppContextValue => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("useAppContext must be used within an AppContextProvider");
+  }
+  return context;
+};
+
+const useOutsideClick = ({
+  targetRef,
+  ignoredRef,
+  onOutsideClick,
+  componentIsActive = true,
+}: UseOutsideClickProps) => {
   const handlerRef = useRef(onOutsideClick);
   handlerRef.current = onOutsideClick;
 
@@ -14,12 +28,16 @@ const useOutsideClick = ({ targetRef, onOutsideClick, componentIsActive = true }
 
     const handleDocumentClick = (e: globalThis.MouseEvent) => {
       const container = targetRef.current;
-      if (!container) {
+      const target = e.target as HTMLElement | null;
+
+      if (!container || !target) {
         return;
       }
 
       const isInside = e.composedPath().includes(container);
-      if (!isInside) {
+      const isIgnored = ignoredRef?.current?.contains(target);
+
+      if (!isInside && !isIgnored) {
         handlerRef.current(e);
       }
     };
@@ -27,11 +45,14 @@ const useOutsideClick = ({ targetRef, onOutsideClick, componentIsActive = true }
     window.addEventListener("click", handleDocumentClick, { capture: true });
 
     return () => {
-      window.removeEventListener("click", handleDocumentClick, { capture: true });
+      window.removeEventListener("click", handleDocumentClick, {
+        capture: true,
+      });
     };
   }, [componentIsActive, targetRef]);
 };
 
 export { 
-  useOutsideClick
+  useAppContext,
+  useOutsideClick,
 };

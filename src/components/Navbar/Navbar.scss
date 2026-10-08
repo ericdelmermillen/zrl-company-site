@@ -1,8 +1,8 @@
 @use "../../partials/_mixins" as mx;
 @use "../../partials/_variables" as vars;
 
-.loginPage {
+.navbar {
 	& {
-		@include mx.page;
+		@include mx.navbar;
 	}
 }

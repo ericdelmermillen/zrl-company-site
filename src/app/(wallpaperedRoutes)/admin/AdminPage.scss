@@ -1,0 +1,8 @@
+@use "../../../partials/_mixins" as mx;
+@use "../../../partials/_variables" as vars;
+
+.adminPage {
+	& {
+		@include mx.page;
+	}
+}

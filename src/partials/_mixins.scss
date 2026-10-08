@@ -10,6 +10,7 @@
 	margin-inline: auto;
 	max-width: vars.$ultra-wide;
 	min-height: calc(100vh - vars.$footer-height + 1px);
+	min-height: 200vh;
 	padding-top: 0;
 	width: 100%;
 }
@@ -27,6 +28,24 @@
 	@media (min-width: vars.$tablet) {
 		padding-top: 2rem;
 		margin-top: 0;
+	}
+}
+
+// *** navigation
+@mixin navbar {
+	background: var(--nav-footer-bg);
+	height: vars.$nav-height;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	transition: all 500ms ease-in-out;
+	width: 100%;
+	z-index: 2;
+	background: var(--nav-footer-bg);
+
+	&.hide {
+		margin-top: calc(-1 * (vars.$nav-height + 1rem));
 	}
 }
 
@@ -97,6 +116,17 @@
 		color: inherit;
 		outline: 1px solid var(--text-color);
 	}
+}
+
+// accents and decorations
+@mixin afterAccent {
+	background: var(--accent-color);
+	bottom: -0.35rem;
+	content: "";
+	height: 2px;
+	left: 0;
+	position: absolute;
+	right: 0;
 }
 
 @mixin error {

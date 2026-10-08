@@ -3,6 +3,6 @@
 
 .homePage {
 	& {
-		opacity: 1;
+		@include mx.page;
 	}
 }

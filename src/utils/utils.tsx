@@ -1,36 +1,36 @@
+import type { MouseEvent } from "react";
 // import { ChooserItem, ShootEntity } from "@/typing/interfaces";
 // import { ToastType } from "@/typing/types";
-// import type { MouseEvent } from "react";
 // import { toast } from "react-toastify";
 
 // const MIN_LOADING_INTERVAL = parseInt(process.env.NEXT_PUBLIC_MIN_LOADING_INTERVAL ?? "250", 10);
 
-// const scrollToTop = () => {
-//   window.scrollTo({
-//     top: 0,
-//     behavior: "smooth",
-//   });  
-//   removeClassFromDiv("nav", "hide");
-// };
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });  
+  removeClassFromDiv("nav", "hide");
+};
 
-// const addClassToDiv = (divID: string, className: string) => {
-//   document.getElementById(divID)?.classList.add(className);
-// };
+const addClassToDiv = (divID: string, className: string) => {
+  document.getElementById(divID)?.classList.add(className);
+};
 
-// const removeClassFromDiv = (divID: string, className: string) => {
-//   document.getElementById(divID)?.classList.remove(className);
-// };
+const removeClassFromDiv = (divID: string, className: string) => {
+  document.getElementById(divID)?.classList.remove(className);
+};
 
-// const isModifiedClick = (
-//   e: MouseEvent<HTMLElement>
-// ) => {
-//   return !!(
-//     e?.metaKey ||
-//     e?.ctrlKey ||
-//     e?.shiftKey ||
-//     e?.altKey
-//   );
-// };
+const isModifiedClick = (
+  e: MouseEvent<HTMLElement>
+) => {
+  return !!(
+    e?.metaKey ||
+    e?.ctrlKey ||
+    e?.shiftKey ||
+    e?.altKey
+  );
+};
 
 // const isValidFirstName = (name: string) => {
 //   return name.trim().length >= 2;
@@ -79,11 +79,11 @@
 //       : [];
 // };
 
-// const normalizeCasing = (string: string | undefined): string => {
-//   return typeof string === "string" && string.length > 0 
-//     ? string[0].toUpperCase() + string.slice(1).toLowerCase()
-//     : ""
-// };
+const normalizeCasing = (string: string | undefined): string => {
+  return typeof string === "string" && string.length > 0 
+    ? string[0].toUpperCase() + string.slice(1).toLowerCase()
+    : ""
+};
 
 // const syncChoosers = (prevChoosers: ChooserItem[], freshEntities: ShootEntity[]): ChooserItem[] => {
 //   const updated = prevChoosers.reduce<ChooserItem[]>((acc, chooser) => {
@@ -102,11 +102,12 @@
 //   return updated.length > 0 ? updated : [{ number: 1, id: null, name: null }];
 // };
 
-// export {
-//   scrollToTop,
-//   addClassToDiv,
-//   removeClassFromDiv,
-//   isModifiedClick,
+export {
+  scrollToTop,
+  addClassToDiv,
+  removeClassFromDiv,
+  isModifiedClick,
+  normalizeCasing,
 //   isValidFirstName,
 //   isValidLastName,
 //   isValidEmail,
@@ -115,6 +116,5 @@
 //   isValidMessage,
 //   staggerToastsByN,
 //   splitOnNewLine,
-//   normalizeCasing,
 //   syncChoosers
-// };
+};

@@ -4,8 +4,14 @@
 :root {
 	--background: #ffffff;
 
-	// box-shadow light
+	//
+
+	// refactor for light and dark versions
 	--box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+	--nav-footer-bg: orange;
+	--nav-footer-box-shadow: 0 4px 8px rgba(25, 48, 62, 0.2);
+	--nav-link-color: #f4f4f4;
+	--nav-footer-text-color: var(--nav-link-color);
 
 	// font size
 	--font-size-xs: 0.75rem;
@@ -130,6 +136,7 @@ body {
 	font-family: var(--body-font);
 	min-height: calc(100vh + 1px);
 	overflow-x: hidden;
+	position: relative;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -178,6 +185,27 @@ button {
 
 img {
 	display: block;
+}
+
+// .navbar {
+
+// }
+
+.app {
+	display: flex;
+	flex-direction: column;
+}
+
+.sr-only {
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
 }
 
 .Toastify {

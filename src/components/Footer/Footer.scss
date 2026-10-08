@@ -1,0 +1,24 @@
+@use "../../partials/mixins.scss" as mx;
+@use "../../partials/variables.scss" as vars;
+
+.footer {
+	& {
+		box-shadow: var(--footer-box-shadow);
+		height: 5rem;
+		margin-top: auto;
+	}
+
+	&__inner {
+		align-items: center;
+		background: var(--nav-footer-bg);
+		color: var(--text-color);
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	&__text {
+		font-size: var(--font-size-lg);
+		margin-block: auto;
+	}
+}
