@@ -1,0 +1,20 @@
+@use "../../partials/_variables" as vars;
+@use "../../partials/_mixins" as mx;
+
+.moreInfo {
+	& {
+		color: var(--text-color);
+		padding-top: var(--section-top-padding);
+		border: 2px solid blue;
+		background: purple;
+	}
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+
+		@media (min-width: vars.$large-tablet) {
+			flex-direction: row;
+		}
+	}
+}

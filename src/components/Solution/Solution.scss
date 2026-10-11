@@ -1,0 +1,56 @@
+@use "../../partials/_variables" as vars;
+@use "../../partials/_mixins" as mx;
+
+.solution {
+	& {
+		display: stretch;
+		margin-bottom: 2rem;
+		width: 100%;
+
+		@media (min-width: vars.$medium-tablet) {
+			margin-bottom: 1rem;
+		}
+	}
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	&__imageBox {
+		@include mx.imageBox;
+		width: 100%;
+		aspect-ratio: 16/9;
+	}
+
+	&__image {
+		@include mx.cardImg;
+	}
+
+	&__title {
+		@include mx.cardTitleHeading;
+
+		&--short {
+			@media (min-width: vars.$small-phone) {
+				display: none;
+			}
+		}
+
+		&--full {
+			display: none;
+
+			@media (min-width: vars.$small-phone) {
+				display: block;
+			}
+		}
+	}
+
+	&__text {
+		@include mx.cardTextBlurb;
+	}
+
+	&__tag {
+		@include mx.cardTag;
+	}
+}

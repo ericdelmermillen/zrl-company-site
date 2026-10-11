@@ -32,9 +32,9 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       <body>
         <AppContextProvider>
           <Navbar />
-          <main className="app">
+          <div className="app">
             {children}
-          </main>
+          </div>
           <Footer />
         </AppContextProvider>
       </body>

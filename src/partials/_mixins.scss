@@ -10,7 +10,6 @@
 	margin-inline: auto;
 	max-width: vars.$ultra-wide;
 	min-height: calc(100vh - vars.$footer-height + 1px);
-	min-height: 200vh;
 	padding-top: 0;
 	width: 100%;
 }
@@ -28,6 +27,138 @@
 	@media (min-width: vars.$tablet) {
 		padding-top: 2rem;
 		margin-top: 0;
+	}
+}
+
+@mixin pageContent {
+	margin-inline: auto;
+	max-width: 100%;
+	padding: 2rem;
+	width: vars.$ultra-wide;
+
+	@media (min-width: vars.$tablet) {
+		padding-inline: 3rem;
+	}
+
+	@media (min-width: vars.$large-tablet) {
+		padding-inline: 4rem;
+	}
+
+	@media (min-width: vars.$desktop) {
+		padding-inline: 6rem;
+	}
+
+	@media (min-width: vars.$ultra-wide) {
+		padding-inline: 8rem;
+	}
+}
+
+@mixin sectionHeading {
+	// might want to use a custom heading color
+	color: var(--text-color);
+	font-family: var(--heading-font);
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+	letter-spacing: var(--letter-spacing-lg);
+	margin-bottom: 1rem;
+	margin-inline: auto;
+	position: relative;
+	text-align: center;
+	white-space: nowrap;
+
+	@media (min-width: vars.$tablet) {
+		display: inline-block;
+		font-size: var(--font-size-xl);
+		margin-inline: auto;
+	}
+
+	@media (min-width: vars.$large-tablet) {
+		display: inline-block;
+		font-size: var(--font-size-2xl);
+		margin-bottom: 2rem;
+		margin-inline: auto;
+	}
+
+	@media (min-width: vars.$desktop) {
+		font-size: var(--font-size-3xl);
+	}
+}
+
+@mixin sectionLead {
+	color: var(--text-color);
+	font-size: var(--font-size-md);
+	letter-spacing: var(--letter-spacing-lg);
+	line-height: var(--line-height-md);
+	margin-bottom: 1rem;
+
+	@media (min-width: vars.$tablet) {
+		font-size: var(--font-size-lg);
+	}
+
+	@media (min-width: vars.$desktop) {
+		font-size: var(--font-size-xl);
+	}
+}
+
+@mixin cardTitleHeading {
+	color: var(--text-color);
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	letter-spacing: var(--letter-spacing-md);
+	line-height: var(--line-height-lg);
+	margin-block: 1rem;
+
+	@media (min-width: vars.$tablet) {
+		font-size: var(--font-size-lg);
+	}
+
+	@media (min-width: vars.$desktop) {
+		font-size: var(--font-size-xl);
+	}
+}
+
+// basic UI elements
+@mixin cardImg {
+	aspect-ratio: 16/9;
+	border-radius: var(--border-radius-card-image);
+	max-width: 100%;
+	object-fit: cover;
+	object-position: center center;
+	overflow: hidden;
+	width: 100%;
+}
+
+@mixin cardBoxShadow {
+	box-shadow:
+		0 4px 12px rgba(0, 0, 0, 0.25),
+		0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+@mixin cardTag {
+	background: var(--accent-color);
+	border-radius: var(--border-radius);
+	color: var(--button-text-color);
+	font-size: var(--font-size-sm);
+	font-weight: 700;
+	padding: var(--tag-padding);
+	letter-spacing: var(--letter-spacing-xl);
+	margin-top: auto;
+	width: fit-content;
+
+	@media (min-width: vars.$medium-tablet) {
+		font-size: var(--font-size-md);
+	}
+}
+
+@mixin sectionHeadingWithAccent {
+	@include sectionHeading;
+	&::after {
+		@include afterAccent;
+		width: 2rem;
+
+		@media (min-width: vars.$tablet) {
+			width: 3rem;
+		}
 	}
 }
 
@@ -118,6 +249,32 @@
 	}
 }
 
+@mixin checkboxInput {
+	@include input;
+
+	& {
+		border-radius: 4px;
+		height: 1.125rem;
+		margin-inline-end: 0.5rem;
+		max-width: 1.125rem;
+		padding: 0.5rem;
+		position: relative;
+		width: 1.125rem;
+
+		&:checked::after {
+			border-bottom: 2px solid #000;
+			border-right: 2px solid #000;
+			content: "";
+			height: 0.65rem;
+			left: 50%;
+			position: absolute;
+			top: 50%;
+			transform: translate(-50%, -50%) rotate(45deg);
+			width: 0.33rem;
+		}
+	}
+}
+
 // accents and decorations
 @mixin afterAccent {
 	background: var(--accent-color);
@@ -127,6 +284,38 @@
 	left: 0;
 	position: absolute;
 	right: 0;
+}
+
+@mixin accentBar {
+	background: var(--accent-color);
+	border-bottom-right-radius: var(--accent-bar-border-radius);
+	border-top-right-radius: var(--accent-bar-border-radius);
+	height: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(calc(-50% + calc(vars.$nav-height / 2)));
+	width: 1rem;
+
+	@media (min-width: vars.$small-tablet) {
+		width: 1.125rem;
+	}
+
+	@media (min-width: vars.$tablet) {
+		width: 1.5rem;
+	}
+}
+
+@mixin accentBarDetail {
+	display: none;
+
+	@media (min-width: vars.$large-tablet) {
+		@include accentBar;
+		display: block;
+		height: 80%;
+		margin: 0;
+		top: 10%;
+		transform: translateY(0%);
+	}
 }
 
 @mixin error {
@@ -381,6 +570,21 @@
 	}
 }
 
+@mixin cardTextBlurb {
+	font-size: var(--font-size-md);
+	letter-spacing: var(--letter-spacing-md);
+	line-height: var(--line-height-md);
+	margin-bottom: 2rem;
+
+	@media (min-width: vars.$tablet) {
+		font-size: var(--font-size-lg);
+	}
+
+	@media (min-width: vars.$desktop) {
+		font-size: var(--font-size-xl);
+	}
+}
+
 @mixin buttonContainer {
 	align-items: center;
 	display: flex;
@@ -388,11 +592,121 @@
 	justify-content: center;
 }
 
-// ----
+@mixin button {
+	align-items: center;
+	background: var(--accent-color);
+	border: none;
+	color: var(--button-text-color);
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	font-family: var(--heading-font);
+	font-size: var(--button-text-xs);
+	font-weight: 700;
+	letter-spacing: var(--letter-spacing-2xl);
+	padding: var(--button-padding-base);
+	text-align: center;
+	transition: all 0.2s ease-in-out;
+	z-index: 2;
+
+	&.disabled {
+		opacity: var(--button-disabled-opacity);
+		pointer-events: none;
+	}
+
+	@media (min-width: vars.$small-phone) {
+		font-size: var(--button-text-sm);
+	}
+
+	@media (min-width: vars.$small-tablet) {
+		font-size: var(--button-text-lg);
+	}
+
+	&:hover {
+		@include hoverClickGrow;
+	}
+
+	&:active {
+		scale: 0.95;
+	}
+
+	&:focus {
+		outline: 2px solid var(--accent-color);
+		outline-offset: 2px;
+	}
+
+	&:visited {
+		color: var(--button-text-color);
+		padding: var(--button-padding-sm);
+	}
+
+	@media (min-width: vars.$desktop) {
+		font-size: var(--button-text-lg);
+	}
+
+	@media (min-width: vars.$ultra-wide) {
+		font-size: var(--button-text-xl);
+		letter-spacing: var(--letter-spacing-xl);
+		padding: var(--button-padding-xl);
+	}
+}
+
+@mixin roundedButton {
+	@include button;
+	& {
+		border-radius: 2rem;
+	}
+}
+
 @mixin imageBox {
 	display: block;
 	inset: 0;
 	overflow: hidden;
 	position: relative;
 	z-index: 0;
+}
+
+// labels and accessibility
+@mixin hiddenLabel {
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+@mixin textLink {
+	color: var(--accent-color) !important;
+	cursor: pointer;
+	text-decoration: underline;
+
+	&.disabled {
+		pointer-events: none;
+		opacity: var(--button-disabled-opacity);
+	}
+}
+
+@mixin hoverClickGrow {
+	transform: scale(1.025);
+	transition: all 0.25s ease-in-out;
+}
+
+@mixin hoverClickGrowIcon {
+	transform: scale(1.15);
+	@include hoverClickGrow;
+}
+
+@mixin hoverClickShrink {
+	transform: scale(0.99);
+	transition: all 0.25s ease-in;
+}
+
+@mixin diabledButton {
+	cursor: pointer;
+	opacity: 0.5;
+	pointer-events: none;
 }

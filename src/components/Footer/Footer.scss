@@ -6,6 +6,8 @@
 		box-shadow: var(--footer-box-shadow);
 		height: 5rem;
 		margin-top: auto;
+		position: relative;
+		z-index: 1;
 	}
 
 	&__inner {

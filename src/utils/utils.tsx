@@ -1,9 +1,12 @@
+import { ToastType } from "@/typing/types";
 import type { MouseEvent } from "react";
+import { toast } from "react-toastify";
+import { isValidPhoneNumber } from "libphonenumber-js";
 // import { ChooserItem, ShootEntity } from "@/typing/interfaces";
 // import { ToastType } from "@/typing/types";
 // import { toast } from "react-toastify";
 
-// const MIN_LOADING_INTERVAL = parseInt(process.env.NEXT_PUBLIC_MIN_LOADING_INTERVAL ?? "250", 10);
+const MIN_LOADING_INTERVAL = parseInt(process.env.NEXT_PUBLIC_MIN_LOADING_INTERVAL ?? "250", 10);
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -40,10 +43,10 @@ const isModifiedClick = (
 //   return name.trim().length >= 2;
 // }
 
-// const isValidEmail = (email: string) => {
-//   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//   return emailRegex.test(email);
-// };
+const isValidEmail = (email: string) => {
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return emailRegex.test(email);
+};
 
 // const isValidPassword = (password: string) => {
 //   if(typeof password !== "string"){ 
@@ -60,15 +63,34 @@ const isModifiedClick = (
 //   return message.trim().length >= 25;
 // };
 
-// const staggerToastsByN = (message: string, toastType: ToastType, staggerOffset: number) => {
-//   setTimeout(() => {
-//     if (toastType === "default") {
-//       toast(message);
-//     } else {
-//       toast[toastType](message);
-//     }
-//   }, MIN_LOADING_INTERVAL * staggerOffset);
-// };
+ const validatePhoneNumber = (phoneValue: string): boolean => {
+  if (!phoneValue.length) {
+    return true;
+  };
+
+  let phoneNumberIsValid = false;
+
+  try {
+    phoneNumberIsValid = isValidPhoneNumber(
+      phoneValue.startsWith("+") ? phoneValue : phoneValue,
+      "US"
+    );
+  } catch {
+    phoneNumberIsValid = false;
+  };
+
+  return phoneNumberIsValid;
+};
+
+const staggerToastsByN = (message: string, toastType: ToastType, staggerOffset: number) => {
+  setTimeout(() => {
+    if (toastType === "default") {
+      toast(message);
+    } else {
+      toast[toastType](message);
+    }
+  }, MIN_LOADING_INTERVAL * staggerOffset);
+};
 
 // const splitOnNewLine = (string: string) => {
 //   return typeof string === "string"
@@ -110,11 +132,12 @@ export {
   normalizeCasing,
 //   isValidFirstName,
 //   isValidLastName,
-//   isValidEmail,
+  isValidEmail,
+  validatePhoneNumber,
 //   isValidPassword,
 //   isValidSubject,
 //   isValidMessage,
-//   staggerToastsByN,
+  staggerToastsByN,
 //   splitOnNewLine,
 //   syncChoosers
 };
