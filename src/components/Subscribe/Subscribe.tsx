@@ -9,7 +9,7 @@ import {
 import { toast } from "react-toastify";
 // import IsLoading from "../IsLoading/IsLoading";
 import LabelledCheckbox from "../LabelledCheckbox/LabelledCheckbox";
-import { PRIVACY_POLICY_TEXT, PRIVACY_POLICY_TITLE } from "@/textCopy/textCopyLegal";
+// import { PRIVACY_POLICY_TEXT, PRIVACY_POLICY_TITLE } from "@/textCopy/textCopyLegal";
 import { isValidEmail } from "@/utils/utils";
 import "./Subscribe.scss";
 
