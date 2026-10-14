@@ -1,23 +1,41 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { 
+  type MouseEvent, 
+  // Suspense 
+} from "react";
 import Link from "next/link";
 import { useAppContext } from "@/hooks/hooks";
 import { navOptions } from "@/constants/navOptions";
 import Logo from "@/assets/icons/Logo";
 import NavSocials from "@/components/NavSocials/NavSocials";
 import "./Nav.scss";
+import { scrollToTop } from "@/utils/utils";
 
 const Nav = () => {
   const {
+    setAppIsLoading,
     isLoggedIn,
     showDropdownNav,
     setShowDropdownNav,
-    toggleButtonRef
+    toggleButtonRef,
+    handleIsOnSamePage
   } = useAppContext();
 
-  const handleToggleShowDropdownNav = () => {
-    setShowDropdownNav(prev => !prev);
+  const pathname = usePathname();
+
+  const isOnHome = pathname === "/";
+
+  const handleToggleShowDropdownNav = () => setShowDropdownNav(prev => !prev);
+
+  const handleIsOnHome = (e: MouseEvent<HTMLElement>) => {
+    handleIsOnSamePage(e);
   };
+
+  const handleHomeClick = () => {
+    setAppIsLoading(true);
+  }
 
   return (
     <nav className="nav">
@@ -25,7 +43,9 @@ const Nav = () => {
 
         <div 
           className="nav__logo-box"
-          // onClick={isOnHome ? handleScrollToTop: handleHomeClick}
+          onClick={isOnHome 
+            ? handleIsOnHome
+            : handleHomeClick}
         >
           <Link href="/">
           <Logo className={"nav__logo"}/>
@@ -64,8 +84,6 @@ const Nav = () => {
                   <NavSocials />
                 </li>
               )
-
-
           }
 
         </ul>

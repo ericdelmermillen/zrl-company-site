@@ -5,7 +5,7 @@ import {
   // type ChangeEvent,
   type SetStateAction, 
   type Dispatch, 
-  // type MouseEvent,
+  type MouseEvent,
   // type DragEvent,
   // type ComponentType, 
   // type SVGProps,
@@ -15,6 +15,8 @@ import { type IconType } from "react-icons";
 import { ModalType } from "./types";
 
 interface AppContextValue {
+  appIsLoading: boolean;
+  setAppIsLoading: Dispatch<SetStateAction<boolean>>;
   scrollYPos: number;
   setScrollYPos: Dispatch<SetStateAction<number>>;
   getPrevScrollYPosValue: () => number;
@@ -23,6 +25,7 @@ interface AppContextValue {
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   showDropdownNav: boolean;
   setShowDropdownNav: Dispatch<SetStateAction<boolean>>;
+  handleIsOnSamePage: (e?: MouseEvent<HTMLElement>) => void;
 }
 
 interface ChildrenProps {

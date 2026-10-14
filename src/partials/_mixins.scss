@@ -12,6 +12,7 @@
 	min-height: calc(100vh - vars.$footer-height + 1px);
 	padding-top: 0;
 	width: 100%;
+	min-height: 200vh;
 }
 
 @mixin inner {
@@ -703,10 +704,4 @@
 @mixin hoverClickShrink {
 	transform: scale(0.99);
 	transition: all 0.25s ease-in;
-}
-
-@mixin diabledButton {
-	cursor: pointer;
-	opacity: 0.5;
-	pointer-events: none;
 }

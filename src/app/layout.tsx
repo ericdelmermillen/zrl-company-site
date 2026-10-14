@@ -3,8 +3,9 @@ import { ReactNode } from "react";
 import { Open_Sans, Poppins } from "next/font/google";
 import { AppContextProvider } from "@/contexts/AppContext";
 import Footer from "@/components/Footer/Footer";
-import "./globals.scss";
+import IsLoading from "@/components/IsLoading/IsLoading";
 import Navbar from "@/components/Navbar/Navbar";
+import "./globals.scss";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
     >
       <body>
         <AppContextProvider>
+          <IsLoading />
           <Navbar />
           <div className="app">
             {children}
