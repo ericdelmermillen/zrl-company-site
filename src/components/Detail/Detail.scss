@@ -2,27 +2,25 @@
 @use "../../partials/_mixins" as mx;
 
 .detail {
-	& {
-		display: flex;
-		flex-basis: 0;
-		flex-direction: column;
-		margin-bottom: 2rem;
-		position: relative;
-		width: 100%;
+	display: flex;
+	flex-basis: 0;
+	flex-direction: column;
+	margin-bottom: 2rem;
+	position: relative;
+	width: 100%;
 
+	@media (min-width: vars.$large-tablet) {
+		flex-direction: row;
+		margin-bottom: 1rem;
+	}
+
+	@media (min-width: vars.$desktop) {
+		margin-bottom: 4rem;
+	}
+
+	&--odd {
 		@media (min-width: vars.$large-tablet) {
-			flex-direction: row;
-			margin-bottom: 1rem;
-		}
-
-		@media (min-width: vars.$desktop) {
-			margin-bottom: 4rem;
-		}
-
-		&--odd {
-			@media (min-width: vars.$large-tablet) {
-				flex-direction: row-reverse;
-			}
+			flex-direction: row-reverse;
 		}
 	}
 

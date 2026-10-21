@@ -2,12 +2,10 @@
 @use "../../partials/_variables" as vars;
 
 .nav {
-	& {
-		box-shadow: var(--nav-footer-box-shadow);
-		height: 100%;
-		position: relative;
-		z-index: 1;
-	}
+	box-shadow: var(--nav-footer-box-shadow);
+	height: 100%;
+	position: relative;
+	z-index: 1;
 
 	&__content {
 		align-items: center;

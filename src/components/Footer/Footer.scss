@@ -2,13 +2,11 @@
 @use "../../partials/variables.scss" as vars;
 
 .footer {
-	& {
-		box-shadow: var(--footer-box-shadow);
-		height: 5rem;
-		margin-top: auto;
-		position: relative;
-		z-index: 1;
-	}
+	box-shadow: var(--footer-box-shadow);
+	height: 5rem;
+	margin-top: auto;
+	position: relative;
+	z-index: 1;
 
 	&__inner {
 		align-items: center;

@@ -2,14 +2,12 @@
 @use "../../partials/_mixins" as mx;
 
 .solution {
-	& {
-		display: stretch;
-		margin-bottom: 2rem;
-		width: 100%;
+	display: stretch;
+	margin-bottom: 2rem;
+	width: 100%;
 
-		@media (min-width: vars.$medium-tablet) {
-			margin-bottom: 1rem;
-		}
+	@media (min-width: vars.$medium-tablet) {
+		margin-bottom: 1rem;
 	}
 
 	&__inner {

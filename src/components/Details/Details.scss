@@ -2,10 +2,8 @@
 @use "../../partials/_mixins" as mx;
 
 .details {
-	& {
-		padding-bottom: 2rem;
-		padding-top: var(--section-top-padding);
-	}
+	padding-bottom: 2rem;
+	padding-top: var(--section-top-padding);
 
 	&__inner {
 		display: flex;

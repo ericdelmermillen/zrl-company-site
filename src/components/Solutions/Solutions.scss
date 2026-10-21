@@ -2,9 +2,7 @@
 @use "../../partials/_mixins" as mx;
 
 .solutions {
-	& {
-		padding-top: var(--section-top-padding);
-	}
+	padding-top: var(--section-top-padding);
 
 	&__inner {
 		display: flex;

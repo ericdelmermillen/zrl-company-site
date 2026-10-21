@@ -2,11 +2,9 @@
 @use "../../partials/_mixins" as mx;
 
 .labelledCheckbox {
-	& {
-		align-items: center;
-		display: flex;
-		width: fit-content;
-	}
+	align-items: center;
+	display: flex;
+	width: fit-content;
 
 	&__label {
 		@include mx.hiddenLabel;

@@ -2,11 +2,9 @@
 @use "../../partials/_mixins" as mx;
 
 .subscribe {
-	& {
-		align-items: center;
-		display: flex;
-		flex-direction: column;
-	}
+	align-items: center;
+	display: flex;
+	flex-direction: column;
 
 	&__inner {
 		display: flex;

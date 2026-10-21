@@ -2,11 +2,9 @@
 @use "../../partials/_mixins" as mx;
 
 .navSocials {
-	& {
-		display: flex;
-		gap: 1.85rem;
-		justify-content: center;
-	}
+	display: flex;
+	gap: 1.85rem;
+	justify-content: center;
 
 	&__social {
 		align-items: center;

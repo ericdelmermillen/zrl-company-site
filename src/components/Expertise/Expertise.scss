@@ -2,11 +2,9 @@
 @use "../../partials/_mixins" as mx;
 
 .expertise {
-	& {
-		margin-bottom: 2rem;
-		padding-bottom: 2rem;
-		padding-top: var(--section-top-padding);
-	}
+	margin-bottom: 2rem;
+	padding-bottom: 2rem;
+	padding-top: var(--section-top-padding);
 
 	&__inner {
 		display: flex;

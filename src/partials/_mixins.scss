@@ -252,7 +252,6 @@
 
 @mixin checkboxInput {
 	@include input;
-
 	& {
 		border-radius: 4px;
 		height: 1.125rem;

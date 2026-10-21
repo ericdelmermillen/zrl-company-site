@@ -2,7 +2,5 @@
 @use "../../../partials/_variables" as vars;
 
 .adminPage {
-	& {
-		@include mx.page;
-	}
+	@include mx.page;
 }
