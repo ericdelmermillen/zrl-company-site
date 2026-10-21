@@ -11,7 +11,7 @@ import { navOptions } from "@/constants/navOptions";
 import Logo from "@/assets/icons/Logo";
 import NavSocials from "@/components/NavSocials/NavSocials";
 import "./Nav.scss";
-import { scrollToTop } from "@/utils/utils";
+// import { scrollToTop } from "@/utils/utils";
 
 const Nav = () => {
   const {
@@ -20,7 +20,8 @@ const Nav = () => {
     showDropdownNav,
     setShowDropdownNav,
     toggleButtonRef,
-    handleIsOnSamePage
+    handleIsOnSamePage,
+    handleNavLinkClick
   } = useAppContext();
 
   const pathname = usePathname();
@@ -35,6 +36,12 @@ const Nav = () => {
 
   const handleHomeClick = () => {
     setAppIsLoading(true);
+    console.log("here")
+  }
+
+  const handleLinkClick = (href: string) => {
+    // handleNavLinkClick(href, true);
+    handleNavLinkClick(href);
   }
 
   return (
@@ -48,23 +55,25 @@ const Nav = () => {
             : handleHomeClick}
         >
           <Link href="/">
-          <Logo className={"nav__logo"}/>
+            <Logo className={"nav__logo"}/>
           </Link>
         </div>
       
         <ul className="nav__links">
 
-          {navOptions.map(({ id, name }) => 
+          {navOptions.map(({ id, name, href }) => 
 
-            <li key={id}>
-              <div 
-                className={`nav__link`} 
-                // onClick={isOnHome 
-                //   ? () => navLinkClick(name)
-                //   : () => notFoundNavLinkClick(name)}
+            <li 
+            key={id}
+            >
+              <button
+                className="nav__link"
+                onClick={() => handleLinkClick(href)}
+                type="button"
+
               >
                 {`${name}`}
-              </div>
+              </button>
             </li>
             )
           }
@@ -73,7 +82,10 @@ const Nav = () => {
 
             ? (
                 <li>
-                  <Link href="/admin">
+                  <Link 
+                    className="nav__link"
+                    href="/admin"
+                  >
                     ADMIN
                   </Link>
                 </li>

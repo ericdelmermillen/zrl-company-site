@@ -410,12 +410,14 @@
 
 @mixin navLink {
 	color: var(--text-color);
+	color: var(--nav-link-color);
 	cursor: pointer;
 	display: flex;
 	font-size: 1rem;
 	font-weight: 600;
 	justify-content: center;
 	letter-spacing: 3px;
+	position: relative;
 
 	@media (min-width: vars.$small-phone) {
 		font-size: 1.25rem;

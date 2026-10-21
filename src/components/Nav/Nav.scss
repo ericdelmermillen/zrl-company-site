@@ -63,15 +63,17 @@
 		}
 	}
 
-	// &__link {
-	// 	@include mx.navLink;
+	&__link {
+		& {
+			@include mx.navLink;
 
-	// 	&:hover {
-	// 		&::after {
-	// 			@include mx.afterAccent;
-	// 		}
-	// 	}
-	// }
+			&:hover {
+				&::after {
+					@include mx.afterAccent;
+				}
+			}
+		}
+	}
 
 	&__logout {
 		display: none;

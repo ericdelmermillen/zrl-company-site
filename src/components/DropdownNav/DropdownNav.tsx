@@ -6,25 +6,24 @@ import { useAppContext, useOutsideClick } from "@/hooks/hooks";
 import { navOptions } from "@/constants/navOptions";
 import NavSocials from "../NavSocials/NavSocials";
 import "./DropdownNav.scss";
+import Link from "next/link";
+
+const NAV_CLICK_DELAY = parseInt(process.env.NEXT_PUBLIC_NAV_CLICK_DELAY || "300", 10);
 
 const DropdownNav = () => {
   const {
     isLoggedIn,
-    scrollYPos, 
-    getPrevScrollYPosValue, 
+    // scrollYPos, 
+    // getPrevScrollYPosValue, 
     // navLinkClick,
     // notFoundNavLinkClick,
     showDropdownNav,
     setShowDropdownNav,
-    toggleButtonRef
+    toggleButtonRef,
+    handleNavLinkClick
   } = useAppContext();
 
   const innerRef = useRef<HTMLDivElement | null>(null);
-
-  const pathname = usePathname();
-  // const isOnHome = pathname === "/";
-
-  // const prevScrollYPosValue = getPrevScrollYPosValue();
 
   const handleOnOutsideClick = () => {
     setShowDropdownNav(false);
@@ -38,6 +37,10 @@ const DropdownNav = () => {
   };
 
   useOutsideClick(outsideClickArgs);
+
+  const handleLinkClick = (href: string) => {
+    handleNavLinkClick(href, true);
+  };
   
   return (
     <nav 
@@ -51,18 +54,13 @@ const DropdownNav = () => {
       >
         <h2 className="sr-only">Menu</h2>
         <ul className={`dropdownNav__links ${showDropdownNav ? "tall" : ""}`}>
-          {/* <li className="dropdownNav__link dropdownNav__item--hidden" >
-            Dropdown Nav Menu
-          </li> */}
 
-          {navOptions.map(({ id, name }) => 
+          {navOptions.map(({ id, name, href }) => 
 
             <li 
               className="dropdownNav__item"
               key={id}
-              // onClick={isOnHome 
-              //   ? () => navLinkClick(name)
-              //   : () => notFoundNavLinkClick(name)}
+              onClick={() => handleLinkClick(href)}
             >
               <span className="dropdownNav__link">
                 {`${name}`}
@@ -77,9 +75,11 @@ const DropdownNav = () => {
                     className="dropdownNav__item"
                     // onClick={() => navLinkClick("admin")}
                   >
-                    <span className="dropdownNav__link">
-                      ADMIN
-                    </span>
+                    <Link href="/admin">
+                      <span className="dropdownNav__link">
+                        ADMIN
+                      </span>
+                    </Link>
                   </li>
                 )
               : (

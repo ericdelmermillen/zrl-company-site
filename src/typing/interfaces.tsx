@@ -26,6 +26,7 @@ interface AppContextValue {
   showDropdownNav: boolean;
   setShowDropdownNav: Dispatch<SetStateAction<boolean>>;
   handleIsOnSamePage: (e?: MouseEvent<HTMLElement>) => void;
+  handleNavLinkClick: any;
 }
 
 interface ChildrenProps {
@@ -42,6 +43,7 @@ interface UseOutsideClickProps {
 interface NavOption {
   id: number;
   name: string;
+  href: string;
 }
 
 interface NavProps {
