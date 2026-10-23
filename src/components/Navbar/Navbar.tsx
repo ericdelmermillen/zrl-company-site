@@ -10,7 +10,7 @@ const Navbar = () => {
   const navIsHidden = getPrevScrollYPosValue() < scrollYPos && scrollYPos > 50;
 
   return (
-    <header className={`navbar ${navIsHidden ? "hide" : ""}`}>
+    <header id="navbar" className={`navbar ${navIsHidden ? "hide" : ""}`}>
       <Nav/>
       <DropdownNav />
     </header>

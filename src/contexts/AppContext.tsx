@@ -15,7 +15,7 @@ import {
   type ChildrenProps,
   type AppContextValue, 
 } from "@/typing/interfaces";
-import { isModifiedClick, scrollToTop } from "@/utils/utils";
+import { addClassToDiv, isModifiedClick, scrollToTop } from "@/utils/utils";
 // import { type TypeOptions, toast } from "react-toastify";
 // import { isModifiedClick, normalizeCasing, scrollToTop } from "@/utils/utils";
 
@@ -49,11 +49,9 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
   const handleNavLinkClick = (href: string, isMobileView: boolean = false) => {
     const isOnHome = pathname === "/";
     const [ route, targetId ] = href.split("#");
-    // onScrollEnd event to pass a
 
     if (isMobileView) {
       setShowDropdownNav(false);
-      // add show to nav after scroll finishes
     }
 
      if (route) {
@@ -61,6 +59,8 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
      }
 
     if (targetId) {
+      addClassToDiv("navbar", "hide");
+
       setTimeout(() => {
         const targetElement = document.getElementById(targetId);
         targetElement && targetElement.scrollIntoView({ behavior: "smooth" });
