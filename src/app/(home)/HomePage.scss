@@ -3,22 +3,14 @@
 
 .homePage {
 	@include mx.page;
-	& {
-		margin-top: 100vh;
-	}
 
 	&__main {
 		background: var(--neutral-bg-1);
+		margin-top: 100vh;
 		position: relative;
-		border: 2px solid red;
-		background: #f4f4f4;
-		min-height: 100vh;
 	}
 
 	&__content {
 		@include mx.pageContent;
-		& {
-			background: yellow;
-		}
 	}
 }

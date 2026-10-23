@@ -55,7 +55,6 @@
 }
 
 @mixin sectionHeading {
-	// might want to use a custom heading color
 	color: var(--text-color);
 	font-family: var(--heading-font);
 	font-size: var(--font-size-lg);
@@ -183,34 +182,74 @@
 
 @mixin button {
 	align-items: center;
-	background: var(--button-background);
+	background: var(--accent-color);
 	border: none;
-	border-radius: var(--border-radius);
-	color: var(--button-color);
+	color: var(--button-text-color);
 	cursor: pointer;
-	display: inline-flex;
-	font-size: 1rem;
-	font-weight: 500;
+	display: flex;
 	justify-content: center;
-	padding: 0.5rem 1rem;
-	transition: background-color 0.3s ease;
+	font-family: var(--heading-font);
+	font-size: var(--button-text-xs);
+	font-weight: 700;
+	letter-spacing: var(--letter-spacing-2xl);
+	padding: var(--button-padding-base);
+	text-align: center;
+	transition: all 0.2s ease-in-out;
+	z-index: 2;
+
+	&.disabled {
+		opacity: var(--button-disabled-opacity);
+		pointer-events: none;
+	}
+
+	@media (min-width: vars.$small-phone) {
+		font-size: var(--button-text-sm);
+	}
+
+	@media (min-width: vars.$small-tablet) {
+		font-size: var(--button-text-lg);
+	}
 
 	&:hover {
-		background: var(--button-color);
-		color: var(--button-background);
-		outline: 2px solid var(--button-background);
+		@include hoverClickGrow;
 	}
 
 	&:active {
-		transform: scale(0.98);
+		scale: 0.95;
+	}
+
+	&:active,
+	&:focus {
+		outline: none;
+	}
+
+	&:visited {
+		color: var(--button-text-color);
+		padding: var(--button-padding-sm);
+	}
+
+	@media (min-width: vars.$desktop) {
+		font-size: var(--button-text-lg);
+	}
+
+	@media (min-width: vars.$ultra-wide) {
+		font-size: var(--button-text-xl);
+		letter-spacing: var(--letter-spacing-xl);
+		padding: var(--button-padding-xl);
 	}
 }
 
-@mixin buttonRounded {
+@mixin roundedButton {
 	@include button;
 	& {
-		border-radius: 3rem;
+		border-radius: 2rem;
 	}
+}
+
+@mixin diabledButton {
+	cursor: pointer;
+	opacity: 0.5;
+	pointer-events: none;
 }
 
 @mixin input {
@@ -594,72 +633,6 @@
 	justify-content: center;
 }
 
-@mixin button {
-	align-items: center;
-	background: var(--accent-color);
-	border: none;
-	color: var(--button-text-color);
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	font-family: var(--heading-font);
-	font-size: var(--button-text-xs);
-	font-weight: 700;
-	letter-spacing: var(--letter-spacing-2xl);
-	padding: var(--button-padding-base);
-	text-align: center;
-	transition: all 0.2s ease-in-out;
-	z-index: 2;
-
-	&.disabled {
-		opacity: var(--button-disabled-opacity);
-		pointer-events: none;
-	}
-
-	@media (min-width: vars.$small-phone) {
-		font-size: var(--button-text-sm);
-	}
-
-	@media (min-width: vars.$small-tablet) {
-		font-size: var(--button-text-lg);
-	}
-
-	&:hover {
-		@include hoverClickGrow;
-	}
-
-	&:active {
-		scale: 0.95;
-	}
-
-	&:focus {
-		outline: 2px solid var(--accent-color);
-		outline-offset: 2px;
-	}
-
-	&:visited {
-		color: var(--button-text-color);
-		padding: var(--button-padding-sm);
-	}
-
-	@media (min-width: vars.$desktop) {
-		font-size: var(--button-text-lg);
-	}
-
-	@media (min-width: vars.$ultra-wide) {
-		font-size: var(--button-text-xl);
-		letter-spacing: var(--letter-spacing-xl);
-		padding: var(--button-padding-xl);
-	}
-}
-
-@mixin roundedButton {
-	@include button;
-	& {
-		border-radius: 2rem;
-	}
-}
-
 @mixin imageBox {
 	display: block;
 	inset: 0;
@@ -698,8 +671,10 @@
 }
 
 @mixin hoverClickGrowIcon {
-	transform: scale(1.15);
 	@include hoverClickGrow;
+	& {
+		transform: scale(1.15);
+	}
 }
 
 @mixin hoverClickShrink {

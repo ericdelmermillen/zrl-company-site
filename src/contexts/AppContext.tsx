@@ -33,7 +33,7 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
   const [ appIsLoading, setAppIsLoading ] = useState(true);
   const [ scrollYPos, setScrollYPos ] = useState(0);
 
-  const [ isLoggedIn, setIsLoggedIn ] = useState(!false);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
 
   const [ showDropdownNav, setShowDropdownNav ] = useState(false);
   
