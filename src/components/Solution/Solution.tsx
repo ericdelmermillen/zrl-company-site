@@ -1,9 +1,8 @@
 import Image from "next/image";
-import { Solutions } from "@/typing/interfaces";
+import { SolutionProps } from "@/typing/interfaces";
 import "./Solution.scss";
 
-
-const Solution = ({ img, shortTitle, fullTitle, text, tag, alt }: Solutions) => {
+const Solution = ({ img, shortTitle, fullTitle, text, tag, alt }: SolutionProps) => {
   return (
     <article className="solution">
       <div className="solution__inner">

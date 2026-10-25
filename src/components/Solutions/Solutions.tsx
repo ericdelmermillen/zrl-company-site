@@ -1,6 +1,6 @@
 import { solutions } from "@/constants/solutions";
+import Solution from "@/components/Solution/Solution";
 import "./Solutions.scss";
-import Solution from "../Solution/Solution";
 
 const Solutions = () => {
   return (

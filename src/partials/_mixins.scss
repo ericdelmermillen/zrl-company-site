@@ -104,7 +104,7 @@
 // basic UI elements
 @mixin cardImg {
 	aspect-ratio: 16/9;
-	border-radius: var(--border-radiu--border-radius);
+	border-radius: var(--border-radius);
 	object-fit: cover;
 	object-position: center center;
 	overflow: hidden;
@@ -120,6 +120,7 @@
 @mixin cardTag {
 	background: var(--accent-color);
 	border-radius: var(--border-radius);
+	color: var(--nav-link-color);
 	font-size: var(--font-size-sm);
 	font-weight: 700;
 	padding: var(--tag-padding);

@@ -2,6 +2,7 @@
 @use "../../partials/_mixins" as mx;
 
 .moreInfo {
+	padding-bottom: var(--section-bottom-padding);
 	padding-top: var(--section-top-padding);
 	width: 100%;
 

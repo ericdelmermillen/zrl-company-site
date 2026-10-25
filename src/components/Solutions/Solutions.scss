@@ -2,6 +2,7 @@
 @use "../../partials/_mixins" as mx;
 
 .solutions {
+	padding-bottom: var(--section-bottom-padding);
 	padding-top: var(--section-top-padding);
 
 	&__inner {
@@ -18,9 +19,6 @@
 
 	&__lead {
 		@include mx.sectionLead;
-		& {
-			margin-bottom: 2rem;
-		}
 	}
 
 	&__lead-stem {
