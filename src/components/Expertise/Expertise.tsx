@@ -6,7 +6,9 @@ const Expertise = () => {
   return (
     <section className="expertise" id="expertise">
       <div className="expertise__inner">
-        <h2 className="expertise__heading">Expertise</h2>
+        <h2 className="expertise__heading">
+          Expertise
+        </h2>
         <p className="expertise__lead">
           We take pride in our expertise. With years of experience and a dedicated team, we deliver exceptional software solutions tailored to your needs. Our strong points include:
         </p>

@@ -1,5 +1,5 @@
 import Details from "@/components/Details/Details";
-// import Expertise from "@/components/Expertise/Expertise";
+import Expertise from "@/components/Expertise/Expertise";
 import Hero from "@/components/Hero/Hero";
 import MoreInfo from "@/components/MoreInfo/MoreInfo";
 import Solutions from "@/components/Solutions/Solutions";
@@ -19,7 +19,7 @@ const HomePage = () => {
             <MoreInfo />
             <Solutions />
             <Details />
-            {/* <Expertise /> */}
+            <Expertise />
             {/* <Values /> */}
             {/* <Subscribe /> */}
           </div>

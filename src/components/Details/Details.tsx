@@ -6,7 +6,9 @@ const Details = () => {
   return (
     <section className="details" id="details">
       <div className="details__inner">
-        <h2 className="details__heading">Details</h2>
+        <h2 className="details__heading">
+          Details
+        </h2>
 
         {details.map(({ heading, lead, img, imgDesc, bullets }, idx) => (
           <Detail
