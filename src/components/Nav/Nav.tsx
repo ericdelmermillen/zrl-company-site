@@ -1,17 +1,15 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { 
-  type MouseEvent, 
-  // Suspense 
-} from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { type MouseEvent } from "react";
 import { useAppContext } from "@/hooks/hooks";
 import { navOptions } from "@/constants/navOptions";
+import ClientLink from "@/components/ClientLink/ClientLink";
 import Logo from "@/assets/icons/Logo";
+import NavItem from "@/components/NavItem/NavItem";
 import NavSocials from "@/components/NavSocials/NavSocials";
 import "./Nav.scss";
-// import { scrollToTop } from "@/utils/utils";
 
 const Nav = () => {
   const {
@@ -30,19 +28,11 @@ const Nav = () => {
 
   const handleToggleShowDropdownNav = () => setShowDropdownNav(prev => !prev);
 
-  const handleIsOnHome = (e: MouseEvent<HTMLElement>) => {
-    handleIsOnSamePage(e);
-  };
+  const handleIsOnHome = (e: MouseEvent<HTMLElement>) => handleIsOnSamePage(e);
 
-  const handleHomeClick = () => {
-    setAppIsLoading(true);
-    console.log("here")
-  }
+  const handleHomeClick = () => setAppIsLoading(true);
 
-  const handleLinkClick = (href: string) => {
-    // handleNavLinkClick(href, true);
-    handleNavLinkClick(href);
-  }
+  const handleLinkClick = (href: string) => handleNavLinkClick(href);
 
   return (
     <nav className="nav">
@@ -63,36 +53,31 @@ const Nav = () => {
 
           {navOptions.map(({ id, name, href }) => 
 
-            <li 
-            key={id}
+            <NavItem
+              key={id}
+              itemClassName="nav__item"
+              buttonClassName="nav__link"
+              href={href}
+              onClick={handleLinkClick}
             >
-              <button
-                className="nav__link"
-                onClick={() => handleLinkClick(href)}
-                type="button"
-
-              >
-                {`${name}`}
-              </button>
-            </li>
+              {name}
+            </NavItem>
             )
           }
           
           {isLoggedIn 
 
             ? (
-                <li>
-                  <Link 
-                    className="nav__link"
-                    href="/admin"
-                  >
-                    ADMIN
-                  </Link>
-                </li>
+                <ClientLink
+                  className="nav__link"
+                  href="/admin"
+                >
+                  ADMIN
+                </ClientLink>
               )
 
             : (
-                <li>
+                <li className="nav__item">
                   <NavSocials />
                 </li>
               )

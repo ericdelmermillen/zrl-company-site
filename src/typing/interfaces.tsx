@@ -46,11 +46,21 @@ interface NavOption {
   href: string;
 }
 
-interface NavProps {
+interface NavItemProps {
+  itemClassName: string;
+  buttonClassName: string;
+  onClick: (href: string) => void;
+  href: string;
   children?: ReactNode;
-  navOptions: NavOption[];
-};
+}
 
+interface ClientLinkProps {
+  href: string;
+  className?: string;
+  onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
+  children?: ReactNode;
+  scroll?: boolean;
+}
 
 interface Social {
   name: string;
@@ -133,7 +143,8 @@ export {
   type ChildrenProps,
   type UseOutsideClickProps,
   type NavOption,
-  type NavProps,
+  type NavItemProps,
+  type ClientLinkProps,
   type Social,
   type IconProps,
   type MoreInfoTextData,

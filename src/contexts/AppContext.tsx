@@ -33,7 +33,7 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
   const [ appIsLoading, setAppIsLoading ] = useState(true);
   const [ scrollYPos, setScrollYPos ] = useState(0);
 
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(!false);
 
   const [ showDropdownNav, setShowDropdownNav ] = useState(false);
   
@@ -55,13 +55,13 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     }
 
      if (route) {
+      setAppIsLoading(true);
       router.push(route); 
      }
 
     if (targetId) {
-      addClassToDiv("navbar", "hide");
-
       setTimeout(() => {
+        addClassToDiv("navbar", "hide");
         const targetElement = document.getElementById(targetId);
         targetElement && targetElement.scrollIntoView({ behavior: "smooth" });
       }, (isMobileView || (route && !isOnHome)) ? (NAV_CLICK_DELAY * 2) : 0);
@@ -130,8 +130,6 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
           });
           
           clearOnScroll();
-          // handleSetShowSideNavFalse();
-          // setShowNavSelectOptions(false);
           ticking = false;
         });
         ticking = true;

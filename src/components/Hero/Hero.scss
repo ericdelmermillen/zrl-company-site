@@ -179,41 +179,6 @@
 		}
 	}
 
-	&__solution {
-		font-family: var(--heading-font);
-		font-size: var(--text-header-heading-xs);
-		font-weight: 600;
-		letter-spacing: var(--letter-spacing-3xl);
-		line-height: var(--line-height-sm);
-		white-space: nowrap;
-
-		&--short {
-			@media (min-width: vars.$small-tablet) {
-				display: none;
-			}
-		}
-
-		&--full {
-			display: none;
-
-			@media (min-width: vars.$small-tablet) {
-				display: inline-block;
-			}
-		}
-
-		@media (min-width: vars.$small-phone) {
-			font-size: var(--text-header-heading-sm);
-		}
-
-		@media (min-width: vars.$small-tablet) {
-			font-size: var(--text-header-heading-md);
-		}
-
-		@media (min-width: vars.$medium-tablet) {
-			font-size: var(--text-header-heading-lg);
-		}
-	}
-
 	&__lead {
 		font-size: var(--text-header-lead-xs);
 		font-weight: 700;

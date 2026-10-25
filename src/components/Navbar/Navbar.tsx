@@ -7,11 +7,12 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   const { scrollYPos, getPrevScrollYPosValue } = useAppContext();
+  
   const navIsHidden = getPrevScrollYPosValue() < scrollYPos && scrollYPos > 50;
 
   return (
     <header id="navbar" className={`navbar ${navIsHidden ? "hide" : ""}`}>
-      <Nav/>
+      <Nav />
       <DropdownNav />
     </header>
   );

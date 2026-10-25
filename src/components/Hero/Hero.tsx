@@ -1,26 +1,7 @@
-"use client";
-
-import { useState, useEffect } from "react";
+import HeroSolution from "../HeroSolution/HeroSolution";
 import "./Hero.scss";
 
-const solutions: string[] = ["Small Business", "Enterprise", "Startups"];
-
 const Hero= () => {
-  const [ solutionIdx, setSolutionIdx ] = useState<number>(0);
-
-  // useEffect to setInterval for rotating solutionIdx
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSolutionIdx(prev =>
-        prev === solutions.length - 1 
-          ? 0 
-          : prev + 1
-      );
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="hero">
       <div className="hero__inner">
@@ -36,16 +17,7 @@ const Hero= () => {
                 For{" "}
               </span>
               <br className="hero__break"></br>
-              <span className="hero__solution">
-                {solutions[solutionIdx] === "Small Business" ? (
-                  <>
-                    <span className="hero__solution hero__solution--short">SMEs</span>
-                    <span className="hero__solution hero__solution--full">Small Business</span>
-                  </>
-                ) : (
-                  solutions[solutionIdx]
-                )}
-              </span>
+              <HeroSolution />
             </h2>
             <p className="hero__lead">
               Build better, faster, smarter with software solutions crafted for your unique needs.

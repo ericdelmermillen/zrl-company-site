@@ -5,18 +5,18 @@
 	box-shadow: var(--nav-footer-box-shadow);
 	height: 100%;
 	position: relative;
-	z-index: 1;
+	z-index: 2;
 
 	&__content {
 		align-items: center;
+		background: var(--nav-footer-bg);
+		box-shadow: var(--nav-box-shadow);
 		display: flex;
 		justify-content: center;
 		height: 100%;
 		margin-inline: auto;
 		max-width: vars.$ultra-wide;
 		width: 100%;
-		background: var(--nav-footer-bg);
-		z-index: 1000;
 
 		@media (min-width: vars.$large-tablet) {
 			padding-inline: 6rem;
@@ -48,9 +48,8 @@
 	}
 
 	&__links {
-		display: none;
-		color: var(--accent-color);
 		color: var(--nav-footer-text-color);
+		display: none;
 
 		@media (min-width: vars.$large-tablet) {
 			align-items: center;
@@ -59,6 +58,10 @@
 			height: 100%;
 			margin-inline-start: auto;
 		}
+	}
+
+	&__item {
+		@include mx.navItem;
 	}
 
 	&__link {
@@ -86,7 +89,6 @@
 		justify-content: center;
 		position: absolute;
 		right: 2rem;
-		top: 0.9rem;
 		top: calc((vars.$nav-height / 2) - calc(vars.$nav-toggle-height / 2));
 		width: 2.25rem;
 
