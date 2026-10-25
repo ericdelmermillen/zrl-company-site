@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { DetailProps } from "@/typing/interfaces";
 import BulletCheck from "@/components/BulletCheck/BulletCheck";
-
 import "./Detail.scss";
 
 const Detail = ({
@@ -19,8 +18,12 @@ const Detail = ({
     <div className={`detail ${!isEven && "detail--odd"}`} >
 
       <div className={`detail__text ${isEven ? "detail__text--even" : "detail__text--odd"}`}>
-        <h3 className="detail__heading">{heading}</h3>
-        <p className="detail__lead">{lead}</p>
+        <h3 className="detail__heading">
+          {heading}
+        </h3>
+        <p className="detail__lead">
+          {lead}
+        </p>
 
         <ul className="detail__points">
           {bullets.map(({ headingShort, headingFull, blurb }, idx) => (

@@ -35,7 +35,9 @@
 		}
 
 		&--odd {
-			padding-inline-start: 3rem;
+			@media (min-width: vars.$large-tablet) {
+				padding-inline-start: 3rem;
+			}
 		}
 	}
 
@@ -63,8 +65,10 @@
 
 	&__imageBox {
 		@include mx.imageBox;
-		width: 100%;
-		aspect-ratio: 16/9;
+		& {
+			aspect-ratio: 16/9;
+			width: 100%;
+		}
 	}
 
 	&__image {

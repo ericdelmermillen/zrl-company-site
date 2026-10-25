@@ -1,4 +1,4 @@
-import Detail from "../Detail/Detail";
+import Detail from "@/components/Detail/Detail";
 import { details } from "@/constants/details";
 import "./Details.scss";
 

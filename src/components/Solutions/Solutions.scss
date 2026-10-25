@@ -2,8 +2,11 @@
 @use "../../partials/_mixins" as mx;
 
 .solutions {
-	padding-bottom: var(--section-bottom-padding);
 	padding-top: var(--section-top-padding);
+
+	@media (min-width: vars.$tablet) {
+		padding-bottom: var(--section-bottom-padding);
+	}
 
 	&__inner {
 		display: flex;

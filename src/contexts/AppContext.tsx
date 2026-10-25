@@ -55,7 +55,10 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     }
 
      if (route) {
-      setAppIsLoading(true);
+      if (!isOnHome) {
+        setAppIsLoading(true);
+      }
+      
       router.push(route); 
      }
 
