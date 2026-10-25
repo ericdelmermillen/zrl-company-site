@@ -33,7 +33,7 @@ const LabelledCheckbox = ({
         id={labelId}
         type="checkbox"
         className={`labelledCheckbox__input
-          ${isValid ? "" : "invalid"}`}
+          ${isValid ? "" : "invalid"}`.trim()}
         checked={isChecked}
         onChange={handleIsClickedChange}
       />

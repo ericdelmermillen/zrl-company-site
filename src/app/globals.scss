@@ -183,7 +183,7 @@ body {
 	flex-direction: column;
 	font-family: var(--body-font);
 	min-height: calc(100vh + 1px);
-	overflow-x: hidden;
+	// overflow-x: hidden;
 	position: relative;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -209,16 +209,45 @@ ol {
 	list-style-type: none;
 }
 
-input {
-	&:-webkit-autofill,
-	&:-webkit-autofill:hover,
-	&:-webkit-autofill:focus {
-		box-shadow: 0 0 0px 1000px var(--background-color) inset !important;
-		caret-color: var(--text-color);
-		transition: background-color 5000s ease-in-out 0s;
-		-webkit-box-shadow: 0 0 0px 1000px var(--background-color) inset !important;
-		-webkit-text-fill-color: var(--text-color);
+li {
+	list-style: none;
+}
+
+input,
+button,
+textarea,
+select {
+	appearance: none;
+	background: none;
+	border: none;
+	color: inherit;
+	font: inherit;
+	outline: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	&:hover {
+		cursor: pointer; // for buttons and clickable inputs
 	}
+
+	&:focus {
+		outline: 2px solid var(--accent-color);
+		outline-offset: 2px;
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+}
+
+// Chrome autofill override
+input:-webkit-autofill {
+	background-color: none !important;
+	box-shadow: none !important;
+	caret-color: var(--text-color);
+	transition: background-color 5000s ease-in-out 0s;
+	-webkit-box-shadow: none !important;
 }
 
 :focus:not(:focus-visible) {
@@ -240,6 +269,7 @@ img {
 	flex-direction: column;
 	max-width: vars.$ultra-wide;
 	margin-inline: auto;
+	width: 100%;
 }
 
 .sr-only {

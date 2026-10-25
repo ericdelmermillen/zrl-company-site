@@ -4,10 +4,17 @@
 .homePage {
 	@include mx.page;
 
+	&__inner {
+		width: 100%;
+	}
+
 	&__main {
 		background: var(--neutral-bg-1);
 		margin-top: 100vh;
+		max-width: 100%;
+		min-width: 100%;
 		position: relative;
+		width: 100%;
 	}
 
 	&__content {

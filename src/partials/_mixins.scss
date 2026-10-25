@@ -2,7 +2,7 @@
 
 @mixin page {
 	align-items: center;
-	background: var(--background-color);
+	background: var(--neutral-bg-1);
 	box-shadow: var(--box-shadow);
 	color: var(--text-color);
 	display: flex;
@@ -12,7 +12,8 @@
 	min-height: calc(100vh - vars.$footer-height + 1px);
 	padding-top: 0;
 	width: 100%;
-	min-height: 200vh;
+	flex: 1;
+	// min-height: 200vh;
 }
 
 @mixin inner {
@@ -33,9 +34,9 @@
 
 @mixin pageContent {
 	margin-inline: auto;
-	max-width: 100%;
+	max-width: vars.$ultra-wide;
 	padding: 2rem;
-	width: vars.$ultra-wide;
+	min-width: 100%;
 
 	@media (min-width: vars.$tablet) {
 		padding-inline: 3rem;
@@ -100,28 +101,10 @@
 	}
 }
 
-@mixin cardTitleHeading {
-	color: var(--text-color);
-	font-size: var(--font-size-md);
-	font-weight: 600;
-	letter-spacing: var(--letter-spacing-md);
-	line-height: var(--line-height-lg);
-	margin-block: 1rem;
-
-	@media (min-width: vars.$tablet) {
-		font-size: var(--font-size-lg);
-	}
-
-	@media (min-width: vars.$desktop) {
-		font-size: var(--font-size-xl);
-	}
-}
-
 // basic UI elements
 @mixin cardImg {
 	aspect-ratio: 16/9;
-	border-radius: var(--border-radius-card-image);
-	max-width: 100%;
+	border-radius: var(--border-radiu--border-radius);
 	object-fit: cover;
 	object-position: center center;
 	overflow: hidden;
@@ -137,7 +120,6 @@
 @mixin cardTag {
 	background: var(--accent-color);
 	border-radius: var(--border-radius);
-	color: var(--button-text-color);
 	font-size: var(--font-size-sm);
 	font-weight: 700;
 	padding: var(--tag-padding);
@@ -253,25 +235,41 @@
 }
 
 @mixin input {
-	background: var(--background-color);
-	border: 1px solid var(--text-color);
+	background: none;
+	border: none;
+	border: 1px solid #333;
+	border-bottom: 1px solid #333;
 	border-radius: var(--border-radius);
 	color: var(--text-color);
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1.125rem;
+	cursor: default;
+	font-family: var(--body-font);
+	font-size: var(--font-size-xs);
+	height: var(--input-height);
+	letter-spacing: var(--letter-spacing-md);
+	line-height: var(--line-height-base);
+	outline: none;
 	padding-block: 0.5rem;
 	padding-inline: 0.5rem;
 	position: relative;
+	resize: none;
 	width: 100%;
+
+	&.invalid {
+		// need invalid border/outline styling for invalid state: will remove yellow bg later
+		// background: yellow;
+		border: 1px solid var(--error-color);
+		outline: 1px solid var(--error-color);
+	}
 
 	&::placeholder {
 		color: var(--text-color);
 		opacity: 0.5;
+		font-size: var(--font-size-xs);
 	}
 
 	&:-webkit-autofill {
 		-webkit-box-shadow: none !important;
-		background-color: transparent !important;
+		background-color: none !important;
 		box-shadow: none !important;
 		color: inherit;
 		transition: background-color 5000s ease-in-out 0s;
@@ -283,14 +281,15 @@
 
 	&:active,
 	&:focus {
-		border: 1px solid var(--text-color);
+		box-shadow: var(--input-box-shadow);
 		color: inherit;
-		outline: 1px solid var(--text-color);
+		outline: none;
 	}
 }
 
 @mixin checkboxInput {
 	@include input;
+
 	& {
 		border-radius: 4px;
 		height: 1.125rem;
@@ -394,7 +393,6 @@
 		background: var(--background-color);
 		border: 1px solid var(--text-color);
 		border-radius: var(--border-radius);
-		color: var(--text-color);
 		height: 3rem;
 		font-size: 1rem;
 		padding: 0.25rem;
@@ -601,13 +599,12 @@
 }
 
 @mixin cardTitleHeading {
-	border-bottom: 2px solid var(--accent-color);
 	color: var(--text-color);
-	display: inline-block;
-	font-size: var(--font-size-base);
-	font-weight: 500;
-	letter-spacing: var(--letter-spacing-lg);
-	line-height: var(--line-height-xl);
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	letter-spacing: var(--letter-spacing-md);
+	line-height: var(--line-height-lg);
+	margin-block: 1rem;
 
 	@media (min-width: vars.$tablet) {
 		font-size: var(--font-size-lg);
@@ -662,7 +659,7 @@
 }
 
 @mixin textLink {
-	color: var(--accent-color) !important;
+	color: var(--accent-color);
 	cursor: pointer;
 	text-decoration: underline;
 

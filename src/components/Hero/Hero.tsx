@@ -7,7 +7,6 @@ const Hero= () => {
       <div className="hero__inner">
         <div className="hero__overlay"></div>
         <div className="hero__accentBar"></div>
-
         <div className="hero__left">
 
           <div className="hero__text">
@@ -22,13 +21,12 @@ const Hero= () => {
             <p className="hero__lead">
               Build better, faster, smarter with software solutions crafted for your unique needs.
             </p>
-
             <a href="#moreInfo" className="hero__button">
               LEARN MORE
             </a>
           </div>
           
-        </div>
+        </div> 
         <div className="hero__right"></div>
 
       </div>

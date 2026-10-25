@@ -4,10 +4,7 @@ import "./MoreInfo.scss";
 
 const MoreInfo = () => {
   return (
-    <section 
-      className="moreInfo" 
-      id="moreInfo"
-    >
+    <section id="moreInfo" className="moreInfo">
       <div className="moreInfo__inner">
         <MoreInfoText />
         <MoreInfoForm /> 
