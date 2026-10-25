@@ -4,7 +4,7 @@ import Hero from "@/components/Hero/Hero";
 import MoreInfo from "@/components/MoreInfo/MoreInfo";
 import Solutions from "@/components/Solutions/Solutions";
 // import Subscribe from "@/components/Subscribe/Subscribe";
-// import Values from "@/components/Values/Values";
+import Values from "@/components/Values/Values";
 import "./HomePage.scss";
 
 const HomePage = () => {
@@ -20,7 +20,7 @@ const HomePage = () => {
             <Solutions />
             <Details />
             <Expertise />
-            {/* <Values /> */}
+            <Values />
             {/* <Subscribe /> */}
           </div>
         </main>

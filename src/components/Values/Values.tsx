@@ -1,5 +1,5 @@
 import { values } from "@/constants/values";
-import BulletCheck from "../BulletCheck/BulletCheck";
+import BulletCheck from "@/components/BulletCheck/BulletCheck";
 import "./Values.scss";
 
 // unlisted video on my youtube to embed: viewable and embeddable but not discoverable
@@ -7,11 +7,15 @@ import "./Values.scss";
 const YOUTUBE_VIDEO_ID = process.env.VITE_YOUTUBE_VIDEO_ID;
 const embedUrl = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?controls=1&mute=0&modestbranding=1&playsinline=1&rel=0`;
 
+console.log(YOUTUBE_VIDEO_ID)
+
 const Values = () => {
   return (
     <div className="values" id="values">
       <div className="values__inner">
-        <h3 className="values__heading">Values</h3>
+        <h3 className="values__heading">
+          Values
+        </h3>
 
         <h2 className="values__lead">
           We have the best most valuable corporate values you guys -- you won't even believe it you guys.
