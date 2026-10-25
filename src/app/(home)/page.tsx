@@ -3,7 +3,7 @@ import Expertise from "@/components/Expertise/Expertise";
 import Hero from "@/components/Hero/Hero";
 import MoreInfo from "@/components/MoreInfo/MoreInfo";
 import Solutions from "@/components/Solutions/Solutions";
-// import Subscribe from "@/components/Subscribe/Subscribe";
+import Subscribe from "@/components/Subscribe/Subscribe";
 import Values from "@/components/Values/Values";
 import "./HomePage.scss";
 
@@ -21,7 +21,7 @@ const HomePage = () => {
             <Details />
             <Expertise />
             <Values />
-            {/* <Subscribe /> */}
+            <Subscribe />
           </div>
         </main>
       </div>

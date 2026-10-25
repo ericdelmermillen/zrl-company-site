@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { type SubmitEvent, useState, useRef } from "react";
 import { 
   useAppContext, 
   // useModalContext 
@@ -15,6 +15,8 @@ import "./Subscribe.scss";
 
 // need api call logic
 // need to hide componentIsLoading via adding hide and removing when showing
+
+// *** do I want to have a local isLoading here?
 
 const Subscribe = () => {
   const { 
@@ -40,7 +42,9 @@ const Subscribe = () => {
     return emailIsValid;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     setInitialFormCheck(true);
 
     let errors = 0;
@@ -88,7 +92,7 @@ const Subscribe = () => {
           Stay updated with our latest news and announcements. Subscribe to our newsletter and follow us on social media for valuable insights and exciting updates.
         </p>
 
-        <form className="subscribe__form" onSubmit={(e) => {e.preventDefault()}}>
+        <form className="subscribe__form" onSubmit={handleSubmit}>
           <div className="subscribe__form-field">
 
             <label htmlFor="subscribe" className="subscribe__label">Subscribe</label>
@@ -117,9 +121,8 @@ const Subscribe = () => {
             <div className="subscribe__button-container">
 
               <button 
-                type="submit"
                 className={`subscribe__submit ${!agreeToPrivacy || componentIsLoading ? "disabled" : ""}`}
-                onClick={handleSubmit}
+                type="submit"
               >
                 SUBMIT
               </button>
