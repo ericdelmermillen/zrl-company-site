@@ -20,7 +20,7 @@ const LabelledCheckbox = ({
   };
 
   const handleSpanLinkClick = (): void => {
-    onSpanLinkClick(modalType)
+    onSpanLinkClick(modalType);
   };
 
   return (

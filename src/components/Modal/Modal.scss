@@ -1,0 +1,154 @@
+@use "../../partials/_variables" as vars;
+@use "../../partials/_mixins" as mx;
+
+.modal {
+	& {
+		height: 100%;
+		left: 0;
+		opacity: 0;
+		pointer-events: none;
+		position: fixed;
+		top: 0;
+		transition: opacity 0.2s ease;
+		width: 100%;
+		z-index: 30;
+
+		&.show {
+			opacity: 1;
+			pointer-events: auto;
+		}
+	}
+
+	&__overlay {
+		background: var(--overlay-modal-bg);
+		height: 100%;
+		opacity: 50%;
+		position: absolute;
+		width: 100%;
+	}
+
+	&__card {
+		background: var(--modal-card-bg);
+		border-radius: var(--border-radius-card);
+		display: flex;
+		height: 100%;
+		left: 50%;
+		max-height: 80vh;
+		max-width: 45rem;
+		overflow: hidden;
+		padding-block: 2rem;
+		padding-inline: 2rem;
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 85%;
+		z-index: 5;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		margin-inline: auto;
+		max-width: 25rem;
+		width: 100%;
+	}
+
+	&__heading {
+		@include mx.sectionHeadingWithAccent;
+		& {
+			margin-bottom: 2rem;
+		}
+	}
+
+	&__text {
+		flex: 1 1 auto;
+		font-size: var(--font-size-sm);
+		letter-spacing: var(--letter-spacing-sm);
+		line-height: var(--line-height-lg);
+		margin-inline: auto;
+		min-height: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		overflow-wrap: anywhere;
+		padding: 0.5rem;
+		margin-bottom: 2rem;
+		max-width: 25rem;
+		text-align: center;
+		text-align: start;
+		white-space: normal;
+		width: 100%;
+		word-break: break-word;
+
+		@media (min-width: vars.$tablet) {
+			font-size: var(--font-size-base);
+		}
+
+		&--informational {
+			box-shadow: inset 0 0 0.25rem rgba(0, 0, 0, 0.25);
+			line-height: var(--line-height-md);
+			max-width: 100%;
+			text-align: start;
+		}
+	}
+
+	&__paragraph {
+		margin-bottom: 1rem;
+		overflow-wrap: anywhere;
+		white-space: normal;
+		word-break: break-word;
+
+		&--numbered {
+			font-weight: 600;
+		}
+	}
+
+	&__inputs {
+		margin-top: 2rem;
+	}
+
+	&__label {
+		@include mx.hiddenLabel;
+	}
+
+	&__input-group {
+		margin-top: 1rem;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	&__input {
+		@include mx.input;
+	}
+
+	&__button-container {
+		@include mx.buttonContainer;
+		& {
+			flex-direction: column;
+			flex-shrink: 0;
+			gap: 1rem;
+
+			@media (min-width: vars.$small-tablet) {
+				flex-direction: row-reverse;
+				gap: 2rem;
+			}
+		}
+	}
+
+	&__button {
+		@include mx.button;
+		& {
+			min-width: 6rem;
+
+			@media (min-width: vars.$small-phone) {
+				min-width: 7rem;
+			}
+
+			@media (min-width: vars.$small-tablet) {
+				min-width: 8rem;
+			}
+		}
+	}
+}

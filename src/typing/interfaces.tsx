@@ -29,6 +29,26 @@ interface AppContextValue {
   handleNavLinkClick: any;
 }
 
+interface ModalContextValue {
+  showModal: boolean;
+  setShowModal: Dispatch<SetStateAction<boolean>>
+  modalType: ModalType | null;
+  setModalType: Dispatch<SetStateAction<ModalType | null>>;
+  modalTitle: string; 
+  setModalTitle: Dispatch<SetStateAction<string | "">>;
+  modalText: string;
+  setModalText: Dispatch<SetStateAction<string | "">>;
+  modalInitialFormCheck: boolean;
+  setModalInitialFormCheck: Dispatch<SetStateAction<boolean>>;
+  modalInputs: ModalInput[] | null;
+  setModalInputs: Dispatch<SetStateAction<ModalInput[] | null>>;
+  modalConfirmCallback: ((inputValues?: Record<string, string>) => void) | null;
+  setModalConfirmCallback: Dispatch<SetStateAction<((inputValues?: Record<string, string>) => void) | null>>;
+  // handlers
+  handleOpenModal: ({ modalType, modalTitle, modalText, inputs }: OpenModalOptions) => void;
+  handleClearModal: () => void;
+};
+
 interface ChildrenProps {
   children?: ReactNode;
 }
@@ -138,8 +158,24 @@ interface ExpertiseItem {
   desc: string;
 }
 
+interface ModalInput {
+  id: string;
+  label: string;
+  placeholder: string;
+  onChange: () => boolean;
+  ref: RefObject<HTMLInputElement | null>;
+}
+
+interface OpenModalOptions {
+  modalType: ModalType;
+  modalTitle: string;
+  modalText: string;
+  inputs?: ModalInput[] | null;
+}
+
 export {
   type AppContextValue,
+  type ModalContextValue,
   type ChildrenProps,
   type UseOutsideClickProps,
   type NavOption,
@@ -155,4 +191,6 @@ export {
   type DetailData,
   type DetailProps,
   type ExpertiseItem,
+  type ModalInput,
+  type OpenModalOptions,
 };

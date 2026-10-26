@@ -1,8 +1,12 @@
 "use client";
 
+import { type CheckboxItem, type OpenModalOptions } from "@/typing/interfaces";
+import { type ModalType } from "@/typing/types";
 import { useState, useRef } from "react";
-import { type CheckboxItem, type ModalType } from "@/typing/types";
-// import { useAppContext, useModalContext } from "../../hooks/hooks";
+import { 
+  // useAppContext, 
+  useModalContext 
+} from "@/hooks/hooks";
 import { isValidEmail, staggerToastsByN, validatePhoneNumber } from "@/utils/utils";
 // import { toast } from "react-toastify";
 import { 
@@ -22,8 +26,8 @@ import "./MoreInfoForm.scss";
 // const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const MoreInfoForm= () => {
-  // const { handleSetShowIsLoadingTrue, handleSetShowIsLoadingFalse } = useAppContext();
-  // const { handleOpenModal } = useModalContext();
+  // const { appIsLoading, setAppIsLoading } = useAppContext();
+  const { handleOpenModal } = useModalContext();
 
   const [ name, setName ] = useState<string>("");
   const [ email, setEmail ] = useState<string>("");
@@ -177,13 +181,15 @@ const MoreInfoForm= () => {
   };
 
   const handleSetModalData = (modalType: ModalType) => {
-  //   if(modalType === "newsletter") {
-  //     handleOpenModal(modalType, NEWSLETTER_POLICY_TITLE, NEWSLETTER_POLICY_TEXT);
-  //   };
+    const isNewsletter = modalType === "newsletter";
     
-  //   if(modalType === "privacy") {
-  //     handleOpenModal(modalType, PRIVACY_POLICY_TITLE, PRIVACY_POLICY_TEXT);
-  //   };
+    const modalOptions: OpenModalOptions = {
+      modalType: modalType, 
+      modalTitle: isNewsletter ? NEWSLETTER_POLICY_TITLE : PRIVACY_POLICY_TITLE,
+      modalText: isNewsletter ? NEWSLETTER_POLICY_TEXT : PRIVACY_POLICY_TEXT,
+    };
+
+    handleOpenModal(modalOptions);
   };
 
   return (
@@ -272,18 +278,28 @@ const MoreInfoForm= () => {
 
           <div className="moreInfoForm__checkboxes-inner">
 
-            {checkboxItems.map((item) => (
+            {checkboxItems.map(({ 
+              key, 
+              labelId, 
+              labelText, 
+              isChecked, 
+              setIsChecked, 
+              isValid, 
+              modalType, 
+              spanStub,
+              spanLinkText
+            }) => (
               <LabelledCheckbox
-                key={item.key}
-                labelId={item.labelId}
-                labelText={item.labelText}
-                isChecked={item.isChecked}
-                setIsChecked={item.setIsChecked}
-                isValid={item.isValid}
-                modalType={item.modalType}
-                spanStub={item.spanStub}
-                spanLinkText={item.spanLinkText}
-                onSpanLinkClick={(modalType) => handleSetModalData(modalType)}
+                key={key}
+                labelId={labelId}
+                labelText={labelText}
+                isChecked={isChecked}
+                setIsChecked={setIsChecked}
+                isValid={isValid}
+                modalType={modalType}
+                spanStub={spanStub}
+                spanLinkText={spanLinkText}
+                onSpanLinkClick={handleSetModalData}
               />
             ))}
             

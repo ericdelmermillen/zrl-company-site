@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { ReactNode } from "react";
+import { ChildrenProps } from "@/typing/interfaces";
 import { Open_Sans, Poppins } from "next/font/google";
 import { AppContextProvider } from "@/contexts/AppContext";
 import Footer from "@/components/Footer/Footer";
 import IsLoading from "@/components/IsLoading/IsLoading";
+import Modal from "@/components/Modal/Modal";
 import Navbar from "@/components/Navbar/Navbar";
 import "./globals.scss";
+import { ModalContextProvider } from "@/contexts/ModalContext";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -22,7 +24,8 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
+// const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
+const RootLayout = ({ children }: Readonly<ChildrenProps>) => {
   return (
     <html 
       lang="en"
@@ -32,12 +35,15 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
     >
       <body>
         <AppContextProvider>
-          <IsLoading />
-          <Navbar />
-          <div className="app">
-            {children}
-          </div>
-          <Footer />
+          <ModalContextProvider>
+            <IsLoading />
+            <Navbar />
+            <Modal />
+            <div className="app">
+              {children}
+            </div>
+            <Footer />
+          </ModalContextProvider>
         </AppContextProvider>
       </body>
     </html>

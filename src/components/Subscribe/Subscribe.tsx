@@ -1,16 +1,13 @@
 "use client";
 
 import { type SubmitEvent, useState, useRef } from "react";
-import { 
-  useAppContext, 
-  // useModalContext 
-} from "../../hooks/hooks";
-// import { PRIVACY_POLICY_TEXT, PRIVACY_POLICY_TITLE } from "../../textCopy/textCopy";
+import { type OpenModalOptions } from "@/typing/interfaces";
+import { useAppContext, useModalContext } from "@/hooks/hooks";
+import { isValidEmail } from "@/utils/utils";
+import { PRIVACY_POLICY_TEXT, PRIVACY_POLICY_TITLE } from "@/textCopy/textCopyLegal";
 import { toast } from "react-toastify";
 // import IsLoading from "../IsLoading/IsLoading";
-import LabelledCheckbox from "../LabelledCheckbox/LabelledCheckbox";
-// import { PRIVACY_POLICY_TEXT, PRIVACY_POLICY_TITLE } from "@/textCopy/textCopyLegal";
-import { isValidEmail } from "@/utils/utils";
+import LabelledCheckbox from "@/components/LabelledCheckbox/LabelledCheckbox";
 import "./Subscribe.scss";
 
 // need api call logic
@@ -23,7 +20,7 @@ const Subscribe = () => {
     // handleSetShowIsLoadingTrue, 
     // handleSetShowIsLoadingFalse 
   } = useAppContext();
-  // const { handleOpenModal } = useModalContext();
+  const { handleOpenModal } = useModalContext();
   const [ initialFormCheck , setInitialFormCheck ] = useState<boolean>(false);
   const [ email, setEmail ] = useState<string>("");
   const [ emailIsValid, setEmailIsValid ] = useState<boolean>(true);
@@ -78,7 +75,13 @@ const Subscribe = () => {
   };
   
   const handleOpenPrivacyModal = () => {
-    // handleOpenModal("privacy", PRIVACY_POLICY_TITLE, PRIVACY_POLICY_TEXT);
+    const modalOptions: OpenModalOptions = {
+      modalType: "privacy", 
+      modalTitle:  PRIVACY_POLICY_TITLE,
+      modalText: PRIVACY_POLICY_TEXT,
+    };
+
+    handleOpenModal(modalOptions);
   };
 
   return (
