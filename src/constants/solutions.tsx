@@ -1,11 +1,11 @@
 
-import { Solutions } from "@/typing/interfaces";
+import { SolutionItem } from "@/typing/interfaces";
 import solution_1 from "@/assets/images/solution-1.jpg";
 import solution_2 from "@/assets/images/solution-2.jpg";
 import solution_3 from "@/assets/images/solution-3.jpg";
 import solution_4 from "@/assets/images/solution-4.jpg";
 
-const solutions: Solutions[] = [
+const solutions: SolutionItem[] = [
     { 
     img: solution_1,
     shortTitle: "Brand & Product Design",

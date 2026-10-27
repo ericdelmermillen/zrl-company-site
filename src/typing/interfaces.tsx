@@ -105,7 +105,7 @@ interface Bullet {
 };
 
 
-interface SolutionProps {
+interface SolutionItem {
   img: StaticImageData | string;
   shortTitle: string;
   fullTitle: string;
@@ -184,7 +184,7 @@ export {
   type IconProps,
   type MoreInfoTextData,
   type Bullet,
-  type SolutionProps,
+  type SolutionItem,
   type CheckboxItem,
   type LabelledCheckboxProps,
   type DetailData,

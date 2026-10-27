@@ -4,7 +4,7 @@ import "./Values.scss";
 
 // unlisted video on my youtube to embed: viewable and embeddable but not discoverable
 
-const YOUTUBE_VIDEO_ID = process.env.VITE_YOUTUBE_VIDEO_ID;
+const YOUTUBE_VIDEO_ID = process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_ID;
 const embedUrl = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?controls=1&mute=0&modestbranding=1&playsinline=1&rel=0`;
 
 console.log(YOUTUBE_VIDEO_ID)
