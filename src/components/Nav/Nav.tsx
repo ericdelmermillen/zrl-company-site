@@ -1,8 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { type MouseEvent } from "react";
 import { useAppContext } from "@/hooks/hooks";
 import { navOptions } from "@/constants/navOptions";
 import ClientLink from "@/components/ClientLink/ClientLink";
@@ -13,24 +10,14 @@ import "./Nav.scss";
 
 const Nav = () => {
   const {
-    setAppIsLoading,
     isLoggedIn,
     showDropdownNav,
     setShowDropdownNav,
     toggleButtonRef,
-    handleIsOnSamePage,
     handleNavLinkClick
   } = useAppContext();
 
-  const pathname = usePathname();
-
-  const isOnHome = pathname === "/";
-
   const handleToggleShowDropdownNav = () => setShowDropdownNav(prev => !prev);
-
-  const handleIsOnHome = (e: MouseEvent<HTMLElement>) => handleIsOnSamePage(e);
-
-  const handleHomeClick = () => setAppIsLoading(true);
 
   const handleLinkClick = (href: string) => handleNavLinkClick(href);
 
@@ -38,15 +25,10 @@ const Nav = () => {
     <nav className="nav">
       <div className="nav__content">
 
-        <div 
-          className="nav__logo-box"
-          onClick={isOnHome 
-            ? handleIsOnHome
-            : handleHomeClick}
-        >
-          <Link href="/">
+        <div className="nav__logo-box">
+          <ClientLink href="/">
             <Logo className={"nav__logo"}/>
-          </Link>
+          </ClientLink>
         </div>
       
         <ul className="nav__links">

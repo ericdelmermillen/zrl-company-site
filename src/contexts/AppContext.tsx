@@ -5,7 +5,6 @@ import {
   useRouter 
 } from "next/navigation";
 import { 
-  type MouseEvent, 
   useState,
   useRef, 
   useEffect, 
@@ -58,7 +57,7 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
       if (!isOnHome) {
         setAppIsLoading(true);
       }
-      
+
       router.push(route); 
      }
 
@@ -71,29 +70,19 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     }
   };
 
-  const handleIsOnSamePage = (e?: MouseEvent<HTMLElement>) => {
-    if (e && isModifiedClick(e)) {
-      return;
-    }
-    
-    setAppIsLoading(true);
-    scrollToTop();
-    handleClearAppState();
-  };
+  // const handleClearAppState = (logOutUser = false) => {
+  //   setAppIsLoading(true);
 
-  const handleClearAppState = (logOutUser = false) => {
-    setAppIsLoading(true);
+  //   if (logOutUser) {
+  //     // setIsLoggedIn(false);
+  //     console.log("Logging you out")
+  //   }
 
-    if (logOutUser) {
-      // setIsLoggedIn(false);
-      console.log("Logging you out")
-    }
-
-    setTimeout(() => {
-      setShowDropdownNav(false);
-      setAppIsLoading(false);
-    }, MIN_LOADING_INTERVAL * 2);
-  };
+  //   setTimeout(() => {
+  //     setShowDropdownNav(false);
+  //     setAppIsLoading(false);
+  //   }, MIN_LOADING_INTERVAL * 2);
+  // };
 
 
   // useEffect to turn off appIsLoading on page load or after navigation
@@ -101,7 +90,7 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     const handleLoad = () => {
       setTimeout(() => {
         setAppIsLoading(false);
-      }, APP_ISLOADING_DELAY);
+      }, APP_ISLOADING_DELAY * 2);
     };
 
     // what is the readyState on the document?
@@ -143,7 +132,6 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   const contextValues: AppContextValue = {
     appIsLoading, 
     setAppIsLoading,
@@ -155,10 +143,8 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     setIsLoggedIn,
     showDropdownNav, 
     setShowDropdownNav,
-    handleIsOnSamePage,
     handleNavLinkClick
   }
-
 
   return (
     <AppContext.Provider value={contextValues}>
@@ -166,8 +152,6 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     </AppContext.Provider>
   );
 };
-
-
 
 export { 
   AppContext,

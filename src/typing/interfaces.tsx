@@ -12,7 +12,7 @@ import {
   type RefObject
 } from "react";
 import { type IconType } from "react-icons";
-import { ModalType } from "./types";
+import { type ModalType } from "./types";
 
 interface AppContextValue {
   appIsLoading: boolean;
@@ -25,7 +25,6 @@ interface AppContextValue {
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   showDropdownNav: boolean;
   setShowDropdownNav: Dispatch<SetStateAction<boolean>>;
-  handleIsOnSamePage: (e?: MouseEvent<HTMLElement>) => void;
   handleNavLinkClick: any;
 }
 
