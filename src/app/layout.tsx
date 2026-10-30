@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { ChildrenProps } from "@/typing/interfaces";
+import { type Metadata } from "next";
 import { Open_Sans, Poppins } from "next/font/google";
+import { ChildrenProps } from "@/typing/interfaces";
 import { AppContextProvider } from "@/contexts/AppContext";
+import { ModalContextProvider } from "@/contexts/ModalContext";
 import Footer from "@/components/Footer/Footer";
 import IsLoading from "@/components/IsLoading/IsLoading";
 import Modal from "@/components/Modal/Modal";
 import Navbar from "@/components/Navbar/Navbar";
 import "./globals.scss";
-import { ModalContextProvider } from "@/contexts/ModalContext";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -24,7 +24,6 @@ const poppins = Poppins({
   display: "swap",
 });
 
-// const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
 const RootLayout = ({ children }: Readonly<ChildrenProps>) => {
   return (
     <html 

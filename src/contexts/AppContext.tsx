@@ -18,7 +18,7 @@ import { addClassToDiv, isModifiedClick, scrollToTop } from "@/utils/utils";
 // import { type TypeOptions, toast } from "react-toastify";
 // import { isModifiedClick, normalizeCasing, scrollToTop } from "@/utils/utils";
 
-const MIN_LOADING_INTERVAL = parseInt(process.env.NEXT_PUBLIC_MIN_LOADING_INTERVAL || "250", 10);
+// const MIN_LOADING_INTERVAL = parseInt(process.env.NEXT_PUBLIC_MIN_LOADING_INTERVAL || "250", 10);
 const APP_ISLOADING_DELAY = parseInt(process.env.NEXT_PUBLIC_APP_ISLOADING_DELAY || "500", 10);
 const NAV_CLICK_DELAY = parseInt(process.env.NEXT_PUBLIC_NAV_CLICK_DELAY || "300", 10);
 
@@ -32,7 +32,7 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
   const [ appIsLoading, setAppIsLoading ] = useState(true);
   const [ scrollYPos, setScrollYPos ] = useState(0);
 
-  const [ isLoggedIn, setIsLoggedIn ] = useState(!false);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
 
   const [ showDropdownNav, setShowDropdownNav ] = useState(false);
   
