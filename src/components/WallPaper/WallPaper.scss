@@ -5,9 +5,9 @@
 	& {
 		height: 100%;
 		overflow: hidden;
-		padding-top: 2rem;
+		padding-top: 1rem;
 		position: fixed;
-		top: calc(vars.$nav-height / 3);
+		top: 0;
 		width: min(120vw, vars.$ultra-wide);
 		z-index: 0;
 	}

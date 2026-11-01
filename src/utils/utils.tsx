@@ -1,12 +1,12 @@
-import { ToastType } from "@/typing/types";
-import type { MouseEvent } from "react";
+import { type ToastType } from "@/typing/types";
+import { type MouseEvent } from "react";
 import { toast } from "react-toastify";
 import { isValidPhoneNumber } from "libphonenumber-js";
-// import { ChooserItem, ShootEntity } from "@/typing/interfaces";
 // import { ToastType } from "@/typing/types";
 // import { toast } from "react-toastify";
 
 const MIN_LOADING_INTERVAL = parseInt(process.env.NEXT_PUBLIC_MIN_LOADING_INTERVAL ?? "250", 10);
+const DEFAULT_NUMBER_OF_COLUMNS = 12;
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -107,22 +107,31 @@ const normalizeCasing = (string: string | undefined): string => {
     : ""
 };
 
-// const syncChoosers = (prevChoosers: ChooserItem[], freshEntities: ShootEntity[]): ChooserItem[] => {
-//   const updated = prevChoosers.reduce<ChooserItem[]>((acc, chooser) => {
-//     if (chooser.id === null) {
-//       acc.push(chooser);
-//       return acc;
-//     }
+const getNumberOfColumnsByWindowWidth = (): number => {
+  if (typeof window === "undefined") {
+    return DEFAULT_NUMBER_OF_COLUMNS;
+  }
 
-//     const match = freshEntities.find((e) => e.id === chooser.id);
-//     if (match) {
-//       acc.push({ ...chooser, name: match.name });
-//     }
-//     return acc;
-//   }, []);
+  const windowWidth = window.innerWidth;
+    return windowWidth < 320
+      ? 4
+      : windowWidth <= 400
+      ? 5
+      : windowWidth <= 500
+      ? 6
+      : windowWidth <= 600
+      ? 7
+      : windowWidth <= 700
+      ? 8
+      : windowWidth <= 800
+      ? 9
+      : windowWidth <= 900
+      ? 10
+      : windowWidth <= 1000
+      ? 11
+      : 12;
 
-//   return updated.length > 0 ? updated : [{ number: 1, id: null, name: null }];
-// };
+};
 
 export {
   scrollToTop,
@@ -138,6 +147,5 @@ export {
 //   isValidSubject,
 //   isValidMessage,
   staggerToastsByN,
-//   splitOnNewLine,
-//   syncChoosers
+  getNumberOfColumnsByWindowWidth,
 };

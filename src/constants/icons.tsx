@@ -1,8 +1,37 @@
 import { AiOutlineException } from "react-icons/ai";
 import { BiSolidCommentError } from "react-icons/bi";
-import { BsCpuFill, BsHddNetworkFill, BsLightningChargeFill, BsShieldExclamation } from "react-icons/bs";
-import { FaChartBar, FaClipboardList, FaCog, FaCogs, FaExclamationTriangle, FaFileAlt, FaGlobeAmericas, FaIdCard, FaSyncAlt, FaTachometerAlt, FaTasks, FaWrench } from "react-icons/fa";
-import { FaBugs, FaChartLine, FaCode, FaFolderOpen, FaLink, FaMicrochip, FaPowerOff, FaRegObjectUngroup, FaRobot, FaUserSecret } from "react-icons/fa6";
+import { 
+  BsCpuFill, 
+  BsHddNetworkFill, 
+  BsLightningChargeFill, 
+  BsShieldExclamation 
+} from "react-icons/bs";
+import { 
+  FaChartBar, 
+  FaClipboardList, 
+  FaCog, 
+  FaCogs, 
+  FaExclamationTriangle, 
+  FaFileAlt, 
+  FaGlobeAmericas, 
+  FaIdCard, 
+  FaSyncAlt, 
+  FaTachometerAlt, 
+  FaTasks, 
+  FaWrench 
+} from "react-icons/fa";
+import { 
+  FaBugs, 
+  FaChartLine, 
+  FaCode, 
+  FaFolderOpen, 
+  FaLink, 
+  FaMicrochip, 
+  FaPowerOff, 
+  FaRegObjectUngroup, 
+  FaRobot, 
+  FaUserSecret 
+} from "react-icons/fa6";
 import { GiLightningArc } from "react-icons/gi";
 import { IoIosLock, IoMdKey } from "react-icons/io";
 import { IoFingerPrintOutline } from "react-icons/io5";
@@ -36,7 +65,7 @@ const ADMIN_ICON_OPTIONS: IconType[] = [
   RiSettings5Fill
 ];
 
-const DEFAULT_ICONS: IconType[] = [
+const DEFAULT_ICON_OPTIONS: IconType[] = [
   BsCpuFill,
   BsHddNetworkFill,
   FaCode,
@@ -88,7 +117,7 @@ const NOT_FOUND_ICON_OPTIONS: IconType[] = [
 
 export { 
   ADMIN_ICON_OPTIONS,
-  DEFAULT_ICONS,
+  DEFAULT_ICON_OPTIONS,
   LOGIN_ICON_OPTIONS,
   NOT_FOUND_ICON_OPTIONS,
  };
