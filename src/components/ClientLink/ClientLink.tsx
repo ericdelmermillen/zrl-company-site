@@ -1,5 +1,6 @@
 "use client";
 
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type  MouseEvent } from "react";
@@ -24,23 +25,13 @@ const ClientLink = ({
 
   const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (!isModifiedClick(e)) {
-
-      if (isOnHome && currentPathname === href) {
-        scrollToTop();
-        setShowDropdownNav(false);
-        
-        if (onClick) {
-          onClick(e);
-        }
-        return;
-      }
-
       setAppIsLoading(true);
-      
+
       setTimeout(() => {
         if (currentPathname === href) {
           setAppIsLoading(false);
           scrollToTop();
+          console.log("here")
         }
         setShowDropdownNav(false);
       }, NAV_CLICK_DELAY * 2);

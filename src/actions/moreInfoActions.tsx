@@ -1,3 +1,4 @@
+import { ActionResponse, SendMoreInfoEmailPayload } from "@/typing/interfaces";
 
 
 // getMoreInfoEmail: reeturning promise
@@ -11,8 +12,21 @@ const editMoreInfoEmail = async () => {
 };
 
 // sendMoreInfoEmail: returning promise
-const sendMoreInfoEmail = async () => {
-  console.log("Sending moreInfoEmail")
+const sendMoreInfoEmail = async ({
+  name,
+  email,
+  phone = null
+}: SendMoreInfoEmailPayload): Promise<ActionResponse> => {
+  console.log(name)
+  console.log(email)
+  console.log(phone)
+
+  // Logic here
+  return {
+    success: true,
+    message: "Email sent successfully",
+    hasSubscribed: true
+  }
 };
 
 // sendMoreInfoTestEmail: returning promise

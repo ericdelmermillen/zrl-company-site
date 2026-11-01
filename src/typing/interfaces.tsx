@@ -172,6 +172,29 @@ interface OpenModalOptions {
   inputs?: ModalInput[] | null;
 }
 
+interface SendMoreInfoEmailPayload {
+  name: string;
+  email: string;
+  phone?: string | null;
+}
+
+interface ActionResponse {
+  success: boolean;
+  message?: string;
+  hasSubscribed: boolean;
+  error?: string;
+}
+
+interface WallPaperProps {
+  customIcons?: IconType[];
+}
+
+interface WallPaperRowProps {
+  className: string;
+  colorMode: "light" | "dark";
+  rowIcons: IconType[];
+}
+
 export {
   type AppContextValue,
   type ModalContextValue,
@@ -192,4 +215,8 @@ export {
   type ExpertiseItem,
   type ModalInput,
   type OpenModalOptions,
+  type SendMoreInfoEmailPayload,
+  type ActionResponse,
+  type WallPaperProps,
+  type WallPaperRowProps,
 };

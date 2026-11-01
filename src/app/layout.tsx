@@ -3,10 +3,13 @@ import { Open_Sans, Poppins } from "next/font/google";
 import { ChildrenProps } from "@/typing/interfaces";
 import { AppContextProvider } from "@/contexts/AppContext";
 import { ModalContextProvider } from "@/contexts/ModalContext";
+// need next themese for color mode
 import Footer from "@/components/Footer/Footer";
 import IsLoading from "@/components/IsLoading/IsLoading";
 import Modal from "@/components/Modal/Modal";
 import Navbar from "@/components/Navbar/Navbar";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { ToastProvider } from "@/providers/ToastProvider";
 import "./globals.scss";
 
 const openSans = Open_Sans({
@@ -34,15 +37,18 @@ const RootLayout = ({ children }: Readonly<ChildrenProps>) => {
     >
       <body>
         <AppContextProvider>
-          <ModalContextProvider>
-            <IsLoading />
-            <Navbar />
-            <Modal />
-            <div className="app">
-              {children}
-            </div>
-            <Footer />
-          </ModalContextProvider>
+          <ThemeProvider>
+            <ModalContextProvider>
+              <IsLoading />
+              <ToastProvider />
+              <Navbar />
+              <Modal />
+              <div className="app">
+                {children}
+              </div>
+              <Footer />
+            </ModalContextProvider>
+          </ThemeProvider>
         </AppContextProvider>
       </body>
     </html>

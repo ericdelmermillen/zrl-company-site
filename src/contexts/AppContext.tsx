@@ -14,7 +14,11 @@ import {
   type ChildrenProps,
   type AppContextValue, 
 } from "@/typing/interfaces";
-import { addClassToDiv, isModifiedClick, scrollToTop } from "@/utils/utils";
+import { 
+  addClassToDiv, 
+  // isModifiedClick, 
+  scrollToTop 
+} from "@/utils/utils";
 // import { type TypeOptions, toast } from "react-toastify";
 // import { isModifiedClick, normalizeCasing, scrollToTop } from "@/utils/utils";
 
@@ -28,36 +32,34 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
-
   const [ appIsLoading, setAppIsLoading ] = useState(true);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(!false);
   const [ scrollYPos, setScrollYPos ] = useState(0);
-
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
-
   const [ showDropdownNav, setShowDropdownNav ] = useState(false);
-  
-  // used to return prevScrollYPos: persists across renders
   const prevScrollYPosRef = useRef<number | null>(null);
 
   const getPrevScrollYPosValue = () => prevScrollYPosRef.current ?? 0;
 
   const toggleButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const clearOnScroll = () => setShowDropdownNav(false);
+  const clearOnScroll = () => {
+    // might need clearing here for modalInputs
+    setShowDropdownNav(false);
+  };
 
+  // *** needs extensive testing
   const handleNavLinkClick = (href: string, isMobileView: boolean = false) => {
     const isOnHome = pathname === "/";
     const [ route, targetId ] = href.split("#");
 
+    console.log(`pathname: ${pathname}`)
     if (isMobileView) {
       setShowDropdownNav(false);
     }
-
-     if (route) {
-      if (!isOnHome) {
-        setAppIsLoading(true);
-      }
-
+    
+     if (route && !isOnHome) {
+      setAppIsLoading(true);
+      
       router.push(route); 
      }
 

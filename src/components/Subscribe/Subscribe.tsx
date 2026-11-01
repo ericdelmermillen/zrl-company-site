@@ -6,7 +6,6 @@ import { useAppContext, useModalContext } from "@/hooks/hooks";
 import { isValidEmail } from "@/utils/utils";
 import { PRIVACY_POLICY_TEXT, PRIVACY_POLICY_TITLE } from "@/textCopy/textCopyLegal";
 import { toast } from "react-toastify";
-// import IsLoading from "../IsLoading/IsLoading";
 import LabelledCheckbox from "@/components/LabelledCheckbox/LabelledCheckbox";
 import "./Subscribe.scss";
 
@@ -35,6 +34,7 @@ const Subscribe = () => {
 
     setEmail(emailValue);
     setEmailIsValid(emailIsValid);
+    console.log(`emailIsValid: ${emailIsValid}`)
 
     return emailIsValid;
   };
@@ -46,7 +46,8 @@ const Subscribe = () => {
 
     let errors = 0;
 
-    if(!handleEmailChange()) {
+    if (!handleEmailChange()) {
+      console.log("toast")
       toast.error("Email is invalid");
       errors++;
     };

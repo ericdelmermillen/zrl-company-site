@@ -3,10 +3,7 @@
 import { type CheckboxItem, type OpenModalOptions } from "@/typing/interfaces";
 import { type ModalType } from "@/typing/types";
 import { useState, useRef } from "react";
-import { 
-  // useAppContext, 
-  useModalContext 
-} from "@/hooks/hooks";
+import { useAppContext, useModalContext } from "@/hooks/hooks";
 import { isValidEmail, staggerToastsByN, validatePhoneNumber } from "@/utils/utils";
 // import { toast } from "react-toastify";
 import { 
@@ -15,18 +12,17 @@ import {
   NEWSLETTER_POLICY_TITLE, 
   NEWSLETTER_POLICY_TEXT 
 } from "@/textCopy/textCopyLegal";
-// import IsLoading from "../IsLoading/IsLoading";
 import LabelledCheckbox from "../LabelledCheckbox/LabelledCheckbox";
 import "./MoreInfoForm.scss";
+import { sendMoreInfoEmail } from "@/actions/moreInfoActions";
+import { toast } from "react-toastify";
 
 // *** need validation state checking when user selects from auto fill
 // *** if user also subscribes here but email is already in database should I just ignore it here but notify that email is already in database in subscribe?
 // need to revise handling of componentIsLoading
 
-// const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 const MoreInfoForm= () => {
-  // const { appIsLoading, setAppIsLoading } = useAppContext();
+  const { appIsLoading, setAppIsLoading } = useAppContext();
   const { handleOpenModal } = useModalContext();
 
   const [ name, setName ] = useState<string>("");
@@ -129,55 +125,27 @@ const MoreInfoForm= () => {
       return;
     };
 
-    // handleSetShowIsLoadingTrue(setComponentIsLoading, "moreInfoFormIsLoading");
+    try {
+      setAppIsLoading(true);
 
-    // const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const response = await sendMoreInfoEmail({
+        name,
+        email,
+        phone,
+      });
 
-    // try {
-    //   const response = await fetch(`${BASE_URL}/moreinfo/send`, {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       name,
-    //       email,
-    //       phone: phone || undefined,
-    //       timezone,
-    //       hasSubscribed: agreeToNewsletter
-    //     })
-    //   });
+      if (response.success) {
+        toast.success(response.message || "Inquiry sent successfully. Check your inbox for confirmation.")
+        setAppIsLoading(false);
+        // clear form 
+        // scroll to top
+      }
 
-    //   if(!response.ok) {
-    //     toast.error("Something went wrong. Please try again.");
-    //     return;
-    //   };
+      console.log(response)
 
-    //   toast.success("Thanks for reaching out. Check your Inbox for more info.");
+    } catch (error) {
 
-    //   const { hasSubscribed } = await response.json();
-
-    //   if(hasSubscribed) {
-    //     staggerToastsByN("Successfully subscribed to our Newsletter.", "success", 2);
-    //   };
-
-    //   setName("");
-    //   setEmail("");
-    //   setPhone("");
-    //   setInitialFormCheck(false);
-    //   setNameIsValid(true);
-    //   setEmailIsValid(true);
-    //   setPhoneIsValid(true);
-    //   setAgreeToNewsletter(true);
-    //   setAgreeToTerms(true);
-    //   emailRef.current?.blur();
-    //   nameRef.current?.blur();
-    //   phoneRef.current?.blur();
-
-    // } catch(error) {
-    //   toast.error("Something went wrong. Please try again.");
-    // } finally {
-    //   setComponentIsLoading(false);
-    //   handleSetShowIsLoadingFalse(setComponentIsLoading, "moreInfoFormIsLoading");
-    // };
+    }
   };
 
   const handleSetModalData = (modalType: ModalType) => {
@@ -201,14 +169,6 @@ const MoreInfoForm= () => {
         onSubmit={(e) => {e.preventDefault()}}
       >
         <div className="moreInfoForm__fields">
-
-          {/* <div 
-            id="moreInfoFormIsLoading"
-            className="moreInfoForm__isLoading hide"
-          >
-            <IsLoading />
-          </div> */}
-
           <div className="moreInfoForm__field moreInfoForm__field--name">
             <label htmlFor="moreInfoFormName" className="moreInfoForm__label">
               Name
@@ -219,9 +179,7 @@ const MoreInfoForm= () => {
               type="text" 
               className={
                 `moreInfoForm__input moreInfoForm__input--name
-                  ${initialFormCheck && !nameIsValid
-                      ? "invalid" : ""
-                  }`}
+                  ${initialFormCheck && !nameIsValid ? "invalid" : ""}`}
               autoComplete="name"
               placeholder="Enter Name"
               value={name}
@@ -261,9 +219,7 @@ const MoreInfoForm= () => {
               type="tel" 
               className={
                 `moreInfoForm__input moreInfoForm__input--phone
-                  ${initialFormCheck && !phoneIsValid && phone
-                      ? "invalid" : ""}  
-              `} 
+                  ${initialFormCheck && !phoneIsValid && phone ? "invalid" : ""}`} 
               inputMode="numeric"
               autoComplete="tel"
               placeholder="Enter Phone (Optional)"
