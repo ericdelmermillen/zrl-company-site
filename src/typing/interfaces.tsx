@@ -12,7 +12,7 @@ import {
   type RefObject
 } from "react";
 import { type IconType } from "react-icons";
-import { type ModalType } from "./types";
+import { WallPaperVariants, type ModalType } from "./types";
 
 interface AppContextValue {
   appIsLoading: boolean;
@@ -186,7 +186,7 @@ interface ActionResponse {
 }
 
 interface WallPaperProps {
-  customIcons?: IconType[];
+  variant?: WallPaperVariants;
 }
 
 interface WallPaperRowProps {

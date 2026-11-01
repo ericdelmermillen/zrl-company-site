@@ -1,4 +1,5 @@
 import { ChildrenProps } from "@/typing/interfaces";
+import WallPaper from "@/components/WallPaper/WallPaper";
 import "./LoginPage.scss";
 
 const LoginPage = ({ children }: ChildrenProps) => {
@@ -17,6 +18,7 @@ const LoginPage = ({ children }: ChildrenProps) => {
         </div>
 
       </div>        
+      <WallPaper variant="login"/>
     </div>
   );
 };

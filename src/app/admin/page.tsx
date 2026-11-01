@@ -1,4 +1,5 @@
-import "./AdminPage.scss"
+import WallPaper from "@/components/WallPaper/WallPaper";
+import "./AdminPage.scss";
 
 const AdminPage = () => {
   return (
@@ -12,6 +13,7 @@ const AdminPage = () => {
       <h1 className="adminPage__heading">
         Admin Page
       </h1>
+      <WallPaper variant="admin"/>
     </div>
   );
 };

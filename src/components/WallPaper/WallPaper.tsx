@@ -5,10 +5,14 @@ import { type WallPaperProps, type WallPaperRowProps } from "@/typing/interfaces
 import { type ColorMode } from "@/typing/types";
 import { type IconType } from "react-icons";
 import { useTheme } from "next-themes";
-import { DEFAULT_ICONS } from "@/constants/icons";
+import { ADMIN_ICON_OPTIONS,
+  DEFAULT_ICONS,
+  LOGIN_ICON_OPTIONS,
+  NOT_FOUND_ICON_OPTIONS,
+} from "@/constants/icons";
 import "./WallPaper.scss";
 
-const WALLPAPER_ROTATION_INTERVAL = parseInt(process.env.NEXT_PUBLIC_WALLPAPER_ROTATION_INTERVAL || "1000", 10);
+const WALLPAPER_ICON_ROTATION_INTERVAL = parseInt(process.env.NEXT_PUBLIC_WALLPAPER_ICON_ROTATION_INTERVAL || "1000", 10);
 
 const ITEMS_PER_ROW = 12;
 const NUMBER_OF_ROWS = 15;
@@ -31,18 +35,24 @@ const WallPaperRow = ({ className, colorMode, rowIcons }: WallPaperRowProps) => 
   );
 };
 
-const WallPaper = memo(({ customIcons }: WallPaperProps) => {
-  const [iconsMatrix, setIconsMatrix] = useState<IconType[][]>([]);
-  const [mounted, setMounted] = useState<boolean>(false);
+const WallPaper = memo(({ variant }: WallPaperProps) => {
+  const [ iconsMatrix, setIconsMatrix ] = useState<IconType[][]>([]);
+  const [ mounted, setMounted ] = useState<boolean>(false);
 
   const { resolvedTheme } = useTheme();
+
+  const iconOptions = variant === "admin"
+    ? ADMIN_ICON_OPTIONS
+    : variant === "login"
+    ? LOGIN_ICON_OPTIONS
+    : variant === "not-found"
+    ? NOT_FOUND_ICON_OPTIONS
+    : DEFAULT_ICONS;
 
   const activeColorMode: ColorMode = mounted && resolvedTheme === "dark" ? "dark" : "light";
 
   useEffect(() => {
     setMounted(true);
-
-    const iconOptions = customIcons || DEFAULT_ICONS;
 
     const buildMatrix = (): IconType[][] => {
       return Array.from({ length: NUMBER_OF_ROWS }, () => {
@@ -57,12 +67,12 @@ const WallPaper = memo(({ customIcons }: WallPaperProps) => {
 
     const interval = setInterval(() => {
       setIconsMatrix(buildMatrix());
-    }, WALLPAPER_ROTATION_INTERVAL);
+    }, WALLPAPER_ICON_ROTATION_INTERVAL);
 
     return () => {
       clearInterval(interval);
     };
-  }, [customIcons]);
+  }, [iconOptions]);
 
   return (
     <div className="wallpaper">
