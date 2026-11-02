@@ -3,4 +3,12 @@
 
 .loginPage {
 	@include mx.page;
+
+	&__inner {
+		@include mx.wallpaperContainer;
+	}
+
+	&__content {
+		@include mx.pageContent;
+	}
 }

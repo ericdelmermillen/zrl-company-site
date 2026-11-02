@@ -19,7 +19,6 @@ const ClientLink = ({
 }: ClientLinkProps ) => {
 
   const currentPathname = usePathname();
-  const isOnHome = currentPathname === "/";
 
   const { setAppIsLoading, setShowDropdownNav } = useAppContext();
 
@@ -31,7 +30,6 @@ const ClientLink = ({
         if (currentPathname === href) {
           setAppIsLoading(false);
           scrollToTop();
-          console.log("here")
         }
         setShowDropdownNav(false);
       }, NAV_CLICK_DELAY * 2);

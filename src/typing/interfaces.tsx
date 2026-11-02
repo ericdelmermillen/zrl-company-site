@@ -195,6 +195,22 @@ interface WallPaperRowProps {
   rowIcons: IconType[];
 }
 
+interface ShowHidePasswordProps {
+  handleTogglePasswordVisibility: () => void;
+  showPassword: boolean;
+};
+
+interface AuthCredentials {
+  email?: string;
+  password?: string;
+}
+
+interface AuthResponse {
+  success: boolean;
+  message: string;
+  userId?: number;
+}
+
 export {
   type AppContextValue,
   type ModalContextValue,
@@ -219,4 +235,7 @@ export {
   type ActionResponse,
   type WallPaperProps,
   type WallPaperRowProps,
+  type ShowHidePasswordProps,
+  type AuthCredentials,
+  type AuthResponse,
 };

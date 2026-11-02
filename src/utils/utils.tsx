@@ -48,12 +48,12 @@ const isValidEmail = (email: string) => {
   return emailRegex.test(email);
 };
 
-// const isValidPassword = (password: string) => {
-//   if(typeof password !== "string"){ 
-//     return false;
-//   };
-//   return password.trim().length >= 8;
-// };
+const isValidPassword = (password: string) => {
+  if(typeof password !== "string"){ 
+    return false;
+  };
+  return password.trim().length >= 8;
+};
 
 // const isValidSubject = (subject: string) => {
 //   return subject.trim().length >= 10;
@@ -143,7 +143,7 @@ export {
 //   isValidLastName,
   isValidEmail,
   validatePhoneNumber,
-//   isValidPassword,
+  isValidPassword,
 //   isValidSubject,
 //   isValidMessage,
   staggerToastsByN,

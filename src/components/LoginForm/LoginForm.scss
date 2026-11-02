@@ -1,0 +1,59 @@
+@use "../../partials/_variables" as vars;
+@use "../../partials/_mixins" as mx;
+
+.loginForm {
+	& {
+		@include mx.formFullWidth;
+	}
+
+	&__inner {
+		@include mx.formFullWidthInner;
+	}
+
+	&__heading {
+		@include mx.formHeading;
+
+		&::after {
+			@include mx.afterAccent;
+		}
+	}
+
+	&__form {
+		@include mx.form;
+	}
+
+	&__field {
+		margin-bottom: 1rem;
+		position: relative;
+
+		&--password {
+			margin-bottom: 0;
+			position: relative;
+		}
+	}
+
+	&__label {
+		@include mx.hiddenLabel;
+	}
+
+	&__input {
+		@include mx.formFullWidthInput;
+	}
+
+	&__error {
+		@include mx.formErrorMessage;
+	}
+
+	&__submit {
+		margin-inline: auto;
+		margin-top: auto;
+	}
+
+	&__button {
+		@include mx.button;
+
+		&.disabled {
+			@include mx.diabledButton;
+		}
+	}
+}

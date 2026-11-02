@@ -47,7 +47,6 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     setShowDropdownNav(false);
   };
 
-  // *** needs extensive testing
   const handleNavLinkClick = (href: string, isMobileView: boolean = false) => {
     const isOnHome = pathname === "/";
     const [ route, targetId ] = href.split("#");
@@ -85,7 +84,6 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
   //     setAppIsLoading(false);
   //   }, MIN_LOADING_INTERVAL * 2);
   // };
-
 
   // useEffect to turn off appIsLoading on page load or after navigation
   useEffect(() => {

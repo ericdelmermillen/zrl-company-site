@@ -55,6 +55,15 @@
 	}
 }
 
+@mixin headingGeneral {
+	color: var(--text-color);
+	font-family: var(--heading-font);
+	font-size: var(--font-size-xs);
+	font-weight: 600;
+	letter-spacing: var(--letter-spacing-large);
+	margin-bottom: 1rem;
+}
+
 @mixin sectionHeading {
 	color: var(--text-color);
 	font-family: var(--heading-font);
@@ -685,4 +694,132 @@
 @mixin hoverClickShrink {
 	transform: scale(0.99);
 	transition: all 0.25s ease-in;
+}
+
+@mixin formFullWidth {
+	align-items: center;
+	background: var(--neutral-bg-1);
+	border: 1px solid var(--text-color);
+	border-radius: var(--border-radius-form);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	margin-inline: auto;
+	max-height: 20rem;
+	max-width: 50rem;
+	min-height: calc(100vh - calc(vars.$nav-height * 2));
+	padding-inline: 2rem;
+	position: relative;
+	text-align: center;
+	z-index: 1;
+	// needs a card shadow
+}
+
+@mixin formFullWidthInner {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	height: 100%;
+	min-height: 100%;
+	padding-block: 3rem;
+
+	@media (min-width: vars.$small-tablet) {
+		padding-inline: 2rem;
+	}
+}
+
+@mixin formHeading {
+	@include headingGeneral;
+	& {
+		display: inline-block;
+		font-size: var(--font-size-xs);
+		margin-bottom: 2rem;
+		margin-inline: auto;
+		position: relative;
+		width: fit-content;
+	}
+}
+
+@mixin form {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	height: 100%;
+	margin-inline: auto;
+	max-width: vars.$large-tablet;
+	min-height: 0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: 100%;
+
+	@media (min-height: 600px) {
+		overflow-y: hidden;
+	}
+}
+
+@mixin formFullWidthInput {
+	background: none;
+	border: none;
+	border: 1px solid var(--text-color);
+	color: var(--text-color);
+	font-family: var(--body-font);
+	font-size: var(--font-size-xs);
+	height: var(--input-height);
+	line-height: var(--line-height-general);
+	margin-bottom: 1.5rem;
+	outline: none;
+	padding-block: 0.75rem;
+	padding-inline: 0.75rem;
+	position: relative;
+	resize: none;
+	width: 100%;
+
+	@media (min-width: vars.$small-tablet) {
+		min-width: 20rem;
+	}
+
+	&::placeholder {
+		color: var(--text-color);
+		opacity: 0.5;
+	}
+
+	&:-webkit-autofill {
+		background-color: none !important;
+		box-shadow: none !important;
+		color: inherit;
+		transition: background-color 5000s ease-in-out 0s;
+		-webkit-box-shadow: none !important;
+	}
+
+	&:-webkit-autofill::first-line {
+		color: var(--text-color) !important;
+	}
+
+	&:active,
+	&:focus {
+		color: inherit;
+	}
+
+	&:focus {
+		box-shadow: var(--input-box-shadow);
+		outline: none;
+	}
+}
+
+@mixin formErrorMessage {
+	color: var(--error-color);
+	margin-top: -1.25rem;
+}
+
+@mixin wallpaperContainer {
+	align-items: center;
+	background: var(--neutral-bg-2);
+	display: flex;
+	flex-direction: column;
+	max-width: 100%;
+	min-height: calc(100vh - (vars.$nav-height));
+	padding-bottom: 2rem;
+	padding-top: calc(vars.$nav-height);
+	position: relative;
+	width: 100%;
 }
