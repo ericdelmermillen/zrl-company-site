@@ -7,6 +7,11 @@ import Logo from "@/assets/icons/Logo";
 import NavItem from "@/components/NavItem/NavItem";
 import NavSocials from "@/components/NavSocials/NavSocials";
 import "./Nav.scss";
+import Logo_1 from "@/assets/icons/Logo_1";
+import Logo_2 from "@/assets/icons/Logo_2";
+import Logo_3 from "@/assets/icons/Logo_3";
+import Logo_40 from "@/assets/icons/Logo_40";
+import Logo_45 from "@/assets/icons/Logo_45";
 
 const Nav = () => {
   const {
@@ -27,7 +32,12 @@ const Nav = () => {
 
         <div className="nav__logo-box">
           <ClientLink href="/">
-            <Logo className={"nav__logo"}/>
+            {/* <Logo className={"nav__logo"}/> */}
+            <Logo_1 className={"nav__logo"}/>
+            {/* <Logo_2 className={"nav__logo"}/> */}
+            {/* <Logo_3 className={"nav__logo"}/> */}
+            {/* <Logo_40 className={"nav__logo"}/> */}
+            {/* <Logo_45 className={"nav__logo"}/> */}
           </ClientLink>
         </div>
       

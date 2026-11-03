@@ -19,11 +19,13 @@
 		opacity: 70%;
 		position: absolute;
 		z-index: 0;
+		// opacity: 0;
 	}
 
 	&__inner {
 		align-items: center;
-		background: url("../../assets/images/header_za.jpg");
+		background: url("../../assets/images/header.webp");
+		background-position-x: center;
 		background-position-x: center;
 		background-position-y: bottom;
 		background-repeat: no-repeat;

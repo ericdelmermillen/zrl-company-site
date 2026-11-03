@@ -20,11 +20,13 @@ const ClientLink = ({
 
   const currentPathname = usePathname();
 
-  const { setAppIsLoading, setShowDropdownNav } = useAppContext();
+  const { setAppIsLoading, showDropdownNav, setShowDropdownNav } = useAppContext();
 
   const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (!isModifiedClick(e)) {
       setAppIsLoading(true);
+
+      console.log("first")
 
       setTimeout(() => {
         if (currentPathname === href) {
@@ -32,7 +34,7 @@ const ClientLink = ({
           scrollToTop();
         }
         setShowDropdownNav(false);
-      }, NAV_CLICK_DELAY * 2);
+      }, showDropdownNav ? NAV_CLICK_DELAY * 2 : 0);
     }
 
     if (onClick) {

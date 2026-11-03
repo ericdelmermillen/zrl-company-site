@@ -5,12 +5,14 @@ const Hero= () => {
   return (
     <section className="hero">
       <div className="hero__inner">
-        <div className="hero__overlay"></div>
-        <div className="hero__accentBar"></div>
+        <div className="hero__overlay" />
+        <div className="hero__accentBar" />
         <div className="hero__left">
 
           <div className="hero__text">
-            <h1 className="hero__heading"><span className="hero__software">Software</span> Solutions</h1>
+            <h1 className="hero__heading"><span className="hero__software">
+              Software</span> Solutions
+            </h1>
             <h2 className="hero__subheading">
               <span className="hero__for">
                 For{" "}

@@ -344,12 +344,8 @@
 	transform: translateY(calc(-50% + calc(vars.$nav-height / 2)));
 	width: 1rem;
 
-	@media (min-width: vars.$small-tablet) {
-		width: 1.125rem;
-	}
-
 	@media (min-width: vars.$tablet) {
-		width: 1.5rem;
+		width: 1.125rem;
 	}
 }
 
@@ -468,8 +464,9 @@
 	display: flex;
 	font-size: 1rem;
 	font-weight: 600;
+	font-weight: 700;
 	justify-content: center;
-	letter-spacing: 3px;
+	letter-spacing: var(--letter-spacing-4xl);
 	position: relative;
 
 	@media (min-width: vars.$small-phone) {
