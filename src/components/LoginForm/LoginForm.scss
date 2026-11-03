@@ -4,6 +4,9 @@
 .loginForm {
 	& {
 		@include mx.formFullWidth;
+		& {
+			margin-top: calc(vars.$nav-height / 2);
+		}
 	}
 
 	&__inner {

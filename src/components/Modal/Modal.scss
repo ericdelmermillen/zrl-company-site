@@ -20,7 +20,7 @@
 	}
 
 	&__overlay {
-		background: var(--overlay-modal-bg);
+		background: var(--modal-overlay-bg);
 		height: 100%;
 		opacity: 50%;
 		position: absolute;
@@ -30,6 +30,7 @@
 	&__card {
 		background: var(--modal-card-bg);
 		border-radius: var(--border-radius-card);
+		box-shadow: var(--modal-card-box-shadow);
 		display: flex;
 		height: 100%;
 		left: 50%;

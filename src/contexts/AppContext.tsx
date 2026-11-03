@@ -67,8 +67,8 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
         addClassToDiv("navbar", "hide");
         const targetElement = document.getElementById(targetId);
         targetElement && targetElement.scrollIntoView({ behavior: "smooth" });
-      // }, (isMobileView || (route && !isOnHome)) ? (NAV_CLICK_DELAY * 2) : 0);
-      }, (isMobileView || (route && !showDropdownNav)) ? (NAV_CLICK_DELAY * 2) : 0);
+      // }, (isMobileView || (route && !showDropdownNav)) ? (NAV_CLICK_DELAY * 2) : 0);
+      }, (isMobileView || (route && !isOnHome)) ? (NAV_CLICK_DELAY * 2) : 0);
     }
   };
 

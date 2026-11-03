@@ -190,8 +190,9 @@ interface WallPaperProps {
 }
 
 interface WallPaperRowProps {
-  className: string;
-  colorMode: "light" | "dark";
+  rowClassName: string;
+  itemClassName: string;
+  iconClassName: string;
   rowIcons: IconType[];
 }
 

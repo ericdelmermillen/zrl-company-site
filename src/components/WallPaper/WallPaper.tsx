@@ -2,7 +2,7 @@
 
 import { useState, useEffect, memo } from "react";
 import { useTheme } from "next-themes";
-import { type WallPaperProps, type WallPaperRowProps } from "@/typing/interfaces";
+import { type WallPaperProps } from "@/typing/interfaces";
 import { type ColorMode } from "@/typing/types";
 import { type IconType } from "react-icons";
 import { 
@@ -12,28 +12,12 @@ import {
   NOT_FOUND_ICON_OPTIONS,
 } from "@/constants/icons";
 import { getNumberOfColumnsByWindowWidth } from "@/utils/utils";
+import WallPaperRow from "../WallPaperRow/WallPaperRow";
 import "./WallPaper.scss";
 
 const WALLPAPER_ICON_ROTATION_INTERVAL = parseInt(process.env.NEXT_PUBLIC_WALLPAPER_ICON_ROTATION_INTERVAL || "1000", 10);
 
 const NUMBER_OF_ROWS = 15;
-
-const WallPaperRow = ({ className, colorMode, rowIcons }: WallPaperRowProps) => {
-  return (
-    <div className={className}>
-      {rowIcons.map((IconComponent, idx) => {
-        return (
-          <div
-            key={idx}
-            className={`wallpaper__item ${colorMode === "dark" ? "dark" : "light"}`}
-          >
-            <IconComponent className="wallpaper__icon" />
-          </div>
-        );
-      })}
-    </div>
-  );
-};
 
 const WallPaper = memo(({ variant }: WallPaperProps) => {
   const [ iconsMatrix, setIconsMatrix ] = useState<IconType[][]>([]);
@@ -104,11 +88,12 @@ const WallPaper = memo(({ variant }: WallPaperProps) => {
 
           <WallPaperRow
             key={idx}
-            className={(idx + 1) % 2 === 0
+            rowClassName={(idx + 1) % 2 === 0
               ? "wallpaper__row wallpaper__row--even"
               : "wallpaper__row wallpaper__row--odd"
             }
-            colorMode={activeColorMode}
+            itemClassName={`wallpaper__item ${activeColorMode === "dark" ? "dark" : "light"}`}
+            iconClassName="wallpaper__icon"
             rowIcons={rowIcons}
           />
         ))}

@@ -114,13 +114,26 @@ html {
 
 	&[data-color-mode="light"] {
 		--text-color: #333333;
-		--nav-footer-bg: #182438;
 		--neutral-bg-1: #e6eae7;
+		--neutral-bg-2: #f0f4f2;
 		--nav-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
 		--accent-color: #d27834;
+		--accent-color: #ff7a1a;
+		--accent-color: #e8630a;
+		--accent-color: #e56f1e;
+		--accent-color: #db762c;
 		--accent-bar-shadow: 4px 0 6px rgba(0, 0, 0, 0.3);
 		//
+		--loading-spinner-color: var(--text-color);
+		--loading-spinner-color: #ef7e25;
 		--nav-footer-bg: #182438;
+		// --nav-footer-bg: #eef2f7;
+		// --nav-footer-bg: #dbe2ec;
+		// --nav-footer-bg: #2b3a4e;
+		// --nav-footer-bg: #8ca2bc;
+		// --nav-footer-bg: #4a627d;
+		--nav-footer-bg: #091322;
+		//
 		--box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 		--toggle-sky: #47478d;
 		--toggle-ball: #f3f3f3;
@@ -147,16 +160,35 @@ html {
 		--button-text-color: #f1f0ea;
 
 		// Modal
-		--overlay-modal-bg: #333;
-		--modal-card-bg: #f4f4f4;
-		--modal-card-bg: var(--neutral-bg-1);
+		--modal-overlay-bg: #333;
+		--modal-card-bg: var(--neutral-bg-2);
 		--modal-overlay-bg: rgba(0, 0, 0, 0.5);
 		//
 	}
 
 	&[data-color-mode="dark"] {
-		--neutral-bg-1: red;
-		--text-color: yellow;
+		--neutral-bg-1: #0f172a;
+		--neutral-bg-1: #1e293b;
+		--neutral-bg-1: #131c2e;
+		--neutral-bg-2: #1e2c45;
+		--neutral-bg-2: #0c1528;
+		--text-color: #f4f4f4;
+		--text-color: #e2e8f0;
+		--text-color: #cbd5e1;
+		--accent-color: #db762c;
+		--accent-color: #c96b28;
+		--nav-footer-bg: #182438;
+		--nav-footer-bg: #091322;
+		--nav-link-color: #f4f4f4;
+		--nav-link-color: #dcdcdd;
+		--header-text-color: #eff0f1;
+		--modal-card-bg: var(--neutral-bg-2);
+		--modal-overlay-bg: #333;
+		--modal-overlay-bg: #091322;
+		--modal-overlay-bg: #060d17;
+		--modal-card-box-shadow:
+			0 0 6px rgba(255, 255, 255, 0.3), 0 5px 5px rgba(0, 0, 0, 0.55);
+		--loading-spinner-color: #ef7e25;
 	}
 }
 
@@ -216,6 +248,14 @@ select {
 		cursor: not-allowed;
 		opacity: 0.6;
 	}
+}
+
+input::placeholder {
+	color: var(--text-color);
+	// color: yellow !important;
+	opacity: 0.6 !important; /* Firefox applies opacity: 0.54 by default unless overridden */
+	letter-spacing: var(--letter-spacing-xl) !important;
+	font-weight: 600 !important;
 }
 
 // Chrome autofill override
