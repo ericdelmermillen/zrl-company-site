@@ -80,13 +80,15 @@
 		white-space: normal;
 		width: 100%;
 		word-break: break-word;
+		// border: 2px solid red;
 
 		@media (min-width: vars.$tablet) {
 			font-size: var(--font-size-base);
 		}
 
 		&--informational {
-			box-shadow: inset 0 0 0.25rem rgba(0, 0, 0, 0.25);
+			// box-shadow: inset 0 0 0.25rem rgba(0, 0, 0, 0.25);
+			box-shadow: var(--text-box-inset-shadow);
 			line-height: var(--line-height-md);
 			max-width: 100%;
 			text-align: start;

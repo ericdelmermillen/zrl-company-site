@@ -12,10 +12,10 @@ import {
   NEWSLETTER_POLICY_TITLE, 
   NEWSLETTER_POLICY_TEXT 
 } from "@/textCopy/textCopyLegal";
-import LabelledCheckbox from "../LabelledCheckbox/LabelledCheckbox";
-import "./MoreInfoForm.scss";
+import LabelledCheckbox from "@/components/LabelledCheckbox/LabelledCheckbox";
 import { sendMoreInfoEmail } from "@/actions/moreInfoActions";
 import { toast } from "react-toastify";
+import "./MoreInfoForm.scss";
 
 // *** need validation state checking when user selects from auto fill
 // *** if user also subscribes here but email is already in database should I just ignore it here but notify that email is already in database in subscribe?

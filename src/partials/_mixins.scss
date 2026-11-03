@@ -3,7 +3,7 @@
 @mixin page {
 	align-items: center;
 	background: var(--neutral-bg-1);
-	box-shadow: var(--box-shadow);
+	box-shadow: var(--page-box-shadow);
 	color: var(--text-color);
 	display: flex;
 	flex-direction: column;
@@ -309,8 +309,8 @@
 		width: 1.125rem;
 
 		&:checked::after {
-			border-bottom: 2px solid #000;
-			border-right: 2px solid #000;
+			border-bottom: 2px solid var(--accent-color);
+			border-right: 2px solid var(--accent-color);
 			content: "";
 			height: 0.65rem;
 			left: 50%;

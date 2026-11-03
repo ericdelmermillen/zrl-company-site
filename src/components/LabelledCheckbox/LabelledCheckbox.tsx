@@ -16,12 +16,10 @@ const LabelledCheckbox = ({
 
   const handleIsClickedChange = (e: ChangeEvent<HTMLInputElement>): boolean => {
     setIsChecked(e.target.checked);
-    return true;
+    return e.target.checked;
   };
 
-  const handleSpanLinkClick = (): void => {
-    onSpanLinkClick(modalType);
-  };
+  const handleSpanLinkClick = (): void => onSpanLinkClick(modalType);
 
   return (
     <div className="labelledCheckbox">
@@ -32,8 +30,7 @@ const LabelledCheckbox = ({
       <input
         id={labelId}
         type="checkbox"
-        className={`labelledCheckbox__input
-          ${isValid ? "" : "invalid"}`.trim()}
+        className={`labelledCheckbox__input ${isValid ? "" : "invalid"}`.trim()}
         checked={isChecked}
         onChange={handleIsClickedChange}
       />
