@@ -1,5 +1,5 @@
-import { values } from "@/constants/values";
 import BulletCheck from "@/components/BulletCheck/BulletCheck";
+import { values } from "@/textCopy/textCopyHome";
 import "./Values.scss";
 
 // unlisted video on my youtube to embed: viewable and embeddable but not discoverable

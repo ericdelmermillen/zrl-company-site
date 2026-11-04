@@ -1,5 +1,5 @@
 import ExpertiseItem from "@/components/ExpertiseItem/ExpertiseItem";
-import { expertise } from "@/constants/expertise";
+import { expertise } from "@/textCopy/textCopyHome";
 import "./Expertise.scss";
 
 const Expertise = () => {

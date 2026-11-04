@@ -1,4 +1,4 @@
-import { NavOption } from "@/typing/interfaces";
+import { type NavOption } from "@/typing/interfaces";
 
 const navOptions: NavOption[] = [
   { id: 1, name: "SOLUTIONS", href: "/#solutions" },

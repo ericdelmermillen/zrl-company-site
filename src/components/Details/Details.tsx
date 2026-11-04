@@ -1,5 +1,5 @@
 import Detail from "@/components/Detail/Detail";
-import { details } from "@/constants/details";
+import { details } from "@/textCopy/textCopyHome";
 import "./Details.scss";
 
 const Details = () => {

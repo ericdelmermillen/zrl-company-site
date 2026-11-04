@@ -1,4 +1,4 @@
-import { solutions } from "@/constants/solutions";
+import { solutions } from "@/textCopy/textCopyHome";
 import Solution from "@/components/Solution/Solution";
 import "./Solutions.scss";
 

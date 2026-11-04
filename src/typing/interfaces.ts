@@ -1,18 +1,13 @@
-import { StaticImageData } from "next/image";
+import { type StaticImageData } from "next/image";
 import { 
-  ReactNode,
-  // type ReactNode, 
-  // type ChangeEvent,
+  type ReactNode,
   type SetStateAction, 
   type Dispatch, 
   type MouseEvent,
-  // type DragEvent,
-  // type ComponentType, 
-  // type SVGProps,
   type RefObject
 } from "react";
 import { type IconType } from "react-icons";
-import { WallPaperVariants, type ModalType } from "./types";
+import { type CheckboxItemKey, type ModalType, type WallPaperVariants } from "./types";
 
 interface AppContextValue {
   appIsLoading: boolean;
@@ -43,7 +38,6 @@ interface ModalContextValue {
   setModalInputs: Dispatch<SetStateAction<ModalInput[] | null>>;
   modalConfirmCallback: ((inputValues?: Record<string, string>) => void) | null;
   setModalConfirmCallback: Dispatch<SetStateAction<((inputValues?: Record<string, string>) => void) | null>>;
-  // handlers
   handleOpenModal: ({ modalType, modalTitle, modalText, inputs }: OpenModalOptions) => void;
   handleClearModal: () => void;
 };
@@ -68,8 +62,8 @@ interface NavOption {
 interface NavItemProps {
   itemClassName: string;
   buttonClassName: string;
-  onClick: (href: string) => void;
   href: string;
+  onClick: (href: string) => void;
   children?: ReactNode;
 }
 
@@ -92,7 +86,7 @@ interface IconProps {
   strokeClassName?: string;
 }
 
-interface MoreInfoTextData {
+interface MoreInfoText {
   titleShort: string;
   titleFull: string;
   description: string;
@@ -104,7 +98,6 @@ interface Bullet {
   blurb: string;
 };
 
-
 interface SolutionItem {
   img: StaticImageData | string;
   shortTitle: string;
@@ -115,7 +108,7 @@ interface SolutionItem {
 };
 
 interface CheckboxItem {
-  key: "agreeToNewsletter" | "agreeToTerms";
+  key: CheckboxItemKey;
   labelId: string;
   labelText: string;
   modalType: ModalType;
@@ -138,7 +131,7 @@ type LabelledCheckboxProps = {
   onSpanLinkClick: (modalType: ModalType) => void;
 };
 
-interface DetailData {
+interface Detail {
   heading: string;
   lead: string;
   bullets: Bullet[];
@@ -146,7 +139,7 @@ interface DetailData {
   imgDesc: string;
 }
 
-interface DetailProps extends DetailData {
+interface DetailProps extends Detail {
   idx: number;
 }
 
@@ -222,12 +215,12 @@ export {
   type ClientLinkProps,
   type Social,
   type IconProps,
-  type MoreInfoTextData,
+  type MoreInfoText,
   type Bullet,
   type SolutionItem,
   type CheckboxItem,
   type LabelledCheckboxProps,
-  type DetailData,
+  type Detail,
   type DetailProps,
   type ExpertiseItem,
   type ModalInput,

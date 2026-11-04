@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useRef } from "react";
+import { useRef, useEffect, useContext } from "react";
 import { 
   type AppContextValue, 
   type ModalContextValue, 
@@ -21,7 +21,7 @@ const useModalContext = (): ModalContextValue => {
   const context = useContext(ModalContext);
   if (!context) {
     throw new Error("useModalContext must be used within a ModalContextProvider");
-  };
+  }
   return context;
 };
 
@@ -58,9 +58,7 @@ const useOutsideClick = ({
     window.addEventListener("click", handleDocumentClick, { capture: true });
 
     return () => {
-      window.removeEventListener("click", handleDocumentClick, {
-        capture: true,
-      });
+      window.removeEventListener("click", handleDocumentClick, { capture: true });
     };
   }, [componentIsActive, targetRef]);
 };

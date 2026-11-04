@@ -1,6 +1,6 @@
 "use client";
 
-import { ChildrenProps } from "@/typing/interfaces";
+import { type ChildrenProps } from "@/typing/interfaces";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 const ThemeProvider = ({ children }: ChildrenProps) => {
@@ -8,6 +8,7 @@ const ThemeProvider = ({ children }: ChildrenProps) => {
     <NextThemesProvider
       attribute="data-color-mode"
       defaultTheme="system"
+      enableSystem
     >
       {children}
     </NextThemesProvider>

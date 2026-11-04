@@ -1,5 +1,5 @@
-import { type ToastType } from "@/typing/types";
 import { type MouseEvent } from "react";
+import { type ToastType } from "@/typing/types";
 import { toast } from "react-toastify";
 import { isValidPhoneNumber } from "libphonenumber-js";
 // import { ToastType } from "@/typing/types";
@@ -9,10 +9,7 @@ const MIN_LOADING_INTERVAL = parseInt(process.env.NEXT_PUBLIC_MIN_LOADING_INTERV
 const DEFAULT_NUMBER_OF_COLUMNS = 12;
 
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });  
+  window.scrollTo({ top: 0, behavior: "smooth" });  
   removeClassFromDiv("nav", "hide");
 };
 
@@ -51,7 +48,7 @@ const isValidEmail = (email: string) => {
 const isValidPassword = (password: string) => {
   if(typeof password !== "string"){ 
     return false;
-  };
+  }
   return password.trim().length >= 8;
 };
 
@@ -66,7 +63,7 @@ const isValidPassword = (password: string) => {
  const validatePhoneNumber = (phoneValue: string): boolean => {
   if (!phoneValue.length) {
     return true;
-  };
+  }
 
   let phoneNumberIsValid = false;
 
@@ -104,7 +101,7 @@ const staggerToastsByN = (message: string, toastType: ToastType, staggerOffset: 
 const normalizeCasing = (string: string | undefined): string => {
   return typeof string === "string" && string.length > 0 
     ? string[0].toUpperCase() + string.slice(1).toLowerCase()
-    : ""
+    : "";
 };
 
 const getNumberOfColumnsByWindowWidth = (): number => {
@@ -147,5 +144,5 @@ export {
 //   isValidSubject,
 //   isValidMessage,
   staggerToastsByN,
-  getNumberOfColumnsByWindowWidth,
+  getNumberOfColumnsByWindowWidth
 };

@@ -62,5 +62,5 @@ const initDb = async () => {
 
 export {
   pool,
-  initDb
+  initDb,
 };

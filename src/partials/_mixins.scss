@@ -13,7 +13,6 @@
 	padding-top: 0;
 	width: 100%;
 	flex: 1;
-	// min-height: 200vh;
 }
 
 @mixin inner {
@@ -27,8 +26,8 @@
 	width: 100%;
 
 	@media (min-width: vars.$tablet) {
-		padding-top: 2rem;
 		margin-top: 0;
+		padding-top: 2rem;
 	}
 }
 
@@ -110,25 +109,18 @@
 	}
 }
 
-// basic UI elements
 @mixin cardImg {
 	aspect-ratio: 16/9;
-	border-radius: var(--border-radius);
+	border-radius: var(--border-radius-card);
 	object-fit: cover;
 	object-position: center center;
 	overflow: hidden;
 	width: 100%;
 }
 
-@mixin cardBoxShadow {
-	box-shadow:
-		0 4px 12px rgba(0, 0, 0, 0.25),
-		0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
 @mixin cardTag {
 	background: var(--accent-color);
-	border-radius: var(--border-radius);
+	border-radius: var(--border-radius-card);
 	color: var(--nav-link-color);
 	font-size: var(--font-size-sm);
 	font-weight: 700;
@@ -154,7 +146,6 @@
 	}
 }
 
-// *** navigation
 @mixin navbar {
 	background: var(--nav-footer-bg);
 	height: vars.$nav-height;
@@ -165,7 +156,6 @@
 	transition: all 500ms ease-in-out;
 	width: 100%;
 	z-index: 2;
-	background: var(--nav-footer-bg);
 
 	&.hide {
 		margin-top: calc(-1 * (vars.$nav-height + 1rem));
@@ -246,9 +236,8 @@
 
 @mixin input {
 	background: none;
-	border: none;
 	border: var(--input-border);
-	border-radius: var(--border-radius);
+	border-radius: var(--border-radius-general);
 	color: var(--text-color);
 	cursor: default;
 	font-family: var(--body-font);
@@ -269,16 +258,16 @@
 
 	&::placeholder {
 		color: var(--text-color);
-		opacity: 0.5;
 		font-size: var(--font-size-xs);
+		opacity: 0.5;
 	}
 
 	&:-webkit-autofill {
-		-webkit-box-shadow: none !important;
 		background-color: none !important;
 		box-shadow: none !important;
-		color: inherit;
-		transition: background-color 5000s ease-in-out 0s;
+		color: inherit !important;
+		transition: background-color 5000s ease-in-out 0s !important;
+		-webkit-box-shadow: none !important;
 	}
 
 	&:-webkit-autofill::first-line {
@@ -295,15 +284,14 @@
 
 @mixin checkboxInput {
 	@include input;
-
 	& {
-		border-radius: 4px;
-		height: 1.125rem;
+		border-radius: var(--border-radius-checkbox);
+		height: var(--checkbox-input-size);
 		margin-inline-end: 0.5rem;
-		max-width: 1.125rem;
+		max-width: var(--checkbox-input-size);
 		padding: 0.5rem;
 		position: relative;
-		width: 1.125rem;
+		width: var(--checkbox-input-size);
 
 		&:checked::after {
 			border-bottom: 2px solid var(--accent-color);
@@ -319,7 +307,6 @@
 	}
 }
 
-// accents and decorations
 @mixin afterAccent {
 	background: var(--accent-color);
 	bottom: -0.35rem;
@@ -337,25 +324,11 @@
 	height: 50%;
 	position: absolute;
 	top: 50%;
-	// transform: translateY(calc(-50% + calc(vars.$nav-height / 2)));
 	transform: translateY(-50%);
 	width: 1rem;
 
 	@media (min-width: vars.$tablet) {
 		width: 1.125rem;
-	}
-}
-
-@mixin accentBarDetail {
-	display: none;
-
-	@media (min-width: vars.$large-tablet) {
-		@include accentBar;
-		display: block;
-		height: 80%;
-		margin: 0;
-		top: 10%;
-		transform: translateY(0%);
 	}
 }
 
@@ -366,85 +339,6 @@
 	font-size: 0.8rem;
 	margin-inline-start: 0.5rem;
 	position: absolute;
-}
-
-@mixin shootImg {
-	aspect-ratio: 1 / 1;
-	max-width: 100%;
-	object-fit: cover;
-	object-position: center;
-	width: 100%;
-}
-
-@mixin shootDetailsImg {
-	@include shootImg;
-	aspect-ratio: 4 / 5;
-}
-
-@mixin selectChooser {
-	&__inner {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-
-		@media (min-width: vars.$tablet) {
-			flex-direction: row;
-		}
-	}
-
-	&__select {
-		background: var(--background-color);
-		border: 1px solid var(--text-color);
-		border-radius: var(--border-radius);
-		height: 3rem;
-		font-size: 1rem;
-		padding: 0.25rem;
-		text-align: center;
-		width: 100%;
-
-		&.userDisabled {
-			pointer-events: none;
-		}
-
-		&:focus,
-		&:active {
-			outline: none;
-		}
-	}
-
-	&__button-container {
-		display: flex;
-		justify-content: center;
-		gap: 1rem;
-
-		@media (min-width: vars.$tablet) {
-			gap: 0.5rem;
-		}
-	}
-
-	&__button {
-		align-items: center;
-		border: 1px solid var(--text-color);
-		border-radius: 50%;
-		display: flex;
-		height: 2.25rem;
-		justify-content: center;
-		padding: 0.25rem;
-		width: 2.25rem;
-
-		&--add {
-			height: 35px;
-			width: 35px;
-		}
-
-		&--add-stroke {
-			stroke: var(--text-color);
-		}
-	}
-
-	&--remove-icon {
-		stroke: var(--text-color);
-	}
 }
 
 @mixin navItem {
@@ -459,7 +353,7 @@
 	color: var(--nav-link-color);
 	cursor: pointer;
 	display: flex;
-	font-size: 1rem;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	font-weight: 700;
 	justify-content: center;
@@ -467,14 +361,8 @@
 	position: relative;
 
 	@media (min-width: vars.$small-phone) {
-		font-size: 1.25rem;
+		font-size: var(--font-size-lg);
 	}
-}
-
-@mixin cardBoxShadow {
-	box-shadow:
-		0 4px 12px rgba(0, 0, 0, 0.25),
-		0 8px 24px rgba(0, 0, 0, 0.15) !important;
 }
 
 @mixin disabledButton {
@@ -482,7 +370,6 @@
 	pointer-events: none;
 }
 
-// ***
 @mixin sideNav {
 	background: var(--nav-footer-bg);
 	bottom: 0;
@@ -517,14 +404,6 @@
 	@include sideNav;
 	left: 0;
 	transform: translateX(-100%); /* start offscreen right */
-}
-
-@mixin clickOffDiv {
-	height: 100%;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 3;
 }
 
 @mixin sideNavCloseButton {
@@ -584,7 +463,9 @@
 
 @mixin navBarToggleRight {
 	@include navBarToggle;
-	right: 2rem;
+	& {
+		right: 2rem;
+	}
 }
 
 @mixin navContent {
@@ -649,7 +530,6 @@
 	z-index: 0;
 }
 
-// labels and accessibility
 @mixin hiddenLabel {
 	border: 0;
 	clip: rect(0, 0, 0, 0);
@@ -694,7 +574,7 @@
 	align-items: center;
 	background: var(--neutral-bg-1);
 	border: 1px solid var(--text-color);
-	border-radius: var(--border-radius-form);
+	border-radius: var(--border-radius-general);
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -707,7 +587,6 @@
 	text-align: center;
 	width: 90%;
 	z-index: 1;
-	// needs a card shadow
 }
 
 @mixin formFullWidthInner {
@@ -782,7 +661,7 @@
 		background-color: none !important;
 		box-shadow: none !important;
 		color: inherit;
-		transition: background-color 5000s ease-in-out 0s;
+		transition: background-color 5000s ease-in-out 0s !important;
 		-webkit-box-shadow: none !important;
 	}
 

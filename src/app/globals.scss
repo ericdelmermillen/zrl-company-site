@@ -29,7 +29,6 @@
 	--font-size-4xl: 3rem;
 	--font-size-5xl: 4rem;
 	--font-size-6xl: 5rem;
-	--border-radius: 8px;
 
 	// letter spacing
 	--letter-spacing-xs: 0.2px;
@@ -78,10 +77,9 @@
 	--button-disabled-opacity: 0.5;
 
 	// border-radius
+	--border-radius-general: 8px;
 	--border-radius-card: 8px;
-
-	// form
-	--border-radius-form: 8px;
+	--border-radius-checkbox: 4px;
 
 	// toast
 	--border-radius-toast: 8px;
@@ -89,6 +87,7 @@
 
 	// UI
 	--input-height: 3rem;
+	--checkbox-input-size: 1.125rem;
 
 	// timing
 	--nav-transition-interval: 600ms;
@@ -190,7 +189,7 @@ html {
 			color-mix(in srgb, var(--text-color) 35%, transparent);
 		--text-color: #cbd5e1;
 		--toast-box-shadow:
-			0 3px 4px color-mix(in srgb, var(--text-color) 12%, transparent),
+			0 2px 3px color-mix(in srgb, var(--text-color) 12%, transparent),
 			0 1px 3px color-mix(in srgb, var(--text-color) 15%, transparent);
 		--toggle-ball: #f3f3f3;
 		--toggle-sky: #47478d;
@@ -319,18 +318,15 @@ img {
 	}
 
 	&__toast {
-		@include mx.cardBoxShadow;
-
-		& {
-			border-radius: var(--border-radius-toast);
-			background: var(--neutral-bg-1) !important;
-			color: var(--text-color) !important;
-			line-height: var(--line-height-sm);
-			max-width: 16rem;
-			padding-block: 1rem !important;
-			padding-inline-end: 1.75rem;
-			padding-inline-start: 1.25rem;
-		}
+		border-radius: var(--border-radius-toast);
+		background: var(--neutral-bg-1) !important;
+		box-shadow: var(--toast-box-shadow);
+		color: var(--text-color) !important;
+		line-height: var(--line-height-sm);
+		max-width: 16rem;
+		padding-block: 1rem !important;
+		padding-inline-end: 1.75rem;
+		padding-inline-start: 1.25rem;
 
 		@media (min-width: vars.$small-phone) {
 			margin-block: 0;
