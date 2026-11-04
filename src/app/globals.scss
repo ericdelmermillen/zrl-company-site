@@ -145,6 +145,9 @@ html {
 		--text-box-inset-shadow: inset 0 0 0.25rem
 			color-mix(in srgb, var(--text-color) 25%, transparent);
 		--text-color: #333333;
+		--toast-box-shadow:
+			0 3px 4px color-mix(in srgb, var(--text-color) 12%, transparent),
+			0 1px 3px color-mix(in srgb, var(--text-color) 18%, transparent);
 		--toggle-ball: #f3f3f3;
 		--toggle-sky: #47478d;
 	}
@@ -186,6 +189,9 @@ html {
 		--text-box-inset-shadow: inset 0 0 0.25rem
 			color-mix(in srgb, var(--text-color) 35%, transparent);
 		--text-color: #cbd5e1;
+		--toast-box-shadow:
+			0 3px 4px color-mix(in srgb, var(--text-color) 12%, transparent),
+			0 1px 3px color-mix(in srgb, var(--text-color) 15%, transparent);
 		--toggle-ball: #f3f3f3;
 		--toggle-sky: #47478d;
 	}
@@ -358,13 +364,13 @@ img {
 	}
 
 	&__toast {
-		@include mx.cardBoxShadow;
+		box-shadow: var(--toast-box-shadow) !important;
 		& {
 			background: var(--neutral-bg-1) !important;
 			border-radius: var(--border-radius-toast) !important;
 			color: var(--text-color) !important;
 			line-height: var(--line-height-sm);
-			margin-bottom: 0.5rem !important;
+			margin-bottom: 0.25rem !important;
 			max-width: 16rem !important;
 			padding-block: 1rem !important;
 			padding-inline-end: 1.75rem !important;

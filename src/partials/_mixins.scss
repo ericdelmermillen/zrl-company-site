@@ -265,7 +265,6 @@
 
 	&.invalid {
 		border: 1px solid var(--error-color);
-		outline: 1px solid var(--error-color);
 	}
 
 	&::placeholder {
