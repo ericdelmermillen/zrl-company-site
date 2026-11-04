@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, createContext} from "react";
+import { useState, useRef, useEffect, createContext } from "react";
 import { 
   type ChildrenProps, 
-  type ModalInput,
   type ModalContextValue,
-  OpenModalOptions
+  type ModalInput,
+  type OpenModalOptions
 } from "@/typing/interfaces";
 import { type ModalType } from "@/typing/types";
 
@@ -22,7 +22,14 @@ const ModalContextProvider = ({ children }: ChildrenProps) => {
   const [ modalInputs, setModalInputs ] = useState<ModalInput[] | null>(null);
   const [ modalConfirmCallback, setModalConfirmCallback ] = useState<(() => void) | null>(null);
 
+  const modalTimeoutRef = useRef<number | null>(null);
+
   const handleOpenModal = ({ modalType, modalTitle, modalText, inputs }: OpenModalOptions) => {
+    if (modalTimeoutRef.current !== null) {
+      clearTimeout(modalTimeoutRef.current);
+      modalTimeoutRef.current = null;
+    }
+
     setShowModal(true);
     setModalType(modalType);
     setModalTitle(modalTitle);
@@ -31,18 +38,33 @@ const ModalContextProvider = ({ children }: ChildrenProps) => {
   };
 
   const handleClearModal = (): void => {
+    if (modalTimeoutRef.current !== null) {
+      clearTimeout(modalTimeoutRef.current);
+    }
+    
     setShowModal(false);
     setModalInitialFormCheck(false);
     setModalConfirmCallback(null);
     setModalInputs(null);
     
-    setTimeout(() => {
+    modalTimeoutRef.current = window.setTimeout(() => {
       setModalTitle("");
       setModalText("");
+      setModalType(null);
+      modalTimeoutRef.current = null;
     }, MIN_LOADING_INTERVAL);
   };
 
-  const contextValues ={
+  // useEffect to clear timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (modalTimeoutRef.current !== null) {
+        clearTimeout(modalTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const contextValues: ModalContextValue ={
     showModal, 
     setShowModal,
     modalType, 
@@ -58,7 +80,7 @@ const ModalContextProvider = ({ children }: ChildrenProps) => {
     modalConfirmCallback, 
     setModalConfirmCallback,
     handleOpenModal,
-    handleClearModal
+    handleClearModal,
   };
 
   return (

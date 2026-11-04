@@ -14,13 +14,7 @@ import {
   type ChildrenProps,
   type AppContextValue, 
 } from "@/typing/interfaces";
-import { 
-  addClassToDiv, 
-  // isModifiedClick, 
-  scrollToTop 
-} from "@/utils/utils";
-// import { type TypeOptions, toast } from "react-toastify";
-// import { isModifiedClick, normalizeCasing, scrollToTop } from "@/utils/utils";
+import { addClassToDiv, scrollToTop } from "@/utils/utils";
 
 // const MIN_LOADING_INTERVAL = parseInt(process.env.NEXT_PUBLIC_MIN_LOADING_INTERVAL || "250", 10);
 const APP_ISLOADING_DELAY = parseInt(process.env.NEXT_PUBLIC_APP_ISLOADING_DELAY || "500", 10);
@@ -32,10 +26,11 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const [ appIsLoading, setAppIsLoading ] = useState(true);
-  const [ isLoggedIn, setIsLoggedIn ] = useState(!false);
-  const [ scrollYPos, setScrollYPos ] = useState(0);
-  const [ showDropdownNav, setShowDropdownNav ] = useState(false);
+  const [ appIsLoading, setAppIsLoading ] = useState<boolean>(true);
+  const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(!false);
+  const [ showDropdownNav, setShowDropdownNav ] = useState<boolean>(false);
+  const [ scrollYPos, setScrollYPos ] = useState<number>(0);
+
   const prevScrollYPosRef = useRef<number | null>(null);
 
   const getPrevScrollYPosValue = () => prevScrollYPosRef.current ?? 0;
@@ -51,11 +46,9 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     const isOnHome = pathname === "/";
     const [ route, targetId ] = href.split("#");
 
-    console.log(`pathname: ${pathname}`)
     if (isMobileView) {
       setShowDropdownNav(false);
     }
-    
      if (route && !isOnHome) {
       setAppIsLoading(true);
       
@@ -67,7 +60,6 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
         addClassToDiv("navbar", "hide");
         const targetElement = document.getElementById(targetId);
         targetElement && targetElement.scrollIntoView({ behavior: "smooth" });
-      // }, (isMobileView || (route && !showDropdownNav)) ? (NAV_CLICK_DELAY * 2) : 0);
       }, (isMobileView || (route && !isOnHome)) ? (NAV_CLICK_DELAY * 2) : 0);
     }
   };
@@ -88,8 +80,10 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
 
   // useEffect to turn off appIsLoading on page load or after navigation
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout | number;
+
     const handleLoad = () => {
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setAppIsLoading(false);
       }, APP_ISLOADING_DELAY * 2);
     };
@@ -100,17 +94,22 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
       handleLoad();
     } else {
       window.addEventListener("load", handleLoad);
-      return () => window.removeEventListener("load", handleLoad);
+    }
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      clearTimeout(timeoutId);
     }
   }, [pathname]);
   
   // useEffect for updating of scrollYPos
   useEffect(() => {
     let ticking = false;
+    let animationFrameId: number | undefined;
 
     const handleScroll = () => {
       if (!ticking) {
-        requestAnimationFrame(() => {
+        animationFrameId = requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
 
           setScrollYPos(prev => {
@@ -130,7 +129,13 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () =>{
+      window.removeEventListener("scroll", handleScroll);
+      if (animationFrameId !== undefined) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, []);
 
   const contextValues: AppContextValue = {
