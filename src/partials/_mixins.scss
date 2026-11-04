@@ -247,7 +247,7 @@
 @mixin input {
 	background: none;
 	border: none;
-	border: 1px solid var(--text-color);
+	border: var(--input-border);
 	border-radius: var(--border-radius);
 	color: var(--text-color);
 	cursor: default;
@@ -264,8 +264,6 @@
 	width: 100%;
 
 	&.invalid {
-		// need invalid border/outline styling for invalid state: will remove yellow bg later
-		// background: yellow;
 		border: 1px solid var(--error-color);
 		outline: 1px solid var(--error-color);
 	}
