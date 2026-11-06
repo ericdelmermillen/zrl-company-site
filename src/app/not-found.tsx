@@ -1,11 +1,9 @@
-
-
 import WallPaper from '@/components/WallPaper/WallPaper';
+import "./NotFoundPage.scss";
 
 const NotFoundPage = () => {
   return (
     <div className="notFoundPage">
-      <br></br>
       <br></br>
       <br></br>
       <br></br>

@@ -13,9 +13,13 @@ const HomePage = () => {
       <div className="homePage__inner">
         <Hero />
         <main className="homePage__main">
-          {/* <Partners /> */}
-        
           <div className="homePage__content">
+            
+            {/* -- Partners carousel requires logos from client comapnies 
+              -- might rename to Clients or similar */}
+
+            {/* <Partners /> */}
+    
             <MoreInfo />
             <Solutions />
             <Details />

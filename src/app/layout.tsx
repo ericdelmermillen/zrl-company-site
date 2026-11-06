@@ -11,6 +11,8 @@ import Modal from "@/components/Modal/Modal";
 import Navbar from "@/components/Navbar/Navbar";
 import "./globals.scss";
 
+// may want to experiment with fonts from designer
+
 const openSans = Open_Sans({
   subsets: ["latin"],
   variable: "--body-font",
