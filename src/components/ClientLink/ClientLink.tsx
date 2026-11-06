@@ -1,9 +1,8 @@
 "use client";
 
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type  MouseEvent } from "react";
+import { type MouseEvent, useRef, useEffect } from "react";
 import { type ClientLinkProps } from "@/typing/interfaces";
 import { useAppContext } from "@/hooks/hooks";
 import { isModifiedClick, scrollToTop } from "@/utils/utils";
@@ -18,6 +17,8 @@ const ClientLink = ({
   scroll = false,
 }: ClientLinkProps ) => {
 
+  const timeoutRef = useRef<number | null>(null);
+
   const currentPathname = usePathname();
 
   const { setAppIsLoading, showDropdownNav, setShowDropdownNav } = useAppContext();
@@ -26,21 +27,33 @@ const ClientLink = ({
     if (!isModifiedClick(e)) {
       setAppIsLoading(true);
 
-      console.log("first")
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
 
-      setTimeout(() => {
+      timeoutRef.current = window.setTimeout(() => {
         if (currentPathname === href) {
           setAppIsLoading(false);
           scrollToTop();
         }
         setShowDropdownNav(false);
-      }, showDropdownNav ? NAV_CLICK_DELAY * 2 : 0);
+      }, showDropdownNav ? (NAV_CLICK_DELAY * 2) : 0);
     }
 
     if (onClick) {
       onClick(e);
     }
   };
+
+  // useEffect to clear timeout on teardown
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    }
+  }, []);
 
   return (
     <Link
