@@ -2,7 +2,7 @@
 
 import { type CheckboxItem, type OpenModalOptions } from "@/typing/interfaces";
 import { type ModalType } from "@/typing/types";
-import { useState, useRef } from "react";
+import { useState, useRef, ChangeEvent, SyntheticEvent } from "react";
 import { useAppContext, useModalContext } from "@/hooks/hooks";
 import { isValidEmail, staggerToastsByN, validatePhoneNumber } from "@/utils/utils";
 // import { toast } from "react-toastify";
@@ -20,9 +20,13 @@ import "./MoreInfoForm.scss";
 // *** need validation state checking when user selects from auto fill
 // *** if user also subscribes here but email is already in database should I just ignore it here but notify that email is already in database in subscribe?
 // need to revise handling of componentIsLoading
+// need clearForm function
+// need state for formRequested: serve toast to tell user to check their email
 
 const MoreInfoForm= () => {
-  const { appIsLoading, setAppIsLoading } = useAppContext();
+  const { 
+    // appIsLoading, 
+    setAppIsLoading } = useAppContext();
   const { handleOpenModal } = useModalContext();
 
   const [ name, setName ] = useState<string>("");
@@ -39,8 +43,6 @@ const MoreInfoForm= () => {
 
   const [ componentIsLoading, setComponentIsLoading ] = useState<boolean>(false);
 
-  const emailRef = useRef<HTMLInputElement | null>(null);
-  const nameRef = useRef<HTMLInputElement | null>(null);
   const phoneRef = useRef<HTMLInputElement | null>(null);
 
   const checkboxItems: CheckboxItem[] = [
@@ -68,16 +70,16 @@ const MoreInfoForm= () => {
     },
   ];
 
-  const handleNameChange = (): boolean => {
-    const nameValue = nameRef.current?.value ?? "";
+  const handleNameChange = (e?: ChangeEvent<HTMLInputElement>): boolean => {
+    const nameValue: string = e ? e.target.value : name;
     const isValidLength = nameValue.trim().length >= 2;
     setName(nameValue);
     setNameIsValid(isValidLength);
     return isValidLength;
   };
 
-  const handleEmailChange = (): boolean => {
-    const emailValue = emailRef.current?.value ?? "";
+  const handleEmailChange = (e?: ChangeEvent<HTMLInputElement>): boolean => {
+    const emailValue: string = e ? e?.target.value : email;
     const emailIsValid = isValidEmail(emailValue);
 
     setEmail(emailValue);
@@ -86,8 +88,8 @@ const MoreInfoForm= () => {
     return emailIsValid;
   };
 
-  const handlePhoneChange = (): boolean => {
-    const phoneValue = phoneRef.current?.value ?? "";
+  const handlePhoneChange = (e?: ChangeEvent<HTMLInputElement>): boolean => {
+    const phoneValue: string = e ? e?.target.value : phone;
     const phoneNumberIsValid = validatePhoneNumber(phoneValue);
 
     setPhone(phoneValue);
@@ -96,7 +98,8 @@ const MoreInfoForm= () => {
     return phoneNumberIsValid;
   };
 
-  const handleSubmit = async (): Promise<void> => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
     setInitialFormCheck(true);
     
     let errors = 0;
@@ -128,17 +131,14 @@ const MoreInfoForm= () => {
     try {
       setAppIsLoading(true);
 
-      const response = await sendMoreInfoEmail({
-        name,
-        email,
-        phone,
-      });
+      const response = await sendMoreInfoEmail({ name, email, phone,});
 
       if (response.success) {
         toast.success(response.message || "Inquiry sent successfully. Check your inbox for confirmation.")
         setAppIsLoading(false);
         // clear form 
         // scroll to top
+        // success toast
       }
 
       console.log(response)
@@ -166,7 +166,7 @@ const MoreInfoForm= () => {
       <form 
         className="moreInfoForm__form" 
         name="moreInfoForm"
-        onSubmit={(e) => {e.preventDefault()}}
+        onSubmit={handleSubmit}
       >
         <div className="moreInfoForm__fields">
           <div className="moreInfoForm__field moreInfoForm__field--name">
@@ -178,12 +178,12 @@ const MoreInfoForm= () => {
               id="moreInfoFormName"
               type="text" 
               className={
-                `moreInfoForm__input moreInfoForm__input--name
-                  ${initialFormCheck && !nameIsValid ? "invalid" : ""}`}
+                `moreInfoForm__input moreInfoForm__input--name ${
+                    initialFormCheck && !nameIsValid ? "invalid" : ""}`.trim()}
+              name="name"
+              value={name}
               autoComplete="name"
               placeholder="Enter Name"
-              value={name}
-              ref={nameRef}
               onChange={handleNameChange}
             />
 
@@ -197,14 +197,14 @@ const MoreInfoForm= () => {
 
             <input
               id="moreInfoFormEmail"
-              className={`moreInfoForm__input moreInfoForm__input--email ${initialFormCheck && !emailIsValid ? "invalid" : ""}`}
+              type="email" 
+              className={`moreInfoForm__input moreInfoForm__input--email ${
+                initialFormCheck && !emailIsValid ? "invalid" : ""}`.trim()}
               name="email"
+              value={email}
               autoComplete="email"
               placeholder="Enter Email"
-              value={email}
-              ref={emailRef}
               onChange={handleEmailChange}
-              onBlur={handleEmailChange}
             />
           </div>
 
@@ -219,7 +219,7 @@ const MoreInfoForm= () => {
               type="tel" 
               className={
                 `moreInfoForm__input moreInfoForm__input--phone
-                  ${initialFormCheck && !phoneIsValid && phone ? "invalid" : ""}`} 
+                  ${initialFormCheck && !phoneIsValid && phone ? "invalid" : ""}`.trim()} 
               inputMode="numeric"
               autoComplete="tel"
               placeholder="Enter Phone (Optional)"
@@ -245,6 +245,7 @@ const MoreInfoForm= () => {
               spanStub,
               spanLinkText
             }) => (
+
               <LabelledCheckbox
                 key={key}
                 labelId={labelId}
@@ -257,6 +258,7 @@ const MoreInfoForm= () => {
                 spanLinkText={spanLinkText}
                 onSpanLinkClick={handleSetModalData}
               />
+
             ))}
             
           </div>
@@ -268,9 +270,9 @@ const MoreInfoForm= () => {
           </label>
             
           <button 
-            className={`moreInfoForm__submitButton ${!agreeToTerms || componentIsLoading ? "disabled" : ""}`}
+            className={`moreInfoForm__submitButton ${
+              !agreeToTerms || componentIsLoading ? "disabled" : ""}`.trim()}
             type="submit"
-            onClick={handleSubmit}
           >
             SUBMIT
           </button>

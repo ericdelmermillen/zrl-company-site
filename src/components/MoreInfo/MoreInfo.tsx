@@ -1,5 +1,5 @@
-import MoreInfoForm from "../MoreInfoForm/MoreInfoForm";
-import MoreInfoText from "../MoreInfoText/MoreInfoText";
+import MoreInfoForm from "@/components/MoreInfoForm/MoreInfoForm";
+import MoreInfoText from "@/components/MoreInfoText/MoreInfoText";
 import "./MoreInfo.scss";
 
 const MoreInfo = () => {

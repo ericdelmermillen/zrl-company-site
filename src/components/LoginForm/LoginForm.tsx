@@ -1,19 +1,18 @@
 "use client";
 
 import { type SyntheticEvent, type ChangeEvent, useState } from "react";
-import { useAppContext } from "@/hooks/hooks";
 import { loginUser } from "@/actions/authActions";
 import { isValidEmail, isValidPassword, staggerToastsByN } from "@/utils/utils";
 import ShowHidePassword from "@/components/ShowHidePassword/ShowHidePassword";
 import "./LoginForm.scss";
+import { toast } from "react-toastify";
 
 const isSafari: boolean =
   navigator.userAgent.toLowerCase().includes("safari") &&
   !navigator.userAgent.toLowerCase().includes("chrome");
 
 const LoginForm  = () => {
-  const { appIsLoading } = useAppContext();
-
+  const [ componentIsLoading, setComponentIsLoading ] = useState<boolean>(false);
   const [ email, setEmail ] = useState<string>("");
   const [ password, setPassword ] = useState<string>("");
   const [ showPassword, setShowPassword ] = useState<boolean>(false);
@@ -24,7 +23,7 @@ const LoginForm  = () => {
   const handleTogglePasswordVisibility = (): void => setShowPassword(prev => !prev);
 
   const handleEmailChange = (e?: ChangeEvent<HTMLInputElement>): boolean => {
-    const emailValue: string = e?.target.value || "";
+    const emailValue: string = e ? e?.target.value : email;
 
     const isValid: boolean = isValidEmail(emailValue);
 
@@ -35,7 +34,7 @@ const LoginForm  = () => {
   };
 
   const handlePasswordChange = (e?: ChangeEvent<HTMLInputElement>): boolean => {
-    const passwordValue: string = e?.target.value ||"";
+    const passwordValue: string = e ? e?.target.value : password;
 
     const isValid: boolean = isValidPassword(passwordValue);
 
@@ -66,8 +65,10 @@ const LoginForm  = () => {
     };
 
     // try/catch here
-
+    // on success serve toast, set isLogged in and redirect to /
     loginUser({email, password});
+    toast.success("Logged in. Redirecting...");
+
   };
 
   return (
@@ -159,8 +160,8 @@ const LoginForm  = () => {
           <div className="loginForm__submit">
             <button
               type="submit"
-              className={`loginForm__button ${appIsLoading ? "disabled" : ""}`.trim()}
-              aria-busy={appIsLoading}
+              className={`loginForm__button ${componentIsLoading ? "disabled" : ""}`.trim()}
+              aria-busy={componentIsLoading}
             >
               SUBMIT
             </button>
