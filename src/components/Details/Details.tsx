@@ -11,6 +11,7 @@ const Details = () => {
         </h2>
 
         {details.map(({ heading, lead, img, imgDesc, bullets }, idx) => (
+          
           <Detail
             key={idx}
             idx={idx}

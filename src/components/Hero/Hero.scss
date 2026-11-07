@@ -2,7 +2,6 @@
 @use "../../partials/_mixins" as mx;
 
 .hero {
-	// make this a mixin: fixedHeader
 	height: 100vh;
 	max-width: vars.$ultra-wide;
 	position: fixed;
@@ -12,14 +11,12 @@
 	width: 100%;
 
 	&__overlay {
-		// make this a mixin: headerOverlay
 		background: var(--header-overlay);
 		background-size: cover;
 		inset: 0;
 		opacity: 70%;
 		position: absolute;
 		z-index: 0;
-		// opacity: 0;
 	}
 
 	&__inner {

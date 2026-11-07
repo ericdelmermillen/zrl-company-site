@@ -5,10 +5,7 @@ import { useAppContext, useModalContext } from "@/hooks/hooks";
 import "./Modal.scss";
 
 const Modal= () => {
-  const { 
-    scrollYPos,
-    getPrevScrollYPosValue
-  } = useAppContext()
+  const { scrollYPos, getPrevScrollYPosValue } = useAppContext()
   
   const { 
     showModal,

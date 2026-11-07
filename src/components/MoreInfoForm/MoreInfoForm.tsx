@@ -64,7 +64,7 @@ const MoreInfoForm= () => {
       spanLinkText: "Privacy Policy",
       isChecked: agreeToTerms,
       setIsChecked: setAgreeToTerms,
-      isValid: true,
+      isValid: initialFormCheck ? agreeToTerms : true
     },
   ];
 

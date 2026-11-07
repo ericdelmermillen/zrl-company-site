@@ -20,6 +20,7 @@ const Subscribe = () => {
     // handleSetShowIsLoadingFalse 
   } = useAppContext();
   const { handleOpenModal } = useModalContext();
+
   const [ initialFormCheck , setInitialFormCheck ] = useState<boolean>(false);
   const [ email, setEmail ] = useState<string>("");
   const [ emailIsValid, setEmailIsValid ] = useState<boolean>(true);
@@ -142,7 +143,7 @@ const Subscribe = () => {
                 labelText={"privacy policy"}
                 isChecked={agreeToPrivacy}
                 setIsChecked={setAgreeToPrivacy}
-                isValid={true}
+                isValid={initialFormCheck ? agreeToPrivacy : true}
                 modalType={"privacy"}
                 spanStub={"Agree to the "}
                 spanLinkText={"Privacy Policy"}

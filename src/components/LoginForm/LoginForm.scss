@@ -27,7 +27,10 @@
 
 	&__field {
 		margin-bottom: 1rem;
+		margin-inline: auto;
+		max-width: 18rem;
 		position: relative;
+		width: 100%;
 
 		&--password {
 			margin-bottom: 0;

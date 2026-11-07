@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useAppContext } from "@/hooks/hooks";
 import { navOptions } from "@/constants/navOptions";
-import ClientLink from "../ClientLink/ClientLink";
+import ClientLink from "@/components/ClientLink/ClientLink";
 import NavItem from "@/components/NavItem/NavItem";
 import NavSocials from "@/components/NavSocials/NavSocials";
 import "./DropdownNav.scss";

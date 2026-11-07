@@ -14,12 +14,11 @@ const LabelledCheckbox = ({
   onSpanLinkClick,
  }: LabelledCheckboxProps) => {
 
-  const handleIsClickedChange = (e: ChangeEvent<HTMLInputElement>): boolean => {
+  const handleIsClickedChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
-    return e.target.checked;
   };
 
-  const handleSpanLinkClick = (): void => onSpanLinkClick(modalType);
+  const handleSpanLinkClick = () => onSpanLinkClick(modalType);
 
   return (
     <div className="labelledCheckbox">

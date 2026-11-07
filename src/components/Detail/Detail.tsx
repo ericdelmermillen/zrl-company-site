@@ -26,14 +26,18 @@ const Detail = ({
         </p>
 
         <ul className="detail__points">
+          
           {bullets.map(({ headingShort, headingFull, blurb }, idx) => (
+
             <BulletCheck
               key={idx}
               headingShort={headingShort}
               headingFull={headingFull}
               blurb={blurb}
             />
+
           ))}
+
         </ul>
       </div>
 

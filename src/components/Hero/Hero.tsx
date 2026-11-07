@@ -10,8 +10,8 @@ const Hero= () => {
         <div className="hero__left">
 
           <div className="hero__text">
-            <h1 className="hero__heading"><span className="hero__software">
-              Software</span> Solutions
+            <h1 className="hero__heading">
+              <span className="hero__software">Software</span> Solutions
             </h1>
             <h2 className="hero__subheading">
               <span className="hero__for">

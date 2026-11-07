@@ -596,6 +596,7 @@
 	height: 100%;
 	min-height: 100%;
 	padding-block: 3rem;
+	width: 100%;
 
 	@media (min-width: vars.$small-tablet) {
 		padding-inline: 2rem;
@@ -611,6 +612,26 @@
 		margin-inline: auto;
 		position: relative;
 		width: fit-content;
+
+		@media (min-width: vars.$small-phone) {
+			font-size: var(--font-size-sm);
+		}
+
+		@media (min-width: vars.$small-tablet) {
+			font-size: var(--font-size-base);
+		}
+
+		@media (min-width: vars.$tablet) {
+			font-size: var(--font-size-md);
+		}
+
+		@media (min-width: vars.$medium-tablet) {
+			font-size: var(--font-size-lg);
+		}
+
+		@media (min-width: vars.$large-tablet) {
+			font-size: var(--font-size-xl);
+		}
 	}
 }
 
@@ -647,10 +668,6 @@
 	position: relative;
 	resize: none;
 	width: 100%;
-
-	@media (min-width: vars.$small-tablet) {
-		min-width: 20rem;
-	}
 
 	&::placeholder {
 		color: var(--text-color);
