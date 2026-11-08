@@ -1,11 +1,11 @@
 "use client";
 
-import { type KeyboardEvent, useRef, useEffect } from "react";
+import { type SyntheticEvent, useRef, useEffect } from "react";
 import { useAppContext, useModalContext } from "@/hooks/hooks";
 import "./Modal.scss";
 
 const Modal= () => {
-  const { scrollYPos, getPrevScrollYPosValue } = useAppContext()
+  const { scrollYPos, getPrevScrollYPosValue } = useAppContext();
   
   const { 
     showModal,
@@ -18,50 +18,75 @@ const Modal= () => {
 
   const modalTextRef = useRef<HTMLDivElement | null>(null);
 
-  const handleEnterPress = (e: KeyboardEvent<HTMLFormElement>): void => {
-    if(e.key === "Enter" && modalConfirmCallback) {
-      e.preventDefault();
+  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    if (modalConfirmCallback) {
       modalConfirmCallback();
-    };
+    }
   };
+
+  // useEffect to clear modal on esc press
+  useEffect(() => {
+    if (!showModal) {
+      return;
+    }
+
+    const handleKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleClearModal();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showModal, handleClearModal]);
+
+
+  // useEffect to reset the scroll position of the Modal when the modal opens
+  useEffect(() => {
+    let rafId: number;
+    if (showModal && modalTextRef.current) {
+      rafId = requestAnimationFrame(() => {
+        if (modalTextRef.current) {
+          modalTextRef.current.scrollTop = 0;
+        }
+      });
+    }
+
+    return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+    };
+  }, [showModal]);
 
   // useEffect to close modal on scroll
   useEffect(() => {
-    if (showModal && getPrevScrollYPosValue() !== scrollYPos) {
+    if (showModal && (getPrevScrollYPosValue() !== scrollYPos)) {
       handleClearModal();
     }
   }, [scrollYPos, getPrevScrollYPosValue]);
 
-  // useEffect to reset the scroll position of the Modal when the modal opens
-  useEffect(() => {
-    if (showModal && modalTextRef.current) {
-      requestAnimationFrame(() => {
-        if (modalTextRef.current) {
-          modalTextRef.current.scrollTop = 0;
-        };
-      });
-    };
-  }, [showModal]);
-
   return (
-    <div className={`modal ${showModal ? "show" : ""}`}>
-      <div className="modal__overlay" onClick={handleClearModal}></div>
+    <div className={`modal ${showModal ? "show" : ""}`.trim()}>
+      <div className="modal__overlay" onClick={handleClearModal} />
 
       <div className="modal__card">
-
         <div className="modal__content">
-
           <h2 className="modal__heading">
             {modalTitle}
           </h2>
 
           <div
             ref={modalTextRef}
-            className={`modal__text ${modalConfirmCallback ? "" : "modal__text--informational"}`}
+            className={`modal__text ${modalConfirmCallback ? "" : "modal__text--informational"}`.trim()}
           >
             {modalText
               .split("\n")
-              .filter((p) => p.trim() !== "")
+              .filter(p => p.trim() !== "")
               .map((paragraph, idx) => (
                 <p
                   key={idx}
@@ -69,31 +94,35 @@ const Modal= () => {
                     /^\s*\d+[\.\):]?\s/.test(paragraph)
                       ? "modal__paragraph--numbered"
                       : ""
-                  }`}
+                  }`.trim()}
                 >
                   {paragraph}
                 </p>
               ))}
 
             {modalInputs && modalInputs.length > 0 
+
               ? (
                   <form 
+                    id="modal-form"
                     className="modal__inputs"
-                    onKeyDown={(e) => handleEnterPress(e)}
+                    onSubmit={handleSubmit}
                   >
-                    {modalInputs.map((input) => (
-                      <div key={input.id} className="modal__input-group">
-                        <label className="modal__label" htmlFor={input.id}>
-                          {input.label}
+                    {modalInputs.map(({ id, label, placeholder, ref, onChange }) => (
+                      
+                      <div key={id} className="modal__input-group">
+                        <label className="modal__label" htmlFor={id}>
+                          {label}
                         </label>
                         <input
+                          id={id}
                           className="modal__input"
-                          id={input.id}
-                          placeholder={input.placeholder}
-                          ref={input.ref}
-                          onChange={() => input.onChange()}
+                          ref={ref}
+                          placeholder={placeholder}
+                          onChange={onChange}
                         />
                       </div>
+
                     ))}
                   </form>
                 )
@@ -102,17 +131,25 @@ const Modal= () => {
           </div>
 
           <div className="modal__button-container">
-            {modalConfirmCallback ? (
-              <button
-                className="modal__button"
-                onClick={() => modalConfirmCallback()}
-              >
-                Send
-              </button>
-            ) : null}
+            
+            {modalConfirmCallback
+
+              ? (
+                  <button
+                    className="modal__button"
+                    type="submit"
+                    form="modal-form"
+                  >
+                    Send
+                  </button>
+                ) 
+              : null
+
+            }
 
             <button
               className="modal__button"
+              type="button"
               onClick={handleClearModal}
             >
               {modalConfirmCallback ? "Cancel" : "OK"}
