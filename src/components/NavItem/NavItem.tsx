@@ -1,4 +1,4 @@
-import { NavItemProps } from "@/typing/interfaces";
+import { type NavItemProps } from "@/typing/interfaces";
 
 const NavItem = ({ 
   itemClassName, 

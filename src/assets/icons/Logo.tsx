@@ -11,14 +11,12 @@ const Logo_2: React.FC<LogoProps> = ({
   accentPrimary = "#ef7e25",
   accentSecondary = "#ca5128",
   className,
-  ...props
 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 985 893.172"
       className={className}
-      {...props}
     >
       <defs>
         <linearGradient

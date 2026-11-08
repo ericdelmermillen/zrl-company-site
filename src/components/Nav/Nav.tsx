@@ -3,20 +3,17 @@
 import { useAppContext } from "@/hooks/hooks";
 import { navOptions } from "@/constants/navOptions";
 import ClientLink from "@/components/ClientLink/ClientLink";
+import Logo from "@/assets/icons/Logo";
 import NavItem from "@/components/NavItem/NavItem";
 import NavSocials from "@/components/NavSocials/NavSocials";
 import "./Nav.scss";
-import Logo_1 from "@/assets/icons/Logo_1";
-import Logo_2 from "@/assets/icons/Logo_2";
-import Logo_40 from "@/assets/icons/Logo_40";
-import Logo_45 from "@/assets/icons/Logo_45";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Nav = () => {
   const {
     isLoggedIn,
     showDropdownNav,
     setShowDropdownNav,
-    toggleButtonRef,
     handleNavLinkClick
   } = useAppContext();
 
@@ -30,19 +27,13 @@ const Nav = () => {
 
         <div className="nav__logo-box">
           <ClientLink href="/">
-            {/* <Logo className={"nav__logo"}/> */}
-            {/* <Logo_1 className={"nav__logo"}/> */}
-            <Logo_2 className={"nav__logo"}/>
-            {/* <Logo_2 className={"nav__logo"}/> */}
-            {/* <Logo_3 className={"nav__logo"}/> */}
-            {/* <Logo_40 className={"nav__logo"}/> */}
-            {/* <Logo_45 className={"nav__logo"}/> */}
+            <Logo className={"nav__logo"}/>
           </ClientLink>
         </div>
       
         <ul className="nav__links">
 
-          {navOptions.map(({ id, name, href }) => 
+          {navOptions.map(({ id, name, href }) => (
 
             <NavItem
               key={id}
@@ -53,18 +44,21 @@ const Nav = () => {
             >
               {name}
             </NavItem>
-            )
-          }
+
+          ))}
           
           {isLoggedIn 
 
             ? (
-                <ClientLink
-                  className="nav__link"
-                  href="/admin"
-                >
-                  ADMIN
-                </ClientLink>
+                <>
+                  <ClientLink 
+                    className="nav__link"
+                    href="/admin"
+                  >
+                    ADMIN
+                  </ClientLink>
+                  <LogoutButton />
+                </>
               )
 
             : (
@@ -77,11 +71,10 @@ const Nav = () => {
         </ul>
 
         <button
-          ref={toggleButtonRef}
+          className={`nav__toggle-button ${showDropdownNav ? "open" : ""}`.trim()}
           type="button"
           aria-label={showDropdownNav ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={showDropdownNav}
-          className={`nav__toggle-button ${showDropdownNav ? "open" : ""}`}
           onClick={handleToggleShowDropdownNav}
         >
           <span className="nav__toggle-icon"></span>

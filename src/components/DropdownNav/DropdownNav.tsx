@@ -7,6 +7,7 @@ import ClientLink from "@/components/ClientLink/ClientLink";
 import NavItem from "@/components/NavItem/NavItem";
 import NavSocials from "@/components/NavSocials/NavSocials";
 import "./DropdownNav.scss";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const DropdownNav = () => {
   const {
@@ -52,14 +53,17 @@ const DropdownNav = () => {
               {isLoggedIn
 
                 ? (
-                    <ClientLink
-                      className="dropdownNav__item"
-                      href="/admin"
-                    >
-                      <span className="dropdownNav__link">
-                        ADMIN
-                      </span>
-                    </ClientLink>
+                    <>
+                      <ClientLink
+                        className="dropdownNav__item"
+                        href="/admin"
+                        >
+                        <span className="dropdownNav__link">
+                          ADMIN
+                        </span>
+                      </ClientLink>
+                      <LogoutButton />
+                    </>
                   )
                 : (
                   <li className="dropdownNav__item">

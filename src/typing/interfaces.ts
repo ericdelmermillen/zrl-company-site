@@ -15,12 +15,13 @@ interface AppContextValue {
   scrollYPos: number;
   setScrollYPos: Dispatch<SetStateAction<number>>;
   getPrevScrollYPosValue: () => number;
-  toggleButtonRef: RefObject<HTMLButtonElement | null>;
   isLoggedIn: boolean;
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
   showDropdownNav: boolean;
   setShowDropdownNav: Dispatch<SetStateAction<boolean>>;
-  handleNavLinkClick: any;
+  handleNavLinkClick: (href: string, isMobileView?: boolean) => void;
+  handleClearAppState: () => void;
+  handleLogoutUser: () => void;
 }
 
 interface ModalContextValue {

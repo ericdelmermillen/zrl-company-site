@@ -13,6 +13,8 @@
 	padding-top: 0;
 	width: 100%;
 	flex: 1;
+	//
+	min-height: 200vh;
 }
 
 @mixin inner {
