@@ -34,6 +34,9 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
   const [ scrollYPos, setScrollYPos ] = useState<number>(0);
 
   const prevScrollYPosRef = useRef<number | null>(null);
+  const logoutTimerRef = useRef<number | null>(null);
+  const navLinkClickTimerRef = useRef<number | null>(null);
+  const clearAppStateTimerRef = useRef<number | null>(null);
 
   const getPrevScrollYPosValue = () => prevScrollYPosRef.current ?? 0;
 
@@ -46,17 +49,21 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     const isOnHome = pathname === "/";
     const [ route, targetId ] = href.split("#");
 
+    if (navLinkClickTimerRef.current) {
+      clearTimeout(navLinkClickTimerRef.current);
+    }
+
     if (isMobileView) {
       setShowDropdownNav(false);
     }
-     if (route && !isOnHome) {
+
+    if (route && !isOnHome) {
       setAppIsLoading(true);
-      
       router.push(route); 
-     }
+    }
 
     if (targetId) {
-      setTimeout(() => {
+      navLinkClickTimerRef.current = window.setTimeout(() => {
         addClassToDiv("navbar", "hide");
         const targetElement = document.getElementById(targetId);
         targetElement && targetElement.scrollIntoView({ behavior: "smooth" });
@@ -72,12 +79,16 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
     // handle async logoutUser action
     setIsLoggedIn(false);
 
-    setTimeout(() => {
+    if (logoutTimerRef.current) {
+      clearTimeout(logoutTimerRef.current);
+    }
+
+    logoutTimerRef.current = window.setTimeout(() => {
       setShowDropdownNav(false);
       setAppIsLoading(false);
 
       if (!isOnHome) {
-        redirect("/");
+        router.push("/");
       } else {
         scrollToTop();
       }
@@ -87,13 +98,17 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
   const handleClearAppState = (logOutUser = false) => {
     setAppIsLoading(true);
 
+    if (clearAppStateTimerRef.current) {
+      clearTimeout(clearAppStateTimerRef.current);
+    }
+
     if (logOutUser) {
       setIsLoggedIn(false);
       toast("Logging you out...");
-      console.log("Logging you out")
+      redirect("/");
     }
 
-    setTimeout(() => {
+    clearAppStateTimerRef.current = window.setTimeout(() => {
       setShowDropdownNav(false);
       setAppIsLoading(false);
     }, MIN_LOADING_INTERVAL * 2);

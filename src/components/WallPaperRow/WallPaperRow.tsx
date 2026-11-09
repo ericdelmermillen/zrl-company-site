@@ -1,4 +1,4 @@
-import { WallPaperRowProps } from "@/typing/interfaces";
+import { type WallPaperRowProps } from "@/typing/interfaces";
 
 const WallPaperRow = ({ 
   rowClassName, 
@@ -8,16 +8,18 @@ const WallPaperRow = ({
 }: WallPaperRowProps) => {
   return (
     <div className={rowClassName}>
-      {rowIcons.map((IconComponent, idx) => {
-        return (
+      
+      {rowIcons.map((IconComponent, idx) => (
+
           <div
             key={idx}
             className={itemClassName}
           >
             <IconComponent className={iconClassName} />
           </div>
-        );
-      })}
+        
+      ))}
+
     </div>
   );
 };
