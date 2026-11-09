@@ -18,8 +18,10 @@
 
 	&__imageBox {
 		@include mx.imageBox;
-		width: 100%;
-		aspect-ratio: 16/9;
+		& {
+			aspect-ratio: 16/9;
+			width: 100%;
+		}
 	}
 
 	&__image {

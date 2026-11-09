@@ -1,6 +1,6 @@
 "use client";
 
-import { ShowHidePasswordProps } from "@/typing/interfaces";
+import { type ShowHidePasswordProps } from "@/typing/interfaces";
 import Hide from "@/assets/icons/Hide";
 import Show from "@/assets/icons/Show";
 import "./ShowHidePassword.scss";

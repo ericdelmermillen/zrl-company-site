@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SolutionItem } from "@/typing/interfaces";
+import { type SolutionItem } from "@/typing/interfaces";
 import "./Solution.scss";
 
 const Solution = ({ img, shortTitle, fullTitle, text, tag, alt }: SolutionItem) => {

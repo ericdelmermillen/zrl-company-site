@@ -2,7 +2,7 @@
 
 import { type CheckboxItem, type OpenModalOptions } from "@/typing/interfaces";
 import { type ModalType } from "@/typing/types";
-import { useState, useRef, ChangeEvent, SyntheticEvent } from "react";
+import { type ChangeEvent, type SyntheticEvent, useState, useRef } from "react";
 import { useAppContext, useModalContext } from "@/hooks/hooks";
 import { isValidEmail, staggerToastsByN, validatePhoneNumber } from "@/utils/utils";
 // import { toast } from "react-toastify";
