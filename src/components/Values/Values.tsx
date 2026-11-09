@@ -3,35 +3,38 @@ import { values } from "@/textCopy/textCopyHome";
 import "./Values.scss";
 
 // unlisted video on my youtube to embed: viewable and embeddable but not discoverable
+const YOUTUBE_VIDEO_ID = process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_ID || "";
+const embedUrl = YOUTUBE_VIDEO_ID
+  ? `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?controls=1&mute=0&modestbranding=1&playsinline=1&rel=0`
+  : null;
 
-const YOUTUBE_VIDEO_ID = process.env.NEXT_PUBLIC_YOUTUBE_VIDEO_ID;
-const embedUrl = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?controls=1&mute=0&modestbranding=1&playsinline=1&rel=0`;
-
-console.log(YOUTUBE_VIDEO_ID)
+// console.log(YOUTUBE_VIDEO_ID)
 
 const Values = () => {
   return (
-    <div className="values" id="values">
+    <div id="values" className="values" >
       <div className="values__inner">
-        <h3 className="values__heading">
+        <h2 className="values__heading">
           Values
-        </h3>
-
-        <h2 className="values__lead">
-          We have the best most valuable corporate values you guys -- you won't even believe it you guys.
         </h2>
 
-        <div className="values__video-container">
-          <iframe
-            className="values__video"
-            src={embedUrl}
-            title="Zidgy Road Labs - Values"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; compute-pressure"
-            allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
-          />
-        </div>
+        <h3 className="values__lead">
+          We have the best most valuable corporate values you guys -- you won't even believe it you guys.
+        </h3>
+
+        {embedUrl && (
+          <div className="values__video-container">
+            <iframe
+              className="values__video"
+              src={embedUrl}
+              title="Zidgy Road Labs - Values"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+        )}
 
         <ul className="values__points">
 
