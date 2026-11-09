@@ -82,7 +82,7 @@ const WallPaper = memo(({ variant }: WallPaperProps) => {
 
     setIconsMatrix(buildMatrix());
 
-    const interval = setInterval(() => {
+    const interval: ReturnType<typeof setInterval> = setInterval(() => {
       setIconsMatrix(buildMatrix());
     }, WALLPAPER_ICON_ROTATION_INTERVAL);
 
