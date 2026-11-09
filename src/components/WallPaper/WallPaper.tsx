@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, memo } from "react";
 import { useTheme } from "next-themes";
+import { useState, useEffect, memo } from "react";
 import { type WallPaperProps } from "@/typing/interfaces";
 import { type ColorMode } from "@/typing/types";
 import { type IconType } from "react-icons";
@@ -12,7 +12,7 @@ import {
   NOT_FOUND_ICON_OPTIONS,
 } from "@/constants/icons";
 import { getNumberOfColumnsByWindowWidth } from "@/utils/utils";
-import WallPaperRow from "../WallPaperRow/WallPaperRow";
+import WallPaperRow from "@/components/WallPaperRow/WallPaperRow";
 import "./WallPaper.scss";
 
 const WALLPAPER_ICON_ROTATION_INTERVAL = parseInt(process.env.NEXT_PUBLIC_WALLPAPER_ICON_ROTATION_INTERVAL || "1000", 10);
@@ -22,7 +22,7 @@ const NUMBER_OF_ROWS = 15;
 const WallPaper = memo(({ variant }: WallPaperProps) => {
   const [ iconsMatrix, setIconsMatrix ] = useState<IconType[][]>([]);
   const [ mounted, setMounted ] = useState<boolean>(false);
-  const [ columns, setColumns ] = useState<number>(getNumberOfColumnsByWindowWidth);
+  const [ columns, setColumns ] = useState<number>(0);
 
   const { resolvedTheme } = useTheme();
 
@@ -36,6 +36,12 @@ const WallPaper = memo(({ variant }: WallPaperProps) => {
 
   const activeColorMode: ColorMode = mounted && resolvedTheme === "dark" ? "dark" : "light";
 
+  // useEffect to set the initial number of columns on the client after hydration
+  useEffect(() => {
+    setMounted(true);
+    setColumns(getNumberOfColumnsByWindowWidth());
+  }, []);
+  
   // useEffect to attach the resize eventListener to update columns value
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -61,7 +67,9 @@ const WallPaper = memo(({ variant }: WallPaperProps) => {
 
   // useEffect to set the 2d array of icons and to trigger the setInterval to update it
   useEffect(() => {
-    setMounted(true);
+    if (columns <= 0) {
+      return;
+    }
 
     const buildMatrix = (): IconType[][] => {
       return Array.from({ length: NUMBER_OF_ROWS }, () => {
@@ -79,7 +87,7 @@ const WallPaper = memo(({ variant }: WallPaperProps) => {
     }, WALLPAPER_ICON_ROTATION_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [iconOptions, columns]);
+  }, [variant, columns]);
 
   return (
     <div className="wallpaper">
