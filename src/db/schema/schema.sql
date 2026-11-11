@@ -45,3 +45,28 @@ VALUES
     'Hi <name>,',
     'Thanks for reaching out to learn more about Zidgy Road Labs.\nWe specialize in innovative solutions that help businesses grow and succeed in today''s digital landscape.\nOur team is dedicated to providing exceptional service and results that exceed expectations.\nIf you have any questions or would like to discuss how we can help, feel free to reply to this email.'
   );
+
+-- planning
+DROP TABLE IF EXISTS revoked_token CASCADE;
+
+DROP TABLE IF EXISTS users CASCADE;
+
+CREATE TABLE users (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  email TEXT NOT NULL,
+  password TEXT NOT NULL,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE UNIQUE INDEX idx_users_email_lower ON users (LOWER(email));
+
+CREATE TABLE revoked_token (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  token_signature TEXT NOT NULL UNIQUE,
+  expires_at TIMESTAMPTZ NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_revoked_token_expires_at ON revoked_token (expires_at);
