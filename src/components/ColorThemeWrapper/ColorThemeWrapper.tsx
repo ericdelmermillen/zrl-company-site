@@ -1,9 +1,9 @@
 "use client";
 
-import { type ChildrenProps } from "@/typing/interfaces";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { type ChildrenProps } from "@/typing/interfaces";
 
-const ThemeProvider = ({ children }: ChildrenProps) => {
+const ColorThemeWrapper = ({ children }: ChildrenProps) => {
   return (
     <NextThemesProvider
       attribute="data-color-mode"
@@ -15,4 +15,4 @@ const ThemeProvider = ({ children }: ChildrenProps) => {
   );
 };
 
-export { ThemeProvider };
+export default ColorThemeWrapper;

@@ -19,7 +19,6 @@ import { addClassToDiv, scrollToTop } from "@/utils/utils";
 import { toast } from "react-toastify";
 
 const MIN_LOADING_INTERVAL = parseInt(process.env.NEXT_PUBLIC_MIN_LOADING_INTERVAL || "250", 10);
-const APP_ISLOADING_DELAY = parseInt(process.env.NEXT_PUBLIC_APP_ISLOADING_DELAY || "500", 10);
 const NAV_CLICK_DELAY = parseInt(process.env.NEXT_PUBLIC_NAV_CLICK_DELAY || "300", 10);
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
@@ -113,30 +112,6 @@ const AppContextProvider = ({ children }: ChildrenProps) => {
       setAppIsLoading(false);
     }, MIN_LOADING_INTERVAL * 2);
   };
-
-  // useEffect to turn off appIsLoading on page load or after navigation
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout | number;
-
-    const handleLoad = () => {
-      timeoutId = setTimeout(() => {
-        setAppIsLoading(false);
-      }, APP_ISLOADING_DELAY * 2);
-    };
-
-    // what is the readyState on the document?
-    if (document.readyState === "complete") {
-      scrollToTop();
-      handleLoad();
-    } else {
-      window.addEventListener("load", handleLoad);
-    }
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-      clearTimeout(timeoutId);
-    }
-  }, [pathname]);
   
   // useEffect for updating of scrollYPos
   useEffect(() => {

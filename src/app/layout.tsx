@@ -1,14 +1,15 @@
-import { type Metadata } from "next";
 import { Open_Sans, Poppins } from "next/font/google";
+import { type Metadata } from "next";
 import { type ChildrenProps } from "@/typing/interfaces";
 import { AppContextProvider } from "@/contexts/AppContext";
 import { ModalContextProvider } from "@/contexts/ModalContext";
-import { ThemeProvider } from "@/providers/ThemeProvider";
 import { ToastProvider } from "@/providers/ToastProvider";
+import ColorThemeWrapper from "@/components/ColorThemeWrapper/ColorThemeWrapper";
 import Footer from "@/components/Footer/Footer";
 import IsLoading from "@/components/IsLoading/IsLoading";
 import Modal from "@/components/Modal/Modal";
 import Navbar from "@/components/Navbar/Navbar";
+import RouteWatcher from "@/components/RouteWatcher/RouteWatcher";
 import "./globals.scss";
 
 // may want to experiment with fonts from designer
@@ -38,8 +39,9 @@ const RootLayout = ({ children }: Readonly<ChildrenProps>) => {
     >
       <body>
         <AppContextProvider>
-          <ThemeProvider>
+          <ColorThemeWrapper>
             <ModalContextProvider>
+              <RouteWatcher />
               <IsLoading />
               <ToastProvider />
               <Navbar />
@@ -49,7 +51,7 @@ const RootLayout = ({ children }: Readonly<ChildrenProps>) => {
               </div>
               <Footer />
             </ModalContextProvider>
-          </ThemeProvider>
+          </ColorThemeWrapper>
         </AppContextProvider>
       </body>
     </html>
